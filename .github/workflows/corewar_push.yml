@@ -6,8 +6,6 @@ on:
 env:
   MIRROR_URL:
     git@github.com:EpitechPromo2026/B-CPE-201-REN-2-1-corewar-enzo.garnier.git
-  EXECUTABLES:
-    "asm/asm", "corewar/corewar"
 
 jobs:
   cleaning:
@@ -31,7 +29,6 @@ jobs:
           fetch-depth: 0
       - run: make
       - run: make clean
-      - run: IFS=','; read -a array <<< "${{ env.EXECUTABLES }}"; for element in "${array[@]}"; do if [ -z $(ls | grep -w $element$) ]; then exit 1; fi; done
 
   Norme:
     runs-on: ubuntu-latest
