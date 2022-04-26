@@ -30,17 +30,6 @@ jobs:
       - run: make
       - run: make clean
 
-  Norme:
-    runs-on: ubuntu-latest
-    needs: compilation
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
-      - name: Installing...
-        run: git clone https://github.com/ronanboiteau/NormEZ && make -C NormEZ install
-      - name: Test norme 'main'
-        run: NORMEZ=$(cd .. && normez my_rpg -ic && cd my_rpg) && echo -e "::notice title=Norme::$NORMEZ"
-
   Size:
     runs-on: ubuntu-latest
     needs: compilation
