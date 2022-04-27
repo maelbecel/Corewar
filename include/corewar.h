@@ -5,8 +5,10 @@
 ** corewar
 */
 
-#ifndef COREWAR
-    #define COREWAR
+#ifndef COREWAR_H_
+    #define COREWAR_H_
+
     #include <stdbool.h>
     #include <stddef.h>
+
 #endif
