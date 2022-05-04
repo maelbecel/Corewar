@@ -1,18 +1,19 @@
 /*
 ** EPITECH PROJECT, 2022
-** main.c
+** corewar
 ** File description:
 ** main
 */
 
 #include "my.h"
 #include "printf.h"
-#include "corewar.h"
+#include "asm.h"
 
-int main (int ac, char **argv, char **env)
+int main (int argc, char **argv)
 {
-    (void)(ac);
-    (void)(argv);
-    (void)(env);
-    return 0;
+    if (argc != 2)
+        return usage(argv[0], EXIT_ERROR);
+    if (!my_strcmp(argv[1], "-h"))
+        return usage(argv[0], EXIT_SUCCESS);
+    return EXIT_SUCCESS;
 }

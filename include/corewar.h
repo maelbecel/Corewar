@@ -10,5 +10,9 @@
 
     #include <stdbool.h>
     #include <stddef.h>
+    #include <unistd.h>
+    #include <stdlib.h>
+
+    #define EXIT_ERROR 84
 
 #endif
