@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+asm/asm
+corewar/corewar
+.vscode
+vgcore*
+doc/
