@@ -7,33 +7,34 @@
 
 NAME         =		    asm
 
-INCLUDE      =         -I ../include/ -I ../include/lib/ -L ../lib/ \
+INCLUDE      =         	-I ../include/ -I ../include/lib/ -L ../lib/ \
 						-lmy -lmyprintf
 
-CFLAGS      +=         -Wall -Wextra -Werror $(INCLUDE)
+CFLAGS      +=         	-Wall -Wextra -Werror $(INCLUDE)
 
-SOURCES      =         src/
+SOURCES      =         	src/
 
-SRC          =         $(SOURCES)main.c \
-					   $(SOURCES)op.c \
+SRC          =         	$(SOURCES)main.c \
+						$(SOURCES)op.c \
+						$(SOURCES)usage.c \
 
-SRC_COUNT    =         $(words $(SRC))
+SRC_COUNT    =         	$(words $(SRC))
 
-NB           =         0
+NB           =         	0
 
 OBJ          =	        $(SRC:.c=.o)
 
-TEMPFILES    =         *~ *vgcore* #*#
+TEMPFILES    =         	*~ *vgcore* #*#
 
-RM           =         rm -f
+RM           =         	rm -f
 
-ECHO         =         /bin/echo -e
-DEFAULT      =         "\033[00m"
-BOLD         =         "\e[1m"
-RED          =         "\e[31m"
-GREEN        =         "\e[32m"
-LIGHT_BLUE   =         "\e[94m"
-WHITE        =         "\e[1;37m"
+ECHO         =         	/bin/echo -e
+DEFAULT      =         	"\033[00m"
+BOLD         =         	"\e[1m"
+RED          =         	"\e[31m"
+GREEN        =         	"\e[32m"
+LIGHT_BLUE   =         	"\e[94m"
+WHITE        =         	"\e[1;37m"
 
 all:	$(NAME)
 
