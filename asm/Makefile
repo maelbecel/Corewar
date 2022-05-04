@@ -17,6 +17,7 @@ SOURCES      =         	src/
 SRC          =         	$(SOURCES)main.c \
 						$(SOURCES)op.c \
 						$(SOURCES)usage.c \
+						$(SOURCES)assembler.c \
 
 SRC_COUNT    =         	$(words $(SRC))
 

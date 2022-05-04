@@ -12,6 +12,7 @@
     #include <stddef.h>
     #include <unistd.h>
     #include <stdlib.h>
+    #include <stdio.h>
 
     #define EXIT_ERROR 84
 
@@ -25,5 +26,15 @@
     ///
     ////////////////////////////////////////////////////////////
     int usage(char *binary, int status);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Write the usage and return a status
+    ///
+    /// \param file_name  the file to compile in .cor
+    ///
+    /// \return The value of status
+    ///
+    ////////////////////////////////////////////////////////////
+    int assembler(char *file_name);
 
 #endif
