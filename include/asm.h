@@ -13,6 +13,7 @@
     #include <unistd.h>
     #include <stdlib.h>
     #include <stdio.h>
+    #include "op.h"
 
     #define EXIT_ERROR 84
 
@@ -36,5 +37,55 @@
     ///
     ////////////////////////////////////////////////////////////
     int assembler(char *file_name);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the .name and .comment in .s file
+    ///
+    /// \param file_name  the input file
+    ///
+    /// \return Struct header with the name and comment
+    ///
+    ////////////////////////////////////////////////////////////
+    header_t *get_header(FILE *file_name, char **line);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief A getline function, opti
+    ///
+    /// \param file_name  the input file
+    ///
+    /// \return Line of a file
+    ///
+    ////////////////////////////////////////////////////////////
+    char *get_line(FILE *file_name);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the .name in .s file
+    ///
+    /// \param line  the line that contains the .name
+    ///
+    /// \return The name between the quotes
+    ///
+    ////////////////////////////////////////////////////////////
+    char *get_name(char *line);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the .comment in .s file
+    ///
+    /// \param line  the line that contains the .comment
+    ///
+    /// \return The comment between the quotes
+    ///
+    ////////////////////////////////////////////////////////////
+    char *get_comment(char *line);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get a string between two double quotes
+    ///
+    /// \param line  the line that contains the double quotes
+    ///
+    /// \return The string
+    ///
+    ////////////////////////////////////////////////////////////
+    char *get_quote_str(char *line);
 
 #endif

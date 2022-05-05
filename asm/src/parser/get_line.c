@@ -52,14 +52,14 @@ char *clean_line(char *line)
     return return_str(line, shift);
 }
 
-char *get_line(FILE *source_file)
+char *get_line(FILE *file_name)
 {
     char *line = NULL;
     ssize_t nread = 0;
     size_t len = 0;
 
     while (true) {
-        nread = getline(&line, &len, source_file);
+        nread = getline(&line, &len, file_name);
         if (nread == -1)
             return NULL;
         if (line[nread - 1] == '\n')

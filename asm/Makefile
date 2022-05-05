@@ -5,37 +5,43 @@
 ## Makefile for corewar
 ##
 
-NAME         =		    asm
+NAME         	=		    asm
 
-INCLUDE      =         	-I ../include/ -I ../include/lib/ -L ../lib/ \
+INCLUDE      	=         	-I ../include/ -I ../include/lib/ -L ../lib/ \
 						-lmy -lmyprintf
 
-CFLAGS      +=         	-Wall -Wextra -Werror $(INCLUDE)
+CFLAGS         +=         	-Wall -Wextra -Werror $(INCLUDE)
 
-SOURCES      =         	src/
+SRC_DIR      	=         	src/
+PARSER_DIR      =         	parser/
 
-SRC          =         	$(SOURCES)main.c \
-						$(SOURCES)op.c \
-						$(SOURCES)usage.c \
-						$(SOURCES)assembler.c \
+SRC          	=         	$(SRC_DIR)main.c 								\
+							$(SRC_DIR)op.c 									\
+							$(SRC_DIR)usage.c 								\
+							$(SRC_DIR)assembler.c 							\
+							$(SRC_DIR)$(PARSER_DIR)get_header.c 			\
+							$(SRC_DIR)$(PARSER_DIR)get_line.c 				\
+							$(SRC_DIR)$(PARSER_DIR)get_name.c 				\
+							$(SRC_DIR)$(PARSER_DIR)get_comment.c			\
+							$(SRC_DIR)$(PARSER_DIR)get_quote_str.c			\
 
-SRC_COUNT    =         	$(words $(SRC))
+SRC_COUNT    	=         	$(words $(SRC))
 
-NB           =         	0
+NB           	=         	0
 
-OBJ          =	        $(SRC:.c=.o)
+OBJ          	=	        $(SRC:.c=.o)
 
-TEMPFILES    =         	*~ *vgcore* #*#
+TEMPFILES    	=         	*~ *vgcore* #*#
 
-RM           =         	rm -f
+RM           	=         	rm -f
 
-ECHO         =         	/bin/echo -e
-DEFAULT      =         	"\033[00m"
-BOLD         =         	"\e[1m"
-RED          =         	"\e[31m"
-GREEN        =         	"\e[32m"
-LIGHT_BLUE   =         	"\e[94m"
-WHITE        =         	"\e[1;37m"
+ECHO         	=         	/bin/echo -e
+DEFAULT      	=         	"\033[00m"
+BOLD         	=         	"\e[1m"
+RED          	=         	"\e[31m"
+GREEN        	=         	"\e[32m"
+LIGHT_BLUE   	=         	"\e[94m"
+WHITE        	=         	"\e[1;37m"
 
 all:	$(NAME)
 
