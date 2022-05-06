@@ -8,8 +8,9 @@
 #include "my.h"
 #include "printf.h"
 #include "corewar.h"
+#include "op.h"
 
-static void usage(int ac, char **av)
+static bool usage(int ac, char **av)
 {
     if (ac == 2 && my_strcmp(av[1], "-h") == 0) {
         my_printf("USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number] ");
@@ -23,11 +24,25 @@ static void usage(int ac, char **av)
         my_printf("address. When no address is specified, optimize the");
         my_printf("addresses so that the processes are as far away from each");
         my_printf("other as possible. The addresses are MEM_SIZE modulo.");
+        return true;
     }
+    return false;
+}
+
+vm_t *init_vm(void)
+{
+    vm_t *vm = malloc(sizeof(vm_t));
+
+    vm->nb_cycle = CYCLE_TO_DIE;
+    return vm;
 }
 
 int main (int ac, char **av, UNUSED char **env)
 {
-    usage(ac, av);
+    vm_t *vm = init_vm();
+    if (usage(ac, av))
+        return 0;
+    get_option(av, vm);
+    my_printf("cycle to die : %i\n", vm->nb_cycle);
     return 0;
 }

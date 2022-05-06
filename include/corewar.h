@@ -10,5 +10,14 @@
 
     #include <stdbool.h>
     #include <stddef.h>
+    #include <stdlib.h>
+
+    typedef struct vm_s vm_t;
+
+    struct vm_s {
+        int nb_cycle;
+    };
+
+    bool get_option(char **av, vm_t *vm);
 
 #endif

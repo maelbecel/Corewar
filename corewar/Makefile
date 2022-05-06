@@ -15,7 +15,8 @@ CFLAGS      +=         -Wall -Wextra -Werror $(INCLUDE)
 SOURCES      =         src/
 
 SRC          =         $(SOURCES)main.c \
-					   $(SOURCES)op.c \
+					   $(SOURCES)op.c 	\
+					   $(SOURCES)get_option.c
 
 SRC_COUNT    =         $(words $(SRC))
 
