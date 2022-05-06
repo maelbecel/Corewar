@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** main.c
+** corewar
 ** File description:
 ** main
 */
