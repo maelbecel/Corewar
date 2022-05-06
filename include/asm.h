@@ -16,6 +16,9 @@
     #include "op.h"
 
     #define EXIT_ERROR 84
+    #define TAB '\t'
+    #define SPACE ' '
+    #define QUOTES '\"'
 
     ////////////////////////////////////////////////////////////
     /// \brief Write the usage and return the status
@@ -56,7 +59,7 @@
     /// \return Line of a file
     ///
     ////////////////////////////////////////////////////////////
-    char *get_line(FILE *file_name);
+    char *get_clean_line(FILE *file_name);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the .name in .s file

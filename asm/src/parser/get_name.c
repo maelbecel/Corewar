@@ -14,7 +14,7 @@ char *get_name(char *line)
 {
     char *str = NULL;
 
-    if (my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)))
+    if (my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) != 0)
         return NULL;
     line += my_strlen(NAME_CMD_STRING) + 1;
     str = get_quote_str(line);

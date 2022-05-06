@@ -14,7 +14,8 @@ char *get_comment(char *line)
 {
     char *str = NULL;
 
-    if (my_strncmp(line, COMMENT_CMD_STRING, my_strlen(COMMENT_CMD_STRING)))
+    if (my_strncmp(line, COMMENT_CMD_STRING,
+                                        my_strlen(COMMENT_CMD_STRING)) != 0)
         return NULL;
     line += my_strlen(COMMENT_CMD_STRING) + 1;
     str = get_quote_str(line);
