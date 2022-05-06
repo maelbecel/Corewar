@@ -20,52 +20,59 @@ static void remove_comment(char *line)
     }
 }
 
-static char *return_str(char *line, size_t shift)
+static size_t do_shift(char *line)
 {
-    char *str = my_strdup(line+shift);
+    size_t shift = 0;
 
+    for (size_t pos = 0; line[pos] != '\0'; pos++) {
+        if (line[pos] == SPACE || line[pos] == TAB)
+            shift++;
+        else
+            break;
+    }
+    return shift;
+}
+
+static void clean_line(char *line)
+{
+    for (size_t pos = my_strlen(line) - 1; pos > 0; pos--) {
+        if (line[pos] == SPACE || line[pos] == TAB)
+            line[pos] = '\0';
+        else
+            break;
+    }
+}
+
+char *clean_str(char *line)
+{
+    size_t shift = 0;
+    char *str = NULL;
+
+    if (!line)
+        return NULL;
+    remove_comment(line);
+    shift = do_shift(line);
+    if (!my_strlen(line))
+        return line;
+    clean_line(line);
+    str = my_strdup(line + shift);
     free(line);
     return str;
 }
 
-char *clean_line(char *line)
-{
-    size_t shift = 0;
-
-    remove_comment(line);
-    for (size_t pos = 0; line[pos] != '\0'; pos++) {
-        if (line[pos] == ' ' || line[pos] == '\t') {
-            shift++;
-        } else {
-            break;
-        }
-    }
-    if (!my_strlen(line))
-        return line;
-    for (size_t pos = my_strlen(line) - 1; pos > 0; pos--) {
-        if (line[pos] == ' ' || line[pos] == '\t') {
-            line[pos] = '\0';
-        } else {
-            break;
-        }
-    }
-    return return_str(line, shift);
-}
-
-char *get_line(FILE *file_name)
+char *get_clean_line(FILE *file_name)
 {
     char *line = NULL;
-    ssize_t nread = 0;
+    ssize_t get = 0;
     size_t len = 0;
 
     while (true) {
-        nread = getline(&line, &len, file_name);
-        if (nread == -1)
+        if ((get = getline(&line, &len, file_name)) == -1)
             return NULL;
-        if (line[nread - 1] == '\n')
-            line[nread - 1] = '\0';
-        line = clean_line(line);
-        if (my_strlen(line))
+        if (line[get - 1] == '\n')
+            line[get - 1] = '\0';
+        line = clean_str(line);
+        if (my_strlen(line) != 0)
             break;
         free(line);
         line = NULL;

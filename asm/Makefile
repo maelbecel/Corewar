@@ -20,7 +20,7 @@ SRC          	=         	$(SRC_DIR)main.c 								\
 							$(SRC_DIR)usage.c 								\
 							$(SRC_DIR)assembler.c 							\
 							$(SRC_DIR)$(PARSER_DIR)get_header.c 			\
-							$(SRC_DIR)$(PARSER_DIR)get_line.c 				\
+							$(SRC_DIR)$(PARSER_DIR)get_clean_line.c 				\
 							$(SRC_DIR)$(PARSER_DIR)get_name.c 				\
 							$(SRC_DIR)$(PARSER_DIR)get_comment.c			\
 							$(SRC_DIR)$(PARSER_DIR)get_quote_str.c			\

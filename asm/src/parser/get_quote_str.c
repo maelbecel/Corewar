@@ -23,20 +23,18 @@ static size_t count_occur(char *str, char c)
 
 char *get_quote_str(char *line)
 {
-    int index = 0;
-    size_t quote[2] = {0};
+    int id_quotes = 0;
+    size_t pos_quote[2] = {0};
 
-    if (count_occur(line, '\"') != 2)
+    if (count_occur(line, QUOTES) != 2)
         return NULL;
     for (size_t i = 0; line[i] != '\0'; i++) {
-        if (line[i] == '\"') {
-            quote[index] = i;
-            index++;
-        }
+        if (line[i] == QUOTES)
+            pos_quote[id_quotes++] = i;
     }
-    if (my_strlen(line + quote[1]) != 1)
+    if (my_strlen(line + pos_quote[1]) != 1)
         return NULL;
-    line[quote[1]] = '\0';
-    line += quote[0] + 1;
+    line[pos_quote[1]] = '\0';
+    line += pos_quote[0] + 1;
     return line;
 }
