@@ -11,6 +11,9 @@
     #include <stdbool.h>
     #include <stddef.h>
     #include <stdlib.h>
+    #include <unistd.h>
+
+    #define EXIT_ERROR 84
 
     typedef struct vm_s vm_t;
 
