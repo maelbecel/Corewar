@@ -16,9 +16,24 @@
     #define EXIT_ERROR 84
 
     typedef struct vm_s vm_t;
+    typedef struct champion_s champion_t;
+    typedef struct prog_s prog_t;
 
     struct vm_s {
         int nb_cycle;
+        champion_t **champ;
+    };
+
+    struct champion_s {
+        int prog_nb;
+        int load_address;
+        prog_t *prog;
+    };
+
+    struct prog_s {
+        int *reg;
+        int pc;
+        int carry;
     };
 
     bool get_option(char **av, vm_t *vm);
