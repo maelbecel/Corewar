@@ -21,12 +21,13 @@
 
     struct vm_s {
         int nb_cycle;
-        champion_t **champ;
+        champion_t **champions;
     };
 
     struct champion_s {
         int prog_nb;
         int load_address;
+        char *name;
         prog_t *prog;
     };
 
@@ -36,6 +37,7 @@
         int carry;
     };
 
-    bool get_option(char **av, vm_t *vm);
+    bool get_option(int ac, char **av, vm_t *vm);
+    bool check_cmp(vm_t *vm);
 
 #endif

@@ -37,12 +37,14 @@ vm_t *init_vm(void)
     return vm;
 }
 
-int main (int ac, char **av, UNUSED char **env)
+int main (int ac, char **av)
 {
     vm_t *vm = init_vm();
     if (usage(ac, av))
         return 0;
-    get_option(av, vm);
-    my_printf("cycle to die : %i\n", vm->nb_cycle);
+    get_option(ac, av, vm);
+    my_printf("cycle to die : %i\nchampions :\n", vm->nb_cycle);
+    for (int i = 0; vm->champions[i]; i++)
+        my_printf("%i : %s -> %i\n", vm->champions[i]->prog_nb, vm->champions[i]->name, vm->champions[i]->load_address);
     return 0;
 }

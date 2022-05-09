@@ -14,7 +14,6 @@ int get_cycle(char **av, int i)
 {
     int cycle = 0;
     if (my_str_isnum(av[i + 1])) {
-        my_printf("test\n");
         cycle = my_getnbr(av[i + 1]);
         if (cycle == 0)
             return CYCLE_TO_DIE;
@@ -35,8 +34,27 @@ bool get_dump(char **av, vm_t *vm)
     return true;
 }
 
-bool get_option(char **av, vm_t *vm)
+bool get_option(int ac, char **av, vm_t *vm)
 {
+    int champ = 0;
+
     get_dump(av, vm);
+    vm->champions = malloc(sizeof(champion_t *) * ac);
+    for (int i = 0; i < ac - 1; i++) {
+        vm->champions[i] = malloc(sizeof(champion_t));
+        vm->champions[i]->load_address = -1;
+        vm->champions[i]->prog_nb = -1;
+        vm->champions[i]->name = NULL;
+    }
+    for (int i = 1; av[i]; i++) {
+        if (my_strcmp(av[i], "-n") == 0 && av[i + 1])
+            vm->champions[champ]->prog_nb = my_getnbr(av[++i]);
+        else if (my_strcmp(av[i], "-a") == 0 && av[i + 1])
+            vm->champions[champ]->load_address = my_getnbr(av[++i]);
+        else if (av[i][0] != '-')
+            vm->champions[champ++]->name = av[i];
+    }
+    vm->champions[champ] = NULL;
+    check_cmp(vm);
     return false;
 }
