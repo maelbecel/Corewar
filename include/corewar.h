@@ -39,5 +39,6 @@
 
     bool get_option(int ac, char **av, vm_t *vm);
     bool check_cmp(vm_t *vm);
+    int error(char *str);
 
 #endif

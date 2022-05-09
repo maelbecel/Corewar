@@ -16,6 +16,7 @@ SOURCES      =         src/
 
 SRC          =         $(SOURCES)main.c \
 					   $(SOURCES)op.c 	\
+					   $(SOURCES)errors.c 	\
 					   $(SOURCES)check_champion.c 	\
 					   $(SOURCES)get_option.c
 
