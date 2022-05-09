@@ -21,7 +21,8 @@
 
     struct vm_s {
         int nb_cycle;
-        champion_t **champions;
+        int nb_champ;
+        champion_t **champ;
     };
 
     struct champion_s {
@@ -40,5 +41,7 @@
     bool get_option(int ac, char **av, vm_t *vm);
     bool check_cmp(vm_t *vm);
     int error(char *str);
+    champion_t **init_champ(vm_t *vm);
+    prog_t *init_prog(int load_ad, int prog_nb);
 
 #endif

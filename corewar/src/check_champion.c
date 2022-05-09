@@ -12,26 +12,26 @@
 
 bool same_prog(vm_t *vm, int prog, int x)
 {
-    for (int i = 0; vm->champions[i]; i++)
-        if (vm->champions[i]->prog_nb == prog && i != x)
+    for (int i = 0; vm->champ[i]; i++)
+        if (vm->champ[i]->prog_nb == prog && i != x)
             return true;
     return false;
 }
 
 bool same_adress(vm_t *vm, int prog, int x)
 {
-    for (int i = 0; vm->champions[i]; i++)
-        if (vm->champions[i]->load_address == prog && i != x)
+    for (int i = 0; vm->champ[i]; i++)
+        if (vm->champ[i]->load_address == prog && i != x)
             return true;
     return false;
 }
 
 bool verif_champ(vm_t *vm)
 {
-    for (int i = 0; vm->champions[i]; i++) {
-        if (same_prog(vm, vm->champions[i]->prog_nb, i))
+    for (int i = 0; vm->champ[i]; i++) {
+        if (same_prog(vm, vm->champ[i]->prog_nb, i))
             error("Duplicate champion number\n");
-        if (same_adress(vm, vm->champions[i]->load_address, i))
+        if (same_adress(vm, vm->champ[i]->load_address, i))
             error("Duplicate champion address\n");
     }
     return true;
@@ -40,20 +40,20 @@ bool verif_champ(vm_t *vm)
 bool check_number(vm_t *vm, int i)
 {
     int x = 0;
-    for (int j = 0; vm->champions[j]; j++) {
-        if (vm->champions[j]->prog_nb == x && vm->champions[j]->prog_nb != -1) {
+    for (int j = 0; vm->champ[j]; j++) {
+        if (vm->champ[j]->prog_nb == x && vm->champ[j]->prog_nb != -1) {
             x++;
             j = -1;
         }
     }
-    vm->champions[i]->prog_nb = x;
+    vm->champ[i]->prog_nb = x;
     return true;
 }
 
 bool check_cmp(vm_t *vm)
 {
-    for (int i = 0; vm->champions[i]; i++) {
-        if (vm->champions[i]->prog_nb == -1)
+    for (int i = 0; vm->champ[i]; i++) {
+        if (vm->champ[i]->prog_nb == -1)
             check_number(vm, i);
     }
     verif_champ(vm);
