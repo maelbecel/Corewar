@@ -57,7 +57,7 @@ bool get_option(int ac, char **av, vm_t *vm)
         } if (av[i][0] != '-') {
             vm->champions[champ++]->name = av[i];
             continue;
-        } if (my_strcmp(av[i], "-dump") != 0)
+        } if (my_strcmp(av[i++], "-dump") != 0)
             error("Invalid flag\n");
     }
     vm->champions[champ] = NULL;

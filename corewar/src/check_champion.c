@@ -10,6 +10,33 @@
 #include "corewar.h"
 #include "op.h"
 
+bool same_prog(vm_t *vm, int prog, int x)
+{
+    for (int i = 0; vm->champions[i]; i++)
+        if (vm->champions[i]->prog_nb == prog && i != x)
+            return true;
+    return false;
+}
+
+bool same_adress(vm_t *vm, int prog, int x)
+{
+    for (int i = 0; vm->champions[i]; i++)
+        if (vm->champions[i]->load_address == prog && i != x)
+            return true;
+    return false;
+}
+
+bool verif_champ(vm_t *vm)
+{
+    for (int i = 0; vm->champions[i]; i++) {
+        if (same_prog(vm, vm->champions[i]->prog_nb, i))
+            error("Duplicate champion number\n");
+        if (same_adress(vm, vm->champions[i]->load_address, i))
+            error("Duplicate champion address\n");
+    }
+    return true;
+}
+
 bool check_number(vm_t *vm, int i)
 {
     int x = 0;
@@ -29,5 +56,6 @@ bool check_cmp(vm_t *vm)
         if (vm->champions[i]->prog_nb == -1)
             check_number(vm, i);
     }
+    verif_champ(vm);
     return true;
 }
