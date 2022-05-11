@@ -65,9 +65,6 @@
     /// \return The value of status
     ///
     ////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-    int usage(char *binary, int status);
-=======
     int help(char *binary, int status);
 
     ////////////////////////////////////////////////////////////
@@ -129,6 +126,5 @@
     ///
     ////////////////////////////////////////////////////////////
     char *get_quote_str(char *line);
->>>>>>> 0ca5d0aef31f53be1b0a6fae962c6c94f5dfe0d0
 
 #endif
