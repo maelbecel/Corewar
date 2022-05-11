@@ -13,7 +13,7 @@
 static bool usage(int ac, char **av)
 {
     if (ac == 2 && my_strcmp(av[1], "-h") == 0) {
-        my_printf("USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number] ");
+        my_printf("help\n./corewar [-dump nbr_cycle] [[-n prog_number] ");
         my_printf("[-a load_address] prog_name] ...\nDESCRIPTION\n");
         my_printf("-dump nbr_cycle dumps the memory after the nbr_cycle ");
         my_printf("execution (if the round isn't already over) with the ");
