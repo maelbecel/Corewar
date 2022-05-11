@@ -63,7 +63,7 @@ bool check_instruction(instruction_t *instruction)
 
     if (!instruction->next->next)
         return true;
-    if (instruction->next->id == ID_LABEL)
+    if (instruction->next->is == IS_LABEL)
         pos = get_op(instruction->next->next->next->str);
     else
         pos = get_op(instruction->str);

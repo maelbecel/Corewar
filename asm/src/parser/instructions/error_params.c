@@ -27,16 +27,16 @@ static int error_direct(instruction_t *instruction)
 
     if (!tmp)
         return EXIT_ERROR;
-    if (tmp->id == ID_LABEL) {
+    if (tmp->is == IS_LABEL) {
         tmp = tmp->next;
-        if (!tmp || tmp->id != ID_OTHER)
+        if (!tmp || tmp->is != IS_OTHER)
             return EXIT_ERROR;
         tmp->type = D_DIR;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return EXIT_ERROR;
     } else {
         tmp->type = D_DIR;
-        if (tmp->id != ID_OTHER ||
+        if (tmp->is != IS_OTHER ||
                         char_list_in_str(tmp->str, "0123456789-") == false)
             return EXIT_ERROR;
     }
@@ -47,9 +47,9 @@ static int error_indirect(instruction_t *instruction)
 {
     instruction_t *tmp = instruction;
 
-    if (tmp->id == ID_LABEL) {
+    if (tmp->is == IS_LABEL) {
         tmp = tmp->next;
-        if (!tmp || tmp->id != ID_OTHER)
+        if (!tmp || tmp->is != IS_OTHER)
             return EXIT_ERROR;
         tmp->type = D_IND;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
@@ -67,7 +67,7 @@ static int error_one_params(instruction_t *tmp)
     if (tmp->str[0] == 'r') {
         if (error_register(tmp) == EXIT_ERROR)
             return EXIT_ERROR;
-    } else if (tmp->id == ID_DIR) {
+    } else if (tmp->is == IS_DIR) {
         if (error_direct(tmp->next) == EXIT_ERROR)
             return EXIT_ERROR;
     } else {
@@ -87,7 +87,7 @@ int error_params(instruction_t *instruction)
     while (tmp->type < D_REG)
         tmp = tmp->next;
     if (tmp->next != NULL) {
-        if (tmp->next->id == ID_SEPARATOR && tmp->next->next != NULL)
+        if (tmp->next->is == IS_SEPARATOR && tmp->next->next != NULL)
             exit_code = error_params(tmp->next->next);
         else
             return EXIT_ERROR;

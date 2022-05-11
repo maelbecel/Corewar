@@ -20,9 +20,9 @@ int assembler(char *file_name)
     file = fopen(file_name, "r");
     if (!file)
         return EXIT_ERROR;
-    if ((header = get_header(file, &line)) == NULL)
+    if (!(header = get_header(file, &line)))
         return EXIT_ERROR;
-    if (line == NULL)
+    if (!line)
         line = get_clean_line(file);
     instructions = get_instructions(file, line);
     get_champion_size(header, instructions);

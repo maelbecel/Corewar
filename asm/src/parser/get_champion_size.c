@@ -64,7 +64,7 @@ static int get_line_size(instruction_t *instruction)
 {
     instruction_t *tmp = instruction;
 
-    if (tmp->next->id == ID_LABEL) {
+    if (tmp->next->is == IS_LABEL) {
         tmp = tmp->next;
         if (tmp->next != NULL)
             tmp = tmp->next->next;

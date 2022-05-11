@@ -10,7 +10,7 @@
 #include "asm.h"
 #include "op.h"
 
-instruction_t *create_instruction(char *str, ID id, TYPE type)
+instruction_t *create_instruction(char *str, IS is, TYPE type)
 {
     instruction_t *instruction = malloc(sizeof(instruction_t));
 
@@ -26,7 +26,7 @@ instruction_t *create_instruction(char *str, ID id, TYPE type)
             return NULL;
     } else
         instruction->str[0] = '\0';
-    instruction->id = id;
+    instruction->is = is;
     instruction->type = type;
     instruction->next = NULL;
     instruction->prev = NULL;

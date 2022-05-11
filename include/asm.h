@@ -30,16 +30,16 @@
     /// TYPEDEF
     ////////////////////////////////////////////////////////////
     typedef struct instruction_s instruction_t;
-    typedef enum id ID;
+    typedef enum is IS;
     typedef enum type TYPE;
     typedef struct parser_s parser_t;
 
-    enum id {
-        ID_OTHER,
-        ID_SPACE,
-        ID_DIR,
-        ID_LABEL,
-        ID_SEPARATOR,
+    enum is {
+        IS_OTHER,
+        IS_SPACE,
+        IS_DIR,
+        IS_LABEL,
+        IS_SEPARATOR,
     };
 
     enum type {
@@ -54,12 +54,12 @@
     struct parser_s{
         char token;
         TYPE type;
-        ID id;
+        IS is;
     };
 
     struct instruction_s{
         char *str;
-        ID id;
+        IS is;
         TYPE type;
         struct instruction_s *next;
         struct instruction_s *prev;
@@ -161,7 +161,8 @@ int error_params(instruction_t *instruction);
 instruction_t *parse_instruction(char *av);
 void clean_instruction(instruction_t *instruction);
 bool check_instruction(instruction_t *line);
-bool error_label(instruction_t **instructions);
+bool check_error_label(instruction_t **instructions);
+bool count_nbr_label(char **list_label);
 
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array
@@ -210,13 +211,13 @@ bool error_label(instruction_t **instructions);
     /// \brief Create a new instruction in array
     ///
     /// \param str  the string of the instruction
-    /// \param id  the id of the instruction
+    /// \param is  the is of the instruction
     /// \param type  the type of the instruction
     ///
     /// \return The created instruction if have no error, EXIT_ERROR otherwise
     ///
     ////////////////////////////////////////////////////////////
-    instruction_t *create_instruction(char *str, ID id, TYPE type);
+    instruction_t *create_instruction(char *str, IS is, TYPE type);
 
     ////////////////////////////////////////////////////////////
     /// \brief Insert a new instruction in the instruction array

@@ -19,26 +19,26 @@ static instruction_t **interprate_file(instruction_t **instruction_line,
         instruction_line[i] = parse_instruction(line);
         clean_instruction(instruction_line[i]);
         printf("____START____\nname: %s\n", instruction_line[i]->str);
-        printf("ID: %d\n", instruction_line[i]->id);
+        printf("IS: %d\n", instruction_line[i]->is);
         printf("TYPE: %d\n", instruction_line[i]->type);
         printf("____NEXT____\nname: %s\n", instruction_line[i]->next->str);
-        printf("ID: %d\n", instruction_line[i]->next->id);
+        printf("IS: %d\n", instruction_line[i]->next->is);
         printf("TYPE: %d\n", instruction_line[i]->next->type);
         if (instruction_line[i]->next->next != NULL) {
             printf("____NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->str);
-            printf("ID: %d\n", instruction_line[i]->next->next->id);
+            printf("IS: %d\n", instruction_line[i]->next->next->is);
             printf("TYPE: %d\n", instruction_line[i]->next->next->type);
             if (instruction_line[i]->next->next->next != NULL) {
                 printf("____NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->str);
-                printf("ID: %d\n", instruction_line[i]->next->next->next->id);
+                printf("IS: %d\n", instruction_line[i]->next->next->next->is);
                 printf("TYPE: %d\n", instruction_line[i]->next->next->next->type);
                 if (instruction_line[i]->next->next->next->next != NULL) {
                     printf("____NEXT-NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->next->str);
-                    printf("ID: %d\n", instruction_line[i]->next->next->next->next->id);
+                    printf("IS: %d\n", instruction_line[i]->next->next->next->next->is);
                     printf("TYPE: %d\n", instruction_line[i]->next->next->next->next->type);
                     if (instruction_line[i]->next->next->next->next->next != NULL) {
                         printf("____NEXT-NEXT-NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->next->next->str);
-                        printf("ID: %d\n", instruction_line[i]->next->next->next->next->next->id);
+                        printf("IS: %d\n", instruction_line[i]->next->next->next->next->next->is);
                         printf("TYPE: %d\n", instruction_line[i]->next->next->next->next->next->type);
                     }
                 }
@@ -65,13 +65,13 @@ instruction_t **get_instructions(FILE *source_file, char *line)
 {
     instruction_t **instruction_line = malloc(sizeof(instruction_t *) * 2);
 
-    if (instruction_line == NULL)
+    if (!instruction_line)
         return NULL;
     instruction_line[0] = NULL;
     instruction_line[1] = NULL;
     if (!(instruction_line =
                 interprate_file(instruction_line, source_file, line)) ||
-                                            error_label(instruction_line)) {
+                                        check_error_label(instruction_line)) {
         free_instructions(instruction_line);
         return NULL;
     }

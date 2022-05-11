@@ -9,7 +9,7 @@
 
 void my_free_2d_array(char **tab)
 {
-    if (tab == NULL)
+    if (!tab)
         return;
     for (size_t i = 0; tab[i] != NULL; i++)
         free(tab[i]);

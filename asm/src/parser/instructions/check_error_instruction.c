@@ -23,13 +23,13 @@ static instruction_t *check_label(instruction_t *tmp)
 {
     if (!tmp->next)
         return NULL;
-    else if (tmp->next->id == ID_LABEL) {
+    else if (tmp->next->is == IS_LABEL) {
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return NULL;
         if (!tmp->next->next)
             return tmp->next;
         tmp = tmp->next->next;
-        if (tmp->id != ID_SPACE)
+        if (tmp->is != IS_SPACE)
             return NULL;
         tmp = tmp->next;
     }
@@ -46,13 +46,13 @@ int check_error_instruction(instruction_t *instruction)
     tmp = check_label(tmp);
     if (!tmp)
         return EXIT_ERROR;
-    if (tmp->id == ID_LABEL)
+    if (tmp->is == IS_LABEL)
         return EXIT_SUCCESS;
     index = get_op(tmp->str);
     if (index == -1)
         return EXIT_ERROR;
     tmp = tmp->next;
-    if (!tmp || (tmp->id != ID_SPACE && tmp->id != ID_SEPARATOR))
+    if (!tmp || (tmp->is != IS_SPACE && tmp->is != IS_SEPARATOR))
         return EXIT_ERROR;
     tmp = tmp->next;
     if (!tmp)

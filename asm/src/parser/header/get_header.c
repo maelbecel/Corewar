@@ -16,15 +16,11 @@ header_t *get_header(FILE *file_name, char **line)
 
     if (!((*line) = get_clean_line(file_name)))
         return NULL;
-    if (my_strcpy(header->prog_name, get_name(*line)) == NULL) {
-        free(*line);
-        return NULL;
-    }
+    my_strcpy(header->prog_name, get_name(*line));
     free(*line);
     if (!((*line) = get_clean_line(file_name)))
         return NULL;
-    if (my_strcpy(header->comment, get_comment(*line)) == NULL)
-        return NULL;
+    my_strcpy(header->comment, get_comment(*line));
     free(*line);
     *line = NULL;
     return header;

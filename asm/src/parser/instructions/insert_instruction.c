@@ -10,24 +10,19 @@
 #include "asm.h"
 #include "op.h"
 
-static void insert_instruction(instruction_t *src, instruction_t *new)
-{
-    instruction_t *old_next = src->next;
-
-    src->next = new;
-    new->prev = src;
-    if (new != NULL)
-        new->next = old_next;
-    if (old_next != NULL)
-        old_next->prev = new;
-}
-
 int insert_new_instruction(instruction_t *start, instruction_t *new)
 {
     instruction_t *last_node = go_to_last(start);
+    instruction_t *next = NULL;
 
     if (!last_node)
         return EXIT_ERROR;
-    insert_instruction(last_node, new);
+    next = last_node->next;
+    last_node->next = new;
+    new->prev = last_node;
+    if (new != NULL)
+        new->next = next;
+    if (next != NULL)
+        next->prev = new;
     return EXIT_SUCCESS;
 }
