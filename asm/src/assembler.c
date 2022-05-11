@@ -15,14 +15,19 @@ int assembler(char *file_name)
     FILE *file = NULL;
     header_t *header = NULL;
     char *line = "";
+    instruction_t **instructions = NULL;
 
     file = fopen(file_name, "r");
     if (!file)
         return EXIT_ERROR;
     if ((header = get_header(file, &line)) == NULL)
         return EXIT_ERROR;
+    if (line == NULL)
+        line = get_clean_line(file);
     my_printf("name: %s | comment: %s\n", header->prog_name, header->comment);
+    instructions = get_instructions(file, line);
     fclose(file);
     free(header);
+    free_instructions(instructions);
     return EXIT_SUCCESS;
 }

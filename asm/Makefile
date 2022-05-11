@@ -27,7 +27,7 @@ SRC          	=         	$(SRC_DIR)main.c 								\
 							$(SRC_DIR)$(PARSER_DIR)get_comment.c			\
 							$(SRC_DIR)$(PARSER_DIR)get_quote_str.c			\
 							$(SRC_DIR)$(PARSER_DIR)get_instructions.c		\
-							$(SRC_DIR)$(NODE_DIR)realloc_node_array.c		\
+							$(SRC_DIR)$(NODE_DIR)realloc_instruction_array.c		\
 							$(SRC_DIR)$(NODE_DIR)free_instructions.c		\
 							$(SRC_DIR)$(NODE_DIR)create_instruction.c		\
 							$(SRC_DIR)$(NODE_DIR)add_node_at_the_end.c		\
