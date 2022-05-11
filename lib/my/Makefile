@@ -43,7 +43,10 @@ SRC			=		concat.c \
 					my_strncpy.c \
 					my_strstr.c \
 					my_strupcase.c \
-					my_swap.c
+					my_swap.c \
+my_array_len.c \
+my_free_2d_array.c \
+my_array_realloc.c \
 
 CFLAGS      +=	    -I . -fvisibility=hidden
 
