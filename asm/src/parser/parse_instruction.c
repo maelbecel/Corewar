@@ -36,10 +36,9 @@ static char *add_one_char(char *str, char c)
 
 static int is_special_id(char c)
 {
-    for (int i = 0; delimit[i].token != 0; i++) {
-        if (delimit[i].token == c) {
-            return i;
-        }
+    for (int pos = 0; delimit[pos].token != 0; pos++) {
+        if (delimit[pos].token == c)
+            return pos;
     }
     return -1;
 }
@@ -77,7 +76,7 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
     return EXIT_SUCCESS;
 }
 
-instruction_t *tokeniser(char *av)
+instruction_t *parse_instruction(char *av)
 {
     int index = 0;
     instruction_t *start = init_node(av);

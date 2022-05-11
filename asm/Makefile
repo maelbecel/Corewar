@@ -37,10 +37,10 @@ SRC          	=         	$(SRC_DIR)main.c 								\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)pop_next.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_params.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_syntax_line.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_error_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_label.c		\
-							$(SRC_DIR)$(PARSER_DIR)tokeniser.c		\
+							$(SRC_DIR)$(PARSER_DIR)parse_instruction.c		\
 
 SRC_COUNT    	=         	$(words $(SRC))
 

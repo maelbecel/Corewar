@@ -139,10 +139,10 @@
     instruction_t **get_instructions(FILE *source_file, char *line);
 
 void free_instructions(instruction_t **instructions);
-int error_syntax_line(instruction_t *token);
+int check_error_instruction(instruction_t *token);
 int get_op(char *mnemonique);
 int error_params(instruction_t *token);
-instruction_t *tokeniser(char *av);
+instruction_t *parse_instruction(char *av);
 void clean_instruction(instruction_t *token);
 bool check_instruction(instruction_t *line);
 bool error_label(instruction_t **array);

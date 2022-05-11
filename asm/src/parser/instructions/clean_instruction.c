@@ -22,7 +22,7 @@ static void clear_space(instruction_t *instruction)
         clear_space(instruction->next);
 }
 
-static void clean_between_sep(instruction_t *instruction)
+static void clear_current(instruction_t *instruction)
 {
     while (instruction->next != NULL) {
         if (instruction->id == ID_SPACE &&
@@ -32,10 +32,10 @@ static void clean_between_sep(instruction_t *instruction)
             break;
     }
     if (instruction->next != NULL)
-        clean_between_sep(instruction->next);
+        clear_current(instruction->next);
 }
 
-static void clean_after_sep(instruction_t *instruction)
+static void clear_next(instruction_t *instruction)
 {
     while (instruction->next != NULL) {
         if (instruction->id == ID_SEPARATOR &&
@@ -45,7 +45,7 @@ static void clean_after_sep(instruction_t *instruction)
             break;
     }
     if (instruction->next != NULL)
-        clean_after_sep(instruction->next);
+        clear_next(instruction->next);
 }
 
 void clean_instruction(instruction_t *instruction)
@@ -60,6 +60,6 @@ void clean_instruction(instruction_t *instruction)
         free(last);
     }
     clear_space(instruction);
-    clean_between_sep(instruction);
-    clean_after_sep(instruction);
+    clear_current(instruction);
+    clear_next(instruction);
 }
