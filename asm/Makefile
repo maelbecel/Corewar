@@ -14,26 +14,27 @@ CFLAGS         +=         	-Wall -Wextra $(INCLUDE)
 
 SRC_DIR      	=         	src/
 PARSER_DIR      =         	parser/
-NODE_DIR      =         	node/
+INSTRUC_DIR      =         	instructions/
+HEADER      =         	header/
 
 SRC          	=         	$(SRC_DIR)main.c 								\
 							$(SRC_DIR)op.c 									\
 							$(SRC_DIR)help.c 								\
 							$(SRC_DIR)assembler.c 							\
 							$(SRC_DIR)char_list_in_str.c 							\
-							$(SRC_DIR)$(PARSER_DIR)get_header.c 			\
-							$(SRC_DIR)$(PARSER_DIR)get_clean_line.c 		\
-							$(SRC_DIR)$(PARSER_DIR)get_name.c 				\
-							$(SRC_DIR)$(PARSER_DIR)get_comment.c			\
-							$(SRC_DIR)$(PARSER_DIR)get_quote_str.c			\
-							$(SRC_DIR)$(PARSER_DIR)get_instructions.c		\
-							$(SRC_DIR)$(NODE_DIR)realloc_instruction_array.c		\
-							$(SRC_DIR)$(NODE_DIR)free_instructions.c		\
-							$(SRC_DIR)$(NODE_DIR)create_instruction.c		\
-							$(SRC_DIR)$(NODE_DIR)add_node_at_the_end.c		\
-							$(SRC_DIR)$(NODE_DIR)rm_node.c		\
-							$(SRC_DIR)$(NODE_DIR)rm_next_node.c		\
-							$(SRC_DIR)$(PARSER_DIR)clean_instructions.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_header.c 			\
+							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_clean_line.c 		\
+							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_name.c 				\
+							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_comment.c			\
+							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_quote_str.c			\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)realloc_instruction_array.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)free_instructions.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)create_instruction.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)add_node_at_the_end.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)rm_node.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)rm_next_node.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instructions.c		\
 							$(SRC_DIR)$(PARSER_DIR)error_params.c		\
 							$(SRC_DIR)$(PARSER_DIR)error_syntax_line.c		\
 							$(SRC_DIR)$(PARSER_DIR)correct_line.c		\
