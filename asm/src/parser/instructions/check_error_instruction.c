@@ -24,16 +24,16 @@ static instruction_t *check_label(instruction_t *tmp)
     if (!tmp->next)
         return NULL;
     else if (tmp->next->id == ID_LABEL) {
-        if (char_list_in_str(tmp->str, LABEL_CHARS))
+        if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return NULL;
-        if (tmp->next->next == NULL)
+        if (!tmp->next->next)
             return tmp->next;
         tmp = tmp->next->next;
         if (tmp->id != ID_SPACE)
             return NULL;
         tmp = tmp->next;
     }
-    if (tmp == NULL)
+    if (!tmp)
         return NULL;
     return tmp;
 }
@@ -44,7 +44,7 @@ int check_error_instruction(instruction_t *instruction)
     instruction_t *tmp = instruction;
 
     tmp = check_label(tmp);
-    if (tmp == NULL)
+    if (!tmp)
         return EXIT_ERROR;
     if (tmp->id == ID_LABEL)
         return EXIT_SUCCESS;
@@ -52,11 +52,10 @@ int check_error_instruction(instruction_t *instruction)
     if (index == -1)
         return EXIT_ERROR;
     tmp = tmp->next;
-    if (tmp == NULL ||
-        (tmp->id != ID_SPACE && tmp->id != ID_SEPARATOR))
+    if (!tmp || (tmp->id != ID_SPACE && tmp->id != ID_SEPARATOR))
         return EXIT_ERROR;
     tmp = tmp->next;
-    if (tmp == NULL)
+    if (!tmp)
         return EXIT_ERROR;
     return error_params(tmp);
 }

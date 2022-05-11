@@ -19,7 +19,8 @@ instruction_t **realloc_instructions(instruction_t **instructions, size_t size)
         return NULL;
     for (; instructions[pos] != NULL; pos++)
         new[pos] = instructions[pos];
-    new[pos] = NULL;
+    for (; pos < size; pos++)
+        new[pos] = NULL;
     free(instructions);
     return new;
 }

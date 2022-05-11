@@ -24,7 +24,6 @@ int assembler(char *file_name)
         return EXIT_ERROR;
     if (line == NULL)
         line = get_clean_line(file);
-    my_printf("name: %s | comment: %s\n", header->prog_name, header->comment);
     instructions = get_instructions(file, line);
     fclose(file);
     free(header);
