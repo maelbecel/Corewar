@@ -40,9 +40,9 @@ static bool find_label_on_list(char **list, char *label)
     return false;
 }
 
-static bool check_label(instruction_t *token, char **list)
+static bool check_label(instruction_t *instruction, char **list)
 {
-    for (instruction_t *tmp = token; tmp != NULL; tmp = tmp->next) {
+    for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
         if (tmp->type > D_REG && tmp->prev->id == ID_LABEL &&
             !find_label_on_list(list, tmp->str)) {
             return false;

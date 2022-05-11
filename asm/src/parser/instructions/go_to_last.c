@@ -12,11 +12,11 @@
 
 instruction_t *go_to_last(instruction_t *start)
 {
-    instruction_t *last_token = start;
+    instruction_t *last = start;
 
     if (!start)
         return NULL;
     if (start->next != NULL)
-        last_token = go_to_last(start->next);
-    return last_token;
+        last = go_to_last(start->next);
+    return last;
 }

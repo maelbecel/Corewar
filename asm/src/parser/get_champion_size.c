@@ -60,9 +60,9 @@ static int compute_size(instruction_t *tmp)
     return size;
 }
 
-static int get_line_size(instruction_t *token)
+static int get_line_size(instruction_t *instruction)
 {
-    instruction_t *tmp = token;
+    instruction_t *tmp = instruction;
 
     if (tmp->next->id == ID_LABEL) {
         tmp = tmp->next;
@@ -74,10 +74,10 @@ static int get_line_size(instruction_t *token)
     return compute_size(tmp);
 }
 
-void get_champion_size(header_t *header, instruction_t **token)
+void get_champion_size(header_t *header, instruction_t **instructions)
 {
-    for (size_t i = 0; token[i] != NULL; i++) {
-        header->prog_size += get_line_size(token[i]);
+    for (size_t i = 0; instructions[i] != NULL; i++) {
+        header->prog_size += get_line_size(instructions[i]);
     }
     header->prog_size = htobe32(header->prog_size);
 }
