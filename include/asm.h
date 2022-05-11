@@ -127,4 +127,30 @@
     ////////////////////////////////////////////////////////////
     char *get_quote_str(char *line);
 
+    ////////////////////////////////////////////////////////////
+    /// \brief Get all of instruction after header and fill a struct with it
+    ///
+    /// \param line  the line of instruction
+    /// \param source_file  the file that contains instructions
+    ///
+    /// \return The string
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t **get_instructions(FILE *source_file, char *line);
+void free_instructions(instruction_t **instructions);
+int error_syntax_line(instruction_t *token);
+int find_index_op(char *mnemonique);
+instruction_t *tokeniser(char *av);
+void clean_instructions(instruction_t *token);
+bool correct_line(instruction_t *line);
+instruction_t **realloc_instruction_array(instruction_t **tab, size_t size);
+bool error_label(instruction_t **array);
+int rm_next_nodes(instruction_t *node);
+instruction_t *rm_node(instruction_t *deleted);
+bool char_list_in_str(char *str, char *src);
+instruction_t *create_instruction(char *str, ID id, TYPE type);
+int error_params(instruction_t *token);
+int add_node_at_the_end(instruction_t *node_1, instruction_t *node_2);
+instruction_t *get_last_token(instruction_t *token);
+
 #endif
