@@ -21,6 +21,7 @@ SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)get_option.c			\
 						$(SOURCES)init_champ.c		 	\
 						$(SOURCES)init_arene.c		 	\
+						$(SOURCES)int_to_hexa.c		 	\
 						$(SOURCES)my_calloc.c 		 	\
 						$(SOURCES)init_prog.c
 

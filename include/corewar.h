@@ -57,6 +57,6 @@
     prog_t *init_prog(int load_ad, int prog_nb);
     unsigned char **init_arene(void);
     void *my_calloc(int size);
-
+    char *int_to_hexa_string(int nb);
 
 #endif
