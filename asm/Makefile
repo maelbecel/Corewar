@@ -28,18 +28,19 @@ SRC          	=         	$(SRC_DIR)main.c 								\
 							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_comment.c			\
 							$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_quote_str.c			\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)realloc_instruction_array.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)realloc_instructions.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)free_instructions.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)create_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)insert_instruction.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)rm_node.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)rm_next_node.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instructions.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)pop.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)go_to_last.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)pop_next.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_params.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_syntax_line.c		\
-							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)correct_line.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_error_instruction.c		\
+							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_instruction.c		\
 							$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_label.c		\
-							$(SRC_DIR)$(PARSER_DIR)tokeniser.c		\
+							$(SRC_DIR)$(PARSER_DIR)parse_instruction.c		\
 
 SRC_COUNT    	=         	$(words $(SRC))
 

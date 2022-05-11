@@ -12,7 +12,7 @@
 
 static void free_instruction(instruction_t *instruction)
 {
-    free(instruction->token);
+    free(instruction->str);
     if (instruction->prev != NULL)
         free(instruction->prev);
     if (instruction->next != NULL)
@@ -24,8 +24,8 @@ static void free_instruction(instruction_t *instruction)
 void free_instructions(instruction_t **instructions)
 {
     if (instructions != NULL) {
-        for (size_t i = 0; instructions[i] != NULL; i++)
-            free_instruction(instructions[i]);
+        for (size_t pos = 0; instructions[pos] != NULL; pos++)
+            free_instruction(instructions[pos]);
     }
     free(instructions);
 }

@@ -21,7 +21,7 @@ static char **get_list_label(instruction_t **array)
     list[1] = NULL;
     for (size_t i = 0; array[i] != NULL; i++) {
         if (array[i]->next->id == ID_LABEL) {
-            list[index] = my_strdup(array[i]->token);
+            list[index] = my_strdup(array[i]->str);
             if (list[index] == NULL)
                 return NULL;
             list = my_array_realloc(list);
@@ -44,7 +44,7 @@ static bool check_label(instruction_t *token, char **list)
 {
     for (instruction_t *tmp = token; tmp != NULL; tmp = tmp->next) {
         if (tmp->type > D_REG && tmp->prev->id == ID_LABEL &&
-            !find_label_on_list(list, tmp->token)) {
+            !find_label_on_list(list, tmp->str)) {
             return false;
         }
     }
