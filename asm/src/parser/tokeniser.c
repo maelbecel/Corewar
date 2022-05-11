@@ -60,8 +60,8 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
     char str[2] = {0};
 
     str[0] = delimit[index].token;
-    if (!my_strlen(last->token)) {
-        last->token = add_one_char(last->token, delimit[index].token);
+    if (!my_strlen(last->str)) {
+        last->str = add_one_char(last->str, delimit[index].token);
         last->id = delimit[index].id;
         last->type = delimit[index].type;
     } else {
@@ -89,8 +89,8 @@ instruction_t *tokeniser(char *av)
         index = is_special_id(av[i]);
         last = go_to_last(start);
         if (index == -1) {
-            last->token = add_one_char(last->token, av[i]);
-            if (last->token == NULL)
+            last->str = add_one_char(last->str, av[i]);
+            if (last->str == NULL)
                 return NULL;
         } else {
             if (add_special_token(index, start, last) == EXIT_ERROR)

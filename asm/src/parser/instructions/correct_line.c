@@ -59,9 +59,9 @@ bool correct_line(instruction_t *line)
     if (!line->next->next)
         return true;
     if (line->next->id == ID_LABEL)
-        pos = find_index_op(line->next->next->next->token);
+        pos = find_index_op(line->next->next->next->str);
     else
-        pos = find_index_op(line->token);
+        pos = find_index_op(line->str);
     if (op_tab[pos].nbr_args != size)
         return false;
     if (!correct_params(op_tab[pos], line))

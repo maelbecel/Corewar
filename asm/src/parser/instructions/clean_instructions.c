@@ -14,7 +14,7 @@ static void clear_space(instruction_t *token)
 {
     while (token->next != NULL) {
         if (token->id == ID_SPACE && token->next->id == ID_SPACE)
-            rm_next_nodes(token);
+            pop_next(token);
         else
             break;
     }
@@ -26,7 +26,7 @@ static void clean_between_sep(instruction_t *token)
 {
     while (token->next != NULL) {
         if (token->id == ID_SPACE && token->next->id == ID_SEPARATOR)
-            token = rm_node(token);
+            token = pop(token);
         else
             break;
     }
@@ -38,7 +38,7 @@ static void clean_after_sep(instruction_t *token)
 {
     while (token->next != NULL) {
         if (token->id == ID_SEPARATOR && token->next->id == ID_SPACE)
-            rm_next_nodes(token);
+            pop_next(token);
         else
             break;
     }
@@ -52,9 +52,9 @@ void clean_instructions(instruction_t *token)
 
     if (token == NULL)
         return;
-    if (!my_strlen(last->token)) {
+    if (!my_strlen(last->str)) {
         last->prev->next = NULL;
-        free(last->token);
+        free(last->str);
         free(last);
     }
     clear_space(token);

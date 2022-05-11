@@ -12,14 +12,14 @@
 
 bool char_list_in_str(char *str, char *src)
 {
-    size_t check = 0;
+    size_t correct = 0;
 
-    for (int pos_str = 0; str[pos_str] != '\0'; pos_str++) {
-        check = 0;
-        for (int pos_src = 0; src[pos_src] != '\0'; pos_src++)
+    for (size_t pos_str = 0; str[pos_str] != '\0'; pos_str++) {
+        correct = 0;
+        for (size_t pos_src = 0; src[pos_src] != '\0'; pos_src++)
             if (str[pos_str] == src[pos_src])
-                check++;
-        if (check == 0)
+                correct++;
+        if (correct == 0)
             return false;
     }
     return true;

@@ -32,7 +32,7 @@ instruction_t **get_instructions(FILE *source_file, char *line)
             return NULL;
         }
         array++;
-        instruction_line = realloc_instruction_array(instruction_line, array);
+        instruction_line = realloc_instructions(instruction_line, array);
         if (instruction_line == NULL)
             return NULL;
         free(line);

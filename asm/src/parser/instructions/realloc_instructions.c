@@ -10,16 +10,16 @@
 #include "asm.h"
 #include "op.h"
 
-instruction_t **realloc_instruction_array(instruction_t **tab, size_t size)
+instruction_t **realloc_instructions(instruction_t **instructions, size_t size)
 {
     instruction_t **new = malloc(sizeof(instruction_t *) * size);
-    size_t i = 0;
+    size_t pos = 0;
 
     if (!new)
         return NULL;
-    for (; tab[i] != NULL; i++)
-        new[i] = tab[i];
-    new[i] = NULL;
-    free(tab);
+    for (; instructions[pos] != NULL; pos++)
+        new[pos] = instructions[pos];
+    new[pos] = NULL;
+    free(instructions);
     return new;
 }

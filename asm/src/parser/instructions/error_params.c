@@ -15,7 +15,7 @@ static int error_register(instruction_t *token)
     int registre = 0;
 
     token->type = D_REG;
-    registre = my_getnbr(token->token+1);
+    registre = my_getnbr(token->str+1);
     if (registre < 1 || registre > REG_NUMBER)
         return EXIT_ERROR;
     return EXIT_SUCCESS;
@@ -32,11 +32,11 @@ static int error_direct(instruction_t *token)
         if (tmp == NULL || tmp->id != ID_WIHOUT)
             return EXIT_ERROR;
         tmp->type = D_DIR;
-        if (char_list_in_str(tmp->token, LABEL_CHARS))
+        if (char_list_in_str(tmp->str, LABEL_CHARS))
             return EXIT_ERROR;
     } else {
         tmp->type = D_DIR;
-        if (tmp->id != ID_WIHOUT || char_list_in_str(tmp->token, "0123456789-"))
+        if (tmp->id != ID_WIHOUT || char_list_in_str(tmp->str, "0123456789-"))
             return EXIT_ERROR;
     }
     return EXIT_SUCCESS;
@@ -51,10 +51,10 @@ static int error_indirect(instruction_t *token)
         if (tmp == NULL || tmp->id != ID_WIHOUT)
             return EXIT_ERROR;
         tmp->type = D_IND;
-        if (char_list_in_str(tmp->token, LABEL_CHARS))
+        if (char_list_in_str(tmp->str, LABEL_CHARS))
             return EXIT_ERROR;
     } else {
-        if (char_list_in_str(token->token, "0123456789-"))
+        if (char_list_in_str(token->str, "0123456789-"))
             return EXIT_ERROR;
         tmp->type = D_IND;
     }
@@ -63,7 +63,7 @@ static int error_indirect(instruction_t *token)
 
 static int error_one_params(instruction_t *tmp)
 {
-    if (tmp->token[0] == 'r') {
+    if (tmp->str[0] == 'r') {
         if (error_register(tmp) == EXIT_ERROR)
             return EXIT_ERROR;
     } else if (tmp->id == ID_DIR) {
