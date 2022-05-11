@@ -48,7 +48,7 @@ static void clean_after_sep(instruction_t *token)
 
 void clean_instructions(instruction_t *token)
 {
-    instruction_t *last = get_last_token(token);
+    instruction_t *last = go_to_last(token);
 
     if (token == NULL)
         return;

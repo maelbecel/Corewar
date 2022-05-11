@@ -68,12 +68,12 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
         data = create_instruction(str, delimit[index].id, delimit[index].type);
         if (data == NULL)
             return EXIT_ERROR;
-        add_node_at_the_end(start, data);
+        insert_new_instruction(start, data);
     }
     data = create_instruction(NULL, 0, 0);
     if (data == NULL)
         return EXIT_ERROR;
-    add_node_at_the_end(start, data);
+    insert_new_instruction(start, data);
     return EXIT_SUCCESS;
 }
 
@@ -83,11 +83,11 @@ instruction_t *tokeniser(char *av)
     instruction_t *start = init_node(av);
     instruction_t *last = NULL;
 
-    if (start == NULL)
+    if (!start)
         return NULL;
     for (size_t i = 1; av[i] != '\0'; i++) {
         index = is_special_id(av[i]);
-        last = get_last_token(start);
+        last = go_to_last(start);
         if (index == -1) {
             last->token = add_one_char(last->token, av[i]);
             if (last->token == NULL)

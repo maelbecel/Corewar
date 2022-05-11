@@ -150,7 +150,7 @@ instruction_t *rm_node(instruction_t *deleted);
 bool char_list_in_str(char *str, char *src);
 instruction_t *create_instruction(char *str, ID id, TYPE type);
 int error_params(instruction_t *token);
-int add_node_at_the_end(instruction_t *node_1, instruction_t *node_2);
-instruction_t *get_last_token(instruction_t *token);
+int insert_new_instruction(instruction_t *start, instruction_t *new);
+instruction_t *go_to_last(instruction_t *token);
 
 #endif

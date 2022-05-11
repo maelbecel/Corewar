@@ -10,10 +10,14 @@ NAME		=		libmy.a
 MYH			=		my.h
 
 SRC			=		concat.c \
+					count_occur.c \
 					inttochar.c \
+					my_array_len.c \
+					my_array_realloc.c \
 					my_compute_power_rec.c \
 					my_compute_square_root.c \
 					my_find_prime_sup.c \
+					my_free_2d_array.c \
 					my_getnbr.c \
 					my_intlen.c \
 					my_is_prime.c \
@@ -44,9 +48,6 @@ SRC			=		concat.c \
 					my_strstr.c \
 					my_strupcase.c \
 					my_swap.c \
-my_array_len.c \
-my_free_2d_array.c \
-my_array_realloc.c \
 
 CFLAGS      +=	    -I . -fvisibility=hidden
 

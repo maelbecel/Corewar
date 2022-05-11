@@ -433,4 +433,15 @@
     ////////////////////////////////////////////////////////////
     char **my_array_realloc(char **tab);
 
+    ////////////////////////////////////////////////////////////
+    /// \brief Count occurence of a char in a string
+    ///
+    /// \param str the str where we find char
+    /// \param c char who is searched
+    ///
+    /// \return The number of occurence
+    ///
+    ////////////////////////////////////////////////////////////
+    size_t count_occur(char *str, char c);
+
 #endif
