@@ -45,9 +45,10 @@ int main (int ac, char **av)
     if (usage(ac, av) )
         return 0;
     get_option(ac, av, vm);
+    fill_champ(vm);
     my_printf("cycle to die : %i\nchampions :\n", vm->nb_cycle);
     for (int i = 0; vm->champ[i]; i++)
-        my_printf("%i : %s -> %i\n", vm->champ[i]->prog_nb, vm->champ[i]->name, vm->champ[i]->load_address);
+        my_printf("%i : %s -> %i\ncode :%s\n", vm->champ[i]->prog_nb, vm->champ[i]->name, vm->champ[i]->load_address, vm->champ[i]->buffer);
     my_printf("arena is :\n");
     for (int i = 0; i < NB_LINE; i++) {
         for (int j = 0; j < MEM_SIZE / NB_LINE; j++)

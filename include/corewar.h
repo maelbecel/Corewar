@@ -61,5 +61,6 @@
     void *my_calloc(int size);
     char *int_to_hexa_string(int nb);
     char *get_data(champion_t *champ);
+    bool fill_champ(vm_t *vm);
 
 #endif

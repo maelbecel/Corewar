@@ -11,11 +11,10 @@
 
 char *get_data(champion_t *champ)
 {
-    printf("name : %s\n", champ->name);
     int fd = open(champ->name, O_RDONLY);
     struct stat file;
 
-    if (fd == 0)
+    if (fd == -1)
         error("Can't open file");
     if (stat(champ->name, &file) == -1)
         return NULL;
@@ -23,5 +22,6 @@ char *get_data(champion_t *champ)
     if (!champ->buffer)
         return NULL;
     read(fd, champ->buffer, file.st_size);
+    close(fd);
     return champ->buffer;
 }
