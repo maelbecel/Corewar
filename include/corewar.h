@@ -24,6 +24,7 @@
     struct vm_s {
         int nb_cycle;
         int nb_champ;
+        unsigned char **arene;
         champion_t **champ;
     };
 
@@ -32,6 +33,11 @@
         int load_address;
         char *name;
         prog_t *prog;
+    };
+
+    struct coord_s {
+        int x;
+        int y;
     };
 
     struct prog_s {
@@ -43,15 +49,14 @@
         int carry;
     };
 
-    struct coord_s {
-        int x;
-        int y;
-    };
 
     bool get_option(int ac, char **av, vm_t *vm);
     bool check_cmp(vm_t *vm);
     int error(char *str);
     champion_t **init_champ(vm_t *vm);
     prog_t *init_prog(int load_ad, int prog_nb);
+    unsigned char **init_arene(void);
+    void *my_calloc(int size);
+
 
 #endif
