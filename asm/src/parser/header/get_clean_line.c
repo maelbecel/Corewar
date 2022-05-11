@@ -43,7 +43,7 @@ static void clean_line(char *line)
     }
 }
 
-char *clean_str(char *line)
+static char *clean_str(char *line)
 {
     size_t shift = 0;
     char *str = NULL;

@@ -10,17 +10,6 @@
 #include "asm.h"
 #include "op.h"
 
-static size_t count_occur(char *str, char c)
-{
-    size_t nbr_occur = 0;
-
-    for (size_t i = 0; str[i] != '\0'; i++) {
-        if (str[i] == c)
-            nbr_occur++;
-    }
-    return nbr_occur;
-}
-
 char *get_quote_str(char *line)
 {
     int id_quotes = 0;
