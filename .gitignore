@@ -56,4 +56,3 @@ corewar/corewar
 .vscode
 vgcore*
 doc/
-*.s
