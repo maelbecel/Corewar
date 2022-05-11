@@ -12,12 +12,14 @@
     #include <stddef.h>
     #include <stdlib.h>
     #include <unistd.h>
+    #include "op.h"
 
     #define EXIT_ERROR 84
 
     typedef struct vm_s vm_t;
     typedef struct champion_s champion_t;
     typedef struct prog_s prog_t;
+    typedef struct coord_s coord_t;
 
     struct vm_s {
         int nb_cycle;
@@ -33,9 +35,17 @@
     };
 
     struct prog_s {
-        int *reg;
-        int pc;
+        int reg[REG_NUMBER];
+        coord_t coord;
+        int goal_cycle;
+        int current_cycle;
+        int id_action;
         int carry;
+    };
+
+    struct coord_s {
+        int x;
+        int y;
     };
 
     bool get_option(int ac, char **av, vm_t *vm);
