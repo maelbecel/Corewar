@@ -51,7 +51,6 @@
         int carry;
     };
 
-
     bool get_option(int ac, char **av, vm_t *vm);
     bool check_cmp(vm_t *vm);
     int error(char *str);
@@ -62,5 +61,21 @@
     char *int_to_hexa_string(int nb);
     char *get_data(champion_t *champ);
     bool fill_champ(vm_t *vm);
+    void add(void);
+    void aff(void);
+    void and(void);
+    void a_fork(void);
+    void ld(void);
+    void ldi(void);
+    void lfork(void);
+    void live(void);
+    void lld(void);
+    void lldi(void);
+    void or(void);
+    void st(void);
+    void sti(void);
+    void sub(void);
+    void xor(void);
+    void zjmp(void);
 
 #endif

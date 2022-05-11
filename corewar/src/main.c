@@ -21,7 +21,7 @@ static bool usage(int ac, char **av)
         my_printf("A0BCDEFE1DD3...)\n-n prog_number sets the next program's ");
         my_printf("number. By default, the first free number in the paramete");
         my_printf("r order\n-a load_address sets the next program's loading");
-        my_printf("address. When no address is specified, optimize the");
+        my_printf("address. When no address is specified, optimize the ");
         my_printf("addresses so that the processes are as far away from each");
         my_printf("other as possible. The addresses are MEM_SIZE modulo.");
         return true;
