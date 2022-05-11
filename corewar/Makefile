@@ -14,8 +14,36 @@ CFLAGS      +=         -Wall -Wextra -Werror $(INCLUDE)
 
 SOURCES      =         src/
 
-SRC          =         $(SOURCES)main.c \
-					   $(SOURCES)op.c \
+ACTION 		 =  	   actions/
+
+SRC          =         	$(SOURCES)main.c 				\
+						$(SOURCES)op.c 					\
+						$(SOURCES)errors.c 				\
+						$(SOURCES)check_champion.c 		\
+						$(SOURCES)get_option.c			\
+						$(SOURCES)init_champ.c		 	\
+						$(SOURCES)init_arene.c		 	\
+						$(SOURCES)int_to_hexa.c		 	\
+						$(SOURCES)fill_champ.c		 	\
+						$(SOURCES)my_calloc.c 		 	\
+						$(SOURCES)init_prog.c			\
+						$(SOURCES)get_data.c		 	\
+						$(SOURCES)$(ACTION)add.c		\
+						$(SOURCES)$(ACTION)aff.c		\
+						$(SOURCES)$(ACTION)and.c		\
+						$(SOURCES)$(ACTION)fork.c		\
+						$(SOURCES)$(ACTION)ld.c		 	\
+						$(SOURCES)$(ACTION)ldi.c		\
+						$(SOURCES)$(ACTION)lfork.c		\
+						$(SOURCES)$(ACTION)live.c		\
+						$(SOURCES)$(ACTION)lld.c		\
+						$(SOURCES)$(ACTION)lldi.c		\
+						$(SOURCES)$(ACTION)or.c		 	\
+						$(SOURCES)$(ACTION)st.c		 	\
+						$(SOURCES)$(ACTION)sti.c		\
+						$(SOURCES)$(ACTION)sub.c		\
+						$(SOURCES)$(ACTION)xor.c		\
+						$(SOURCES)$(ACTION)zjmp.c		\
 
 SRC_COUNT    =         $(words $(SRC))
 
