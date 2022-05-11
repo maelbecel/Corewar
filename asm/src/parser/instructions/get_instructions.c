@@ -23,7 +23,7 @@ instruction_t **get_instructions(FILE *source_file, char *line)
     my_printf("line: %s\n", line);
     for (size_t i = 0; line != NULL; i++) {
         instruction_line[i] = tokeniser(line);
-        clean_instructions(instruction_line[i]);
+        clean_instruction(instruction_line[i]);
         if (!instruction_line[i] ||
             error_syntax_line(instruction_line[i]) ||
             !check_instruction(instruction_line[i])) {

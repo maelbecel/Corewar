@@ -143,7 +143,7 @@ int error_syntax_line(instruction_t *token);
 int get_op(char *mnemonique);
 int error_params(instruction_t *token);
 instruction_t *tokeniser(char *av);
-void clean_instructions(instruction_t *token);
+void clean_instruction(instruction_t *token);
 bool check_instruction(instruction_t *line);
 bool error_label(instruction_t **array);
 

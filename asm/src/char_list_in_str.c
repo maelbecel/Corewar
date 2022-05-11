@@ -10,7 +10,7 @@
 #include "asm.h"
 #include "op.h"
 
-static void check(int *correct, char *src, char *str, int pos_str)
+static void check(size_t *correct, char *src, char *str, int pos_str)
 {
     for (size_t pos_src = 0; src[pos_src] != '\0'; pos_src++)
         if (str[pos_str] == src[pos_src])

@@ -48,7 +48,7 @@ static void clean_after_sep(instruction_t *instruction)
         clean_after_sep(instruction->next);
 }
 
-void clean_instructions(instruction_t *instruction)
+void clean_instruction(instruction_t *instruction)
 {
     instruction_t *last = go_to_last(instruction);
 
