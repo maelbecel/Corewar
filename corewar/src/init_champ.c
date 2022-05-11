@@ -10,17 +10,13 @@
 #include "corewar.h"
 #include "op.h"
 
-champion_t **init_champ(vm_t *vm)
+int init_champ(champion_t *champ)
 {
-    champion_t **champ = malloc(sizeof(champion_t *) * (vm->nb_champ + 1));
-
-    champ[vm->nb_champ] = NULL;
-    for (int i = 0; i < vm->nb_champ; i++) {
-        champ[i] = malloc(sizeof(champion_t));
-        champ[i]->prog_nb = -1;
-        champ[i]->prog = init_prog(champ[i]->load_address, champ[i]->prog_nb);
-        if (!champ[i]->prog)
-            return NULL;
-    }
-    return champ;
+    champ->prog = init_prog(champ->load_address, champ->prog_nb);
+    if (!champ->prog)
+        return -1;
+    champ->buffer = get_data(champ);
+    if (!champ->buffer)
+        return -1;
+    return 0;
 }

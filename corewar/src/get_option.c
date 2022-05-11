@@ -55,7 +55,8 @@ bool get_option(int ac, char **av, vm_t *vm)
             vm->champ[champ]->load_address = (my_str_isnum(av[i + 1])) ? my_getnbr(av[++i]) : error("Invalid adress of champion\n");
             continue;
         } if (av[i][0] != '-') {
-            vm->champ[champ++]->name = av[i];
+            vm->champ[champ]->name = av[i];
+            init_champ(vm->champ[champ++]);
             continue;
         } if (my_strcmp(av[i++], "-dump") != 0)
             error("Invalid flag\n");

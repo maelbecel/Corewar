@@ -12,6 +12,7 @@
     #include <stddef.h>
     #include <stdlib.h>
     #include <unistd.h>
+    #include <sys/stat.h>
     #include "op.h"
 
     #define EXIT_ERROR 84
@@ -32,6 +33,7 @@
         int prog_nb;
         int load_address;
         char *name;
+        char *buffer;
         prog_t *prog;
     };
 
@@ -53,10 +55,11 @@
     bool get_option(int ac, char **av, vm_t *vm);
     bool check_cmp(vm_t *vm);
     int error(char *str);
-    champion_t **init_champ(vm_t *vm);
+    int init_champ(champion_t *champ);
     prog_t *init_prog(int load_ad, int prog_nb);
     unsigned char **init_arene(void);
     void *my_calloc(int size);
     char *int_to_hexa_string(int nb);
+    char *get_data(champion_t *champ);
 
 #endif

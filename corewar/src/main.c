@@ -35,7 +35,6 @@ vm_t *init_vm(void)
 
     vm->nb_cycle = CYCLE_TO_DIE;
     vm->nb_champ = 2;
-    vm->champ = init_champ(vm);
     vm->arene = init_arene();
     return vm;
 }
