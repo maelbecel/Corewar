@@ -25,6 +25,7 @@ int assembler(char *file_name)
     if (line == NULL)
         line = get_clean_line(file);
     instructions = get_instructions(file, line);
+    get_champion_size(header, instructions);
     fclose(file);
     free(header);
     free_instructions(instructions);

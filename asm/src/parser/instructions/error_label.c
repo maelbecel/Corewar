@@ -67,14 +67,14 @@ static bool double_label_declaration(char **list)
     return false;
 }
 
-bool error_label(instruction_t **array)
+bool error_label(instruction_t **instructions)
 {
-    char **list = get_list_label(array);
+    char **list = get_list_label(instructions);
 
     if (list == NULL)
         return true;
-    for (size_t i = 0; array[i] != NULL; i++) {
-        if (!check_label(array[i], list)) {
+    for (size_t i = 0; instructions[i] != NULL; i++) {
+        if (!check_label(instructions[i], list)) {
             my_free_2d_array(list);
             return true;
         }

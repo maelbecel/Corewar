@@ -29,14 +29,14 @@ static int error_direct(instruction_t *instruction)
         return EXIT_ERROR;
     if (tmp->id == ID_LABEL) {
         tmp = tmp->next;
-        if (!tmp || tmp->id != ID_WIHOUT)
+        if (!tmp || tmp->id != ID_OTHER)
             return EXIT_ERROR;
         tmp->type = D_DIR;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return EXIT_ERROR;
     } else {
         tmp->type = D_DIR;
-        if (tmp->id != ID_WIHOUT ||
+        if (tmp->id != ID_OTHER ||
                         char_list_in_str(tmp->str, "0123456789-") == false)
             return EXIT_ERROR;
     }
@@ -49,7 +49,7 @@ static int error_indirect(instruction_t *instruction)
 
     if (tmp->id == ID_LABEL) {
         tmp = tmp->next;
-        if (!tmp || tmp->id != ID_WIHOUT)
+        if (!tmp || tmp->id != ID_OTHER)
             return EXIT_ERROR;
         tmp->type = D_IND;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)

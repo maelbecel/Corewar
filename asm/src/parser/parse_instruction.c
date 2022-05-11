@@ -17,7 +17,7 @@ const parser_t delimit[] =
     {DIRECT_CHAR, D_GET, ID_DIR},
     {LABEL_CHAR, D_GET, ID_LABEL},
     {SEPARATOR_CHAR, D_SEPARATOR, ID_SEPARATOR},
-    {0, ID_WIHOUT, ID_WIHOUT},
+    {0, ID_OTHER, ID_OTHER},
 };
 
 static char *add_one_char(char *str, char c)
@@ -49,7 +49,7 @@ static instruction_t *init_node(char *av)
     char str[2] = {0};
 
     str[0] = av[0];
-    start = create_instruction(str, ID_WIHOUT, D_NORMAL);
+    start = create_instruction(str, ID_OTHER, D_NORMAL);
     return start;
 }
 

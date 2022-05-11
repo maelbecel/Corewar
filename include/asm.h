@@ -8,6 +8,9 @@
 #ifndef ASM_H_
     #define ASM_H_
 
+    ////////////////////////////////////////////////////////////
+    /// INCLUDE
+    ////////////////////////////////////////////////////////////
     #include <stdbool.h>
     #include <stddef.h>
     #include <unistd.h>
@@ -15,18 +18,24 @@
     #include <stdio.h>
     #include "op.h"
 
+    ////////////////////////////////////////////////////////////
+    /// DEFINE
+    ////////////////////////////////////////////////////////////
     #define EXIT_ERROR 84
     #define TAB '\t'
     #define SPACE ' '
     #define QUOTES '\"'
 
+    ////////////////////////////////////////////////////////////
+    /// TYPEDEF
+    ////////////////////////////////////////////////////////////
     typedef struct instruction_s instruction_t;
     typedef enum id ID;
     typedef enum type TYPE;
     typedef struct parser_s parser_t;
 
     enum id {
-        ID_WIHOUT,
+        ID_OTHER,
         ID_SPACE,
         ID_DIR,
         ID_LABEL,
@@ -138,14 +147,21 @@
     ////////////////////////////////////////////////////////////
     instruction_t **get_instructions(FILE *source_file, char *line);
 
-void free_instructions(instruction_t **instructions);
-int check_error_instruction(instruction_t *token);
-int get_op(char *mnemonique);
-int error_params(instruction_t *token);
+    ////////////////////////////////////////////////////////////
+    /// \brief Free the instruction array
+    ///
+    /// \param instruction  the instruction array that go to be free
+    ///
+    ////////////////////////////////////////////////////////////
+    void free_instructions(instruction_t **instructions);
+
+int check_error_instruction(instruction_t *instruction);
+int get_op(char *str);
+int error_params(instruction_t *instruction);
 instruction_t *parse_instruction(char *av);
-void clean_instruction(instruction_t *token);
+void clean_instruction(instruction_t *instruction);
 bool check_instruction(instruction_t *line);
-bool error_label(instruction_t **array);
+bool error_label(instruction_t **instructions);
 
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array
