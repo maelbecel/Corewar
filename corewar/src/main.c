@@ -9,10 +9,10 @@
 #include "printf.h"
 #include "corewar.h"
 
-static void usage(int ac, char **av)
+static void help(int ac, char **av)
 {
     if (ac == 2 && my_strcmp(av[1], "-h") == 0) {
-        my_printf("USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number] ");
+        my_printf("help\n./corewar [-dump nbr_cycle] [[-n prog_number] ");
         my_printf("[-a load_address] prog_name] ...\nDESCRIPTION\n");
         my_printf("-dump nbr_cycle dumps the memory after the nbr_cycle ");
         my_printf("execution (if the round isn't already over) with the ");
@@ -28,6 +28,6 @@ static void usage(int ac, char **av)
 
 int main (int ac, char **av, UNUSED char **env)
 {
-    usage(ac, av);
+    help(ac, av);
     return 0;
 }
