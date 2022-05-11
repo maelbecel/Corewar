@@ -16,14 +16,16 @@ instruction_t *create_instruction(char *str, ID id, TYPE type)
 
     if (!instruction)
         return NULL;
-    if (!str) {
-        instruction->token = malloc(sizeof(char) * 1);
-        if (!instruction->token)
+    instruction->str = malloc(sizeof(char) * 1);
+    if (!instruction->str) {
+        free(instruction);
+        return NULL;
+    }
+    if (str != NULL) {
+        if (!(instruction->str = my_strdup(str)))
             return NULL;
-        instruction->token[0] = '\0';
     } else
-        if (!(instruction->token = my_strdup(str)))
-            return NULL;
+        instruction->str[0] = '\0';
     instruction->id = id;
     instruction->type = type;
     instruction->next = NULL;

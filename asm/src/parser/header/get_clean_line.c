@@ -52,7 +52,7 @@ static char *clean_str(char *line)
         return NULL;
     remove_comment(line);
     shift = do_shift(line);
-    if (!my_strlen(line))
+    if (my_strlen(line) == 0)
         return line;
     clean_line(line);
     str = my_strdup(line + shift);
