@@ -14,6 +14,8 @@ CFLAGS      +=         -Wall -Wextra -Werror $(INCLUDE)
 
 SOURCES      =         src/
 
+ACTION 		 =  	   actions/
+
 SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)op.c 					\
 						$(SOURCES)errors.c 				\
@@ -26,6 +28,22 @@ SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)my_calloc.c 		 	\
 						$(SOURCES)init_prog.c			\
 						$(SOURCES)get_data.c		 	\
+						$(SOURCES)$(ACTION)add.c		\
+						$(SOURCES)$(ACTION)aff.c		\
+						$(SOURCES)$(ACTION)and.c		\
+						$(SOURCES)$(ACTION)fork.c		\
+						$(SOURCES)$(ACTION)ld.c		 	\
+						$(SOURCES)$(ACTION)ldi.c		\
+						$(SOURCES)$(ACTION)lfork.c		\
+						$(SOURCES)$(ACTION)live.c		\
+						$(SOURCES)$(ACTION)lld.c		\
+						$(SOURCES)$(ACTION)lldi.c		\
+						$(SOURCES)$(ACTION)or.c		 	\
+						$(SOURCES)$(ACTION)st.c		 	\
+						$(SOURCES)$(ACTION)sti.c		\
+						$(SOURCES)$(ACTION)sub.c		\
+						$(SOURCES)$(ACTION)xor.c		\
+						$(SOURCES)$(ACTION)zjmp.c		\
 
 SRC_COUNT    =         $(words $(SRC))
 
