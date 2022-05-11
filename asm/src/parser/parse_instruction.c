@@ -36,10 +36,9 @@ static char *add_one_char(char *str, char c)
 
 static int is_special_id(char c)
 {
-    for (int i = 0; delimit[i].token != 0; i++) {
-        if (delimit[i].token == c) {
-            return i;
-        }
+    for (int pos = 0; delimit[pos].token != 0; pos++) {
+        if (delimit[pos].token == c)
+            return pos;
     }
     return -1;
 }
@@ -60,8 +59,8 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
     char str[2] = {0};
 
     str[0] = delimit[index].token;
-    if (!my_strlen(last->token)) {
-        last->token = add_one_char(last->token, delimit[index].token);
+    if (!my_strlen(last->str)) {
+        last->str = add_one_char(last->str, delimit[index].token);
         last->id = delimit[index].id;
         last->type = delimit[index].type;
     } else {
@@ -77,7 +76,7 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
     return EXIT_SUCCESS;
 }
 
-instruction_t *tokeniser(char *av)
+instruction_t *parse_instruction(char *av)
 {
     int index = 0;
     instruction_t *start = init_node(av);
@@ -89,8 +88,8 @@ instruction_t *tokeniser(char *av)
         index = is_special_id(av[i]);
         last = go_to_last(start);
         if (index == -1) {
-            last->token = add_one_char(last->token, av[i]);
-            if (last->token == NULL)
+            last->str = add_one_char(last->str, av[i]);
+            if (last->str == NULL)
                 return NULL;
         } else {
             if (add_special_token(index, start, last) == EXIT_ERROR)

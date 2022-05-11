@@ -22,17 +22,17 @@ instruction_t **get_instructions(FILE *source_file, char *line)
     instruction_line[1] = NULL;
     my_printf("line: %s\n", line);
     for (size_t i = 0; line != NULL; i++) {
-        instruction_line[i] = tokeniser(line);
-        clean_instructions(instruction_line[i]);
+        instruction_line[i] = parse_instruction(line);
+        clean_instruction(instruction_line[i]);
         if (!instruction_line[i] ||
-            error_syntax_line(instruction_line[i]) ||
-            !correct_line(instruction_line[i])) {
+            check_error_instruction(instruction_line[i]) ||
+            !check_instruction(instruction_line[i])) {
             free(line);
             free_instructions(instruction_line);
             return NULL;
         }
         array++;
-        instruction_line = realloc_instruction_array(instruction_line, array);
+        instruction_line = realloc_instructions(instruction_line, array);
         if (instruction_line == NULL)
             return NULL;
         free(line);

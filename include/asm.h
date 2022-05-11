@@ -49,7 +49,7 @@
     };
 
     struct instruction_s{
-        char *token;
+        char *str;
         ID id;
         TYPE type;
         struct instruction_s *next;
@@ -137,20 +137,90 @@
     ///
     ////////////////////////////////////////////////////////////
     instruction_t **get_instructions(FILE *source_file, char *line);
+
 void free_instructions(instruction_t **instructions);
-int error_syntax_line(instruction_t *token);
-int find_index_op(char *mnemonique);
-instruction_t *tokeniser(char *av);
-void clean_instructions(instruction_t *token);
-bool correct_line(instruction_t *line);
-instruction_t **realloc_instruction_array(instruction_t **tab, size_t size);
-bool error_label(instruction_t **array);
-int rm_next_nodes(instruction_t *node);
-instruction_t *rm_node(instruction_t *deleted);
-bool char_list_in_str(char *str, char *src);
-instruction_t *create_instruction(char *str, ID id, TYPE type);
+int check_error_instruction(instruction_t *token);
+int get_op(char *mnemonique);
 int error_params(instruction_t *token);
-int insert_new_instruction(instruction_t *start, instruction_t *new);
-instruction_t *go_to_last(instruction_t *token);
+instruction_t *parse_instruction(char *av);
+void clean_instruction(instruction_t *token);
+bool check_instruction(instruction_t *line);
+bool error_label(instruction_t **array);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Realloc the instruction array
+    ///
+    /// \param instructions  the instruction array that needs to be realloc
+    /// \param size  the size of the array
+    ///
+    /// \return The instruction array reallocated
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t **realloc_instructions(instruction_t **instructions,
+                                                                size_t size);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Remove the next instruction of an instruction
+    ///
+    /// \param instruction  the instruction that go to delete it next
+    ///
+    /// \return EXIT_SUCCESS if have no error, EXIT_ERROR otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    int pop_next(instruction_t *instruction);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Remove the instruction of the instruction array
+    ///
+    /// \param instruction  the instruction that go to be deleted
+    ///
+    /// \return EXIT_SUCCESS if have no error, EXIT_ERROR otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t *pop(instruction_t *instruction);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Check if a str contains char of another str
+    ///
+    /// \param str  the str that go to be compared
+    /// \param src  the str filter
+    ///
+    /// \return true if all char correspond, false otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    bool char_list_in_str(char *str, char *src);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Create a new instruction in array
+    ///
+    /// \param str  the string of the instruction
+    /// \param id  the id of the instruction
+    /// \param type  the type of the instruction
+    ///
+    /// \return The created instruction if have no error, EXIT_ERROR otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t *create_instruction(char *str, ID id, TYPE type);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Insert a new instruction in the instruction array
+    ///
+    /// \param start  the first instruction of the array
+    /// \param new  the new instruction that be added
+    ///
+    /// \return EXIT_SUCCESS if have no error, EXIT_ERROR otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    int insert_new_instruction(instruction_t *start, instruction_t *new);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Go and return the last instruction of instruction array
+    ///
+    /// \param new  the new instruction that be added
+    ///
+    /// \return EXIT_SUCCESS if have no error, EXIT_ERROR otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t *go_to_last(instruction_t *start);
 
 #endif
