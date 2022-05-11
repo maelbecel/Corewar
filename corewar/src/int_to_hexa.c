@@ -15,7 +15,7 @@ char *int_to_hexa_string(int nb)
     int quotient = nb;
     int r;
     char *base = "0123456789abcdef";
-    char *res = malloc(16 * (nb + 1));
+    char *res = my_calloc(16 * (nb + 1));
     int j = 0;
 
     if (!res)
