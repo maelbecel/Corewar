@@ -10,20 +10,20 @@
 #include "asm.h"
 #include "op.h"
 
-int find_index_op(char *mnemonique)
+int get_op(char *mnemonique)
 {
-    for (int i = 0; op_tab[i].mnemonique; i++) {
-        if (!my_strcmp(mnemonique, op_tab[i].mnemonique))
-            return i;
+    for (size_t pos = 0; op_tab[pos].mnemonique != NULL; pos++) {
+        if (my_strcmp(mnemonique, op_tab[pos].mnemonique) == 0)
+            return pos;
     }
     return -1;
 }
 
 static instruction_t *check_label(instruction_t *cursor)
 {
-    if (cursor->next == NULL) {
+    if (!cursor->next)
         return NULL;
-    } else if (cursor->next->id == ID_LABEL) {
+    else if (cursor->next->id == ID_LABEL) {
         if (char_list_in_str(cursor->str, LABEL_CHARS))
             return NULL;
         if (cursor->next->next == NULL)
@@ -48,7 +48,7 @@ int error_syntax_line(instruction_t *token)
         return EXIT_ERROR;
     if (cursor->id == ID_LABEL)
         return EXIT_SUCCESS;
-    index = find_index_op(cursor->str);
+    index = get_op(cursor->str);
     if (index == -1)
         return EXIT_ERROR;
     cursor = cursor->next;

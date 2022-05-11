@@ -26,7 +26,7 @@ instruction_t **get_instructions(FILE *source_file, char *line)
         clean_instructions(instruction_line[i]);
         if (!instruction_line[i] ||
             error_syntax_line(instruction_line[i]) ||
-            !correct_line(instruction_line[i])) {
+            !check_instruction(instruction_line[i])) {
             free(line);
             free_instructions(instruction_line);
             return NULL;

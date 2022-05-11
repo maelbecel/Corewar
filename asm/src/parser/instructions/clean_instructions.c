@@ -10,54 +10,56 @@
 #include "asm.h"
 #include "op.h"
 
-static void clear_space(instruction_t *token)
+static void clear_space(instruction_t *instruction)
 {
-    while (token->next != NULL) {
-        if (token->id == ID_SPACE && token->next->id == ID_SPACE)
-            pop_next(token);
+    while (instruction->next != NULL) {
+        if (instruction->id == ID_SPACE && instruction->next->id == ID_SPACE)
+            pop_next(instruction);
         else
             break;
     }
-    if (token->next != NULL)
-        clear_space(token->next);
+    if (instruction->next != NULL)
+        clear_space(instruction->next);
 }
 
-static void clean_between_sep(instruction_t *token)
+static void clean_between_sep(instruction_t *instruction)
 {
-    while (token->next != NULL) {
-        if (token->id == ID_SPACE && token->next->id == ID_SEPARATOR)
-            token = pop(token);
+    while (instruction->next != NULL) {
+        if (instruction->id == ID_SPACE &&
+                                        instruction->next->id == ID_SEPARATOR)
+            instruction = pop(instruction);
         else
             break;
     }
-    if (token->next != NULL)
-        clean_between_sep(token->next);
+    if (instruction->next != NULL)
+        clean_between_sep(instruction->next);
 }
 
-static void clean_after_sep(instruction_t *token)
+static void clean_after_sep(instruction_t *instruction)
 {
-    while (token->next != NULL) {
-        if (token->id == ID_SEPARATOR && token->next->id == ID_SPACE)
-            pop_next(token);
+    while (instruction->next != NULL) {
+        if (instruction->id == ID_SEPARATOR &&
+                                        instruction->next->id == ID_SPACE)
+            pop_next(instruction);
         else
             break;
     }
-    if (token->next != NULL)
-        clean_after_sep(token->next);
+    if (instruction->next != NULL)
+        clean_after_sep(instruction->next);
 }
 
-void clean_instructions(instruction_t *token)
+void clean_instructions(instruction_t *instruction)
 {
-    instruction_t *last = go_to_last(token);
+    instruction_t *last = go_to_last(instruction);
 
-    if (token == NULL)
+    if (!instruction)
         return;
-    if (!my_strlen(last->str)) {
+    if (my_strlen(last->str) == 0) {
         last->prev->next = NULL;
         free(last->str);
         free(last);
     }
-    clear_space(token);
-    clean_between_sep(token);
-    clean_after_sep(token);
+    clear_space(instruction);
+    clean_between_sep(instruction);
+    clean_after_sep(instruction);
 }

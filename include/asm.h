@@ -140,11 +140,11 @@
 
 void free_instructions(instruction_t **instructions);
 int error_syntax_line(instruction_t *token);
-int find_index_op(char *mnemonique);
+int get_op(char *mnemonique);
 int error_params(instruction_t *token);
 instruction_t *tokeniser(char *av);
 void clean_instructions(instruction_t *token);
-bool correct_line(instruction_t *line);
+bool check_instruction(instruction_t *line);
 bool error_label(instruction_t **array);
 
     ////////////////////////////////////////////////////////////
