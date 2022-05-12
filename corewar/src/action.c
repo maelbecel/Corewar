@@ -25,7 +25,7 @@ bool actions(vm_t *vm, champion_t *champ)
     int c = 0;
 
     for (int i = 0; champ->prog[i]; i++) {
-        c = vm->arene[vm->champ[i]->prog[0]->coord.y][vm->champ[i]->prog[0]->coord.x];
+        c = vm->arene[champ->prog[i]->coord.y][champ->prog[i]->coord.x];
         for (int j = 0; op_tab[j].code != 0; j++)
             get_action(vm, j, champ, c);
     }

@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void xor(void)
+void xor(UNUSED vm_t *vm, ...)
 {
     my_printf("xor\n");
 }

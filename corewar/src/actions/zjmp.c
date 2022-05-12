@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void zjmp(void)
+void zjmp(UNUSED vm_t *vm, ...)
 {
     my_printf("zjmp\n");
 }
