@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void sub(void)
+void sub(UNUSED vm_t *vm, ...)
 {
     my_printf("sub\n");
 }
