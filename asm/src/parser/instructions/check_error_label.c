@@ -13,9 +13,8 @@
 static int check(instruction_t **array, char **list_label, size_t pos,
                                                             size_t *pos_list)
 {
-    if (array[pos]->next->is == IS_LABEL) {
-        list_label[(*pos_list)] = my_strdup(array[pos]->str);
-        if (!list_label[(*pos_list)])
+    if (array[pos]->next->type == T_LABEL) {
+        if (!(list_label[(*pos_list)] = my_strdup(array[pos]->str)))
             return EXIT_ERROR;
         list_label = my_array_realloc(list_label);
         (*pos_list)++;
@@ -33,8 +32,14 @@ static char **create_label_list(instruction_t **array)
     list_label[0] = NULL;
     list_label[1] = NULL;
     for (size_t pos = 0; array[pos] != NULL; pos++) {
-        if (check(array, list_label, pos, &pos_list) == EXIT_ERROR)
-            return NULL;
+        // if (check(array, list_label, pos, &pos_list) == EXIT_ERROR)
+        //     return NULL;
+        if (array[pos]->next->type == T_LABEL) {
+            if (!(list_label[(pos_list)] = my_strdup(array[pos]->str)))
+                return NULL;
+            list_label = my_array_realloc(list_label);
+            (pos_list)++;
+        }
     }
     return list_label;
 }
@@ -51,7 +56,7 @@ static bool find_label_on_list(char **list_label, char *label)
 static bool check_label(instruction_t *instruction, char **list_label)
 {
     for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
-        if (tmp->type > D_REG && tmp->prev->is == IS_LABEL &&
+        if (tmp->attribut > D_REG && tmp->prev->type == T_LABEL &&
             !find_label_on_list(list_label, tmp->str)) {
             return true;
         }

@@ -1,5 +1,5 @@
 .name		"basic"
-.comment	"this is a basic stuff"
+.comment	"this type a basic stuff"
 
 loop:
 	st r1, 6

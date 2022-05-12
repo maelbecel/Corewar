@@ -10,21 +10,21 @@
 #include "asm.h"
 #include "op.h"
 
-static int get_type(TYPE type)
+static int get_type(ATTRIBUT attribut)
 {
-    if (type == D_REG)
+    if (attribut == D_REG)
         return T_REG;
-    if (type == D_DIR)
+    if (attribut == D_DIR)
         return T_DIR;
-    if (type == D_IND)
+    if (attribut == D_IND)
         return T_IND;
     return 0;
 }
 
 static int check_type(instruction_t *move, op_t op, size_t *arg)
 {
-    if (move->type > D_SEPARATOR) {
-        if ((get_type(move->type) & op.type[(*arg)]) == 0)
+    if (move->attribut > D_SEPARATOR) {
+        if ((get_type(move->attribut) & op.attribut[(*arg)]) == 0)
             return EXIT_ERROR;
         (*arg)++;
     }
@@ -50,7 +50,7 @@ static char get_argc(instruction_t *instruction)
     instruction_t *move = instruction;
 
     for (size_t i = 0; move; i++) {
-        if (move->type >= D_REG)
+        if (move->attribut >= D_REG)
             nb++;
         move = move->next;
     }
@@ -63,7 +63,7 @@ bool check_instruction(instruction_t *instruction)
 
     if (!instruction->next->next)
         return true;
-    if (instruction->next->is == IS_LABEL)
+    if (instruction->next->type == T_LABEL)
         pos = get_op(instruction->next->next->next->str);
     else
         pos = get_op(instruction->str);

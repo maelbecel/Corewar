@@ -9,7 +9,7 @@
     #define ASM_H_
 
     ////////////////////////////////////////////////////////////
-    /// INCLUDE
+    /// Headers
     ////////////////////////////////////////////////////////////
     #include <stdbool.h>
     #include <stddef.h>
@@ -19,30 +19,52 @@
     #include "op.h"
 
     ////////////////////////////////////////////////////////////
-    /// DEFINE
+    /// \def EXIT_ERROR
     ////////////////////////////////////////////////////////////
     #define EXIT_ERROR 84
+
+    ////////////////////////////////////////////////////////////
+    /// \def TAB
+    ////////////////////////////////////////////////////////////
     #define TAB '\t'
+
+    ////////////////////////////////////////////////////////////
+    /// \def SPACE
+    ////////////////////////////////////////////////////////////
     #define SPACE ' '
+
+    ////////////////////////////////////////////////////////////
+    /// \def QUOTES
+    ////////////////////////////////////////////////////////////
     #define QUOTES '\"'
 
     ////////////////////////////////////////////////////////////
-    /// TYPEDEF
+    /// Structures
     ////////////////////////////////////////////////////////////
     typedef struct instruction_s instruction_t;
-    typedef enum is IS;
-    typedef enum type TYPE;
-    typedef struct parser_s parser_t;
+    typedef struct is_s is_t;
 
-    enum is {
-        IS_OTHER,
-        IS_SPACE,
-        IS_DIR,
-        IS_LABEL,
-        IS_SEPARATOR,
+    ////////////////////////////////////////////////////////////
+    /// Enumerations
+    ////////////////////////////////////////////////////////////
+    typedef enum type TYPE;
+    typedef enum attribut ATTRIBUT;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Enumerates type of asm.
+    ////////////////////////////////////////////////////////////
+    enum type {
+        T_OTHER,
+        T_SPACE,
+        TP_DIR,
+        T_LABEL,
+        T_SEPARATOR,
     };
 
-    enum type {
+    ////////////////////////////////////////////////////////////
+    /// \brief Enumerates attribut of type of asm.
+    ////////////////////////////////////////////////////////////
+    enum attribut {
         D_NORMAL,
         D_GET,
         D_SEPARATOR,
@@ -51,15 +73,31 @@
         D_IND,
     };
 
-    struct parser_s{
+    ////////////////////////////////////////////////////////////
+    /// \brief Is element structure.
+    ///
+    /// Contain the char, it type and it attribut.
+    /// Allow to get the type and attribut of a char.
+    ///
+    /// \struct is_s is_t
+    ////////////////////////////////////////////////////////////
+    struct is_s {
         char token;
+        ATTRIBUT attribut;
         TYPE type;
-        IS is;
     };
 
-    struct instruction_s{
+    ////////////////////////////////////////////////////////////
+    /// \brief Is instruction structure.
+    ///
+    /// Contain all information of an instrution:
+    /// It string, it attribut, it type, and the next/previous instruction.
+    ///
+    /// \struct is_s is_t
+    ////////////////////////////////////////////////////////////
+    struct instruction_s {
         char *str;
-        IS is;
+        ATTRIBUT attribut;
         TYPE type;
         struct instruction_s *next;
         struct instruction_s *prev;
@@ -156,13 +194,25 @@
     void free_instructions(instruction_t **instructions);
 
 int check_error_instruction(instruction_t *instruction);
-int get_op(char *str);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Return the mnemonique associated to a string
+    ///
+    /// \param str  the string
+    ///
+    /// \return The pos (number) of the mnemonique
+    ///
+    ////////////////////////////////////////////////////////////
+    int get_op(char *str);
+
 int error_params(instruction_t *instruction);
 instruction_t *parse_instruction(char *av);
 void clean_instruction(instruction_t *instruction);
 bool check_instruction(instruction_t *line);
 bool check_error_label(instruction_t **instructions);
 bool count_nbr_label(char **list_label);
+char *my_charcat(char *str, char c);
+void get_champion_size(header_t *header, instruction_t **instructions);
 
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array
@@ -211,13 +261,13 @@ bool count_nbr_label(char **list_label);
     /// \brief Create a new instruction in array
     ///
     /// \param str  the string of the instruction
-    /// \param is  the is of the instruction
     /// \param type  the type of the instruction
+    /// \param attribut  the attribut of the instruction
     ///
     /// \return The created instruction if have no error, EXIT_ERROR otherwise
     ///
     ////////////////////////////////////////////////////////////
-    instruction_t *create_instruction(char *str, IS is, TYPE type);
+    instruction_t *create_instruction(char *str, TYPE type, ATTRIBUT attribut);
 
     ////////////////////////////////////////////////////////////
     /// \brief Insert a new instruction in the instruction array

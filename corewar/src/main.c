@@ -21,7 +21,7 @@ static bool usage(int ac, char **av)
         my_printf("A0BCDEFE1DD3...)\n-n prog_number sets the next program's ");
         my_printf("number. By default, the first free number in the paramete");
         my_printf("r order\n-a load_address sets the next program's loading");
-        my_printf("address. When no address is specified, optimize the ");
+        my_printf("address. When no address type specified, optimize the ");
         my_printf("addresses so that the processes are as far away from each");
         my_printf("other as possible. The addresses are MEM_SIZE modulo.");
         return true;
@@ -49,7 +49,7 @@ int main (int ac, char **av)
     my_printf("cycle to die : %i\nchampions :\n", vm->nb_cycle);
     for (int i = 0; vm->champ[i]; i++)
         my_printf("%i : %s -> %i\n", vm->champ[i]->prog_nb, vm->champ[i]->name, vm->champ[i]->load_address);
-    my_printf("arena is :\n");
+    my_printf("arena type :\n");
     for (int i = 0; i < NB_LINE; i++) {
         for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
             my_printf("%s ", int_to_hexa_string(vm->arene[i][j]));

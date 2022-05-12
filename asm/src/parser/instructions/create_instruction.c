@@ -10,7 +10,7 @@
 #include "asm.h"
 #include "op.h"
 
-instruction_t *create_instruction(char *str, IS is, TYPE type)
+instruction_t *create_instruction(char *str, TYPE type, ATTRIBUT attribut)
 {
     instruction_t *instruction = malloc(sizeof(instruction_t));
 
@@ -26,8 +26,8 @@ instruction_t *create_instruction(char *str, IS is, TYPE type)
             return NULL;
     } else
         instruction->str[0] = '\0';
-    instruction->is = is;
     instruction->type = type;
+    instruction->attribut = attribut;
     instruction->next = NULL;
     instruction->prev = NULL;
     return instruction;

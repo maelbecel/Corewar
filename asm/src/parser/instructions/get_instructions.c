@@ -19,27 +19,27 @@ static instruction_t **interprate_file(instruction_t **instruction_line,
         instruction_line[i] = parse_instruction(line);
         clean_instruction(instruction_line[i]);
         printf("____START____\nname: %s\n", instruction_line[i]->str);
-        printf("IS: %d\n", instruction_line[i]->is);
         printf("TYPE: %d\n", instruction_line[i]->type);
+        printf("ATTRIBUT: %d\n", instruction_line[i]->attribut);
         printf("____NEXT____\nname: %s\n", instruction_line[i]->next->str);
-        printf("IS: %d\n", instruction_line[i]->next->is);
         printf("TYPE: %d\n", instruction_line[i]->next->type);
+        printf("ATTRIBUT: %d\n", instruction_line[i]->next->attribut);
         if (instruction_line[i]->next->next != NULL) {
             printf("____NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->str);
-            printf("IS: %d\n", instruction_line[i]->next->next->is);
             printf("TYPE: %d\n", instruction_line[i]->next->next->type);
+            printf("ATTRIBUT: %d\n", instruction_line[i]->next->next->attribut);
             if (instruction_line[i]->next->next->next != NULL) {
                 printf("____NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->str);
-                printf("IS: %d\n", instruction_line[i]->next->next->next->is);
                 printf("TYPE: %d\n", instruction_line[i]->next->next->next->type);
+                printf("ATTRIBUT: %d\n", instruction_line[i]->next->next->next->attribut);
                 if (instruction_line[i]->next->next->next->next != NULL) {
                     printf("____NEXT-NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->next->str);
-                    printf("IS: %d\n", instruction_line[i]->next->next->next->next->is);
                     printf("TYPE: %d\n", instruction_line[i]->next->next->next->next->type);
+                    printf("ATTRIBUT: %d\n", instruction_line[i]->next->next->next->next->attribut);
                     if (instruction_line[i]->next->next->next->next->next != NULL) {
                         printf("____NEXT-NEXT-NEXT-NEXT-NEXT____\nname: %s\n", instruction_line[i]->next->next->next->next->next->str);
-                        printf("IS: %d\n", instruction_line[i]->next->next->next->next->next->is);
                         printf("TYPE: %d\n", instruction_line[i]->next->next->next->next->next->type);
+                        printf("ATTRIBUT: %d\n", instruction_line[i]->next->next->next->next->next->attribut);
                     }
                 }
             }

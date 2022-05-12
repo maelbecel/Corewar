@@ -51,7 +51,7 @@
     void my_swap(int *a, int *b);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Check if a number is negative
+    /// \brief Check if a number type negative
     ///
     /// \param nb number to check
     ///
@@ -132,11 +132,11 @@
     int my_compute_square_root(int nb);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Check if a number is prime
+    /// \brief Check if a number type prime
     ///
     /// \param nb number to check
     ///
-    /// \return 1 if is prime, 0 otherwise
+    /// \return 1 if type prime, 0 otherwise
     ///
     ////////////////////////////////////////////////////////////
     int my_is_prime(int nb);
@@ -437,7 +437,7 @@
     /// \brief Count occurence of a char in a string
     ///
     /// \param str the str where we find char
-    /// \param c char who is searched
+    /// \param c char who type searched
     ///
     /// \return The number of occurence
     ///

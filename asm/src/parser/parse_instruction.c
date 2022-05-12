@@ -10,14 +10,14 @@
 #include "asm.h"
 #include "op.h"
 
-const parser_t delimit[] =
+const is_t delimit[] =
 {
-    {' ', D_NORMAL, IS_SPACE},
-    {'\t', D_NORMAL, IS_SPACE},
-    {DIRECT_CHAR, D_GET, IS_DIR},
-    {LABEL_CHAR, D_GET, IS_LABEL},
-    {SEPARATOR_CHAR, D_SEPARATOR, IS_SEPARATOR},
-    {0, IS_OTHER, IS_OTHER},
+    {' ', D_NORMAL, T_SPACE},
+    {'\t', D_NORMAL, T_SPACE},
+    {DIRECT_CHAR, D_GET, T_DIR},
+    {LABEL_CHAR, D_GET, T_LABEL},
+    {SEPARATOR_CHAR, D_SEPARATOR, T_SEPARATOR},
+    {0, T_OTHER, T_OTHER},
 };
 
 static int is_special_id(char c)
@@ -35,7 +35,7 @@ static instruction_t *init_node(char *av)
     char str[2] = {0};
 
     str[0] = av[0];
-    start = create_instruction(str, IS_OTHER, D_NORMAL);
+    start = create_instruction(str, T_OTHER, D_NORMAL);
     return start;
 }
 
@@ -47,10 +47,10 @@ static int add_special_token(int index, instruction_t *start, instruction_t *las
     str[0] = delimit[index].token;
     if (!my_strlen(last->str)) {
         last->str = my_charcat(last->str, delimit[index].token);
-        last->is = delimit[index].is;
         last->type = delimit[index].type;
+        last->attribut = delimit[index].attribut;
     } else {
-        data = create_instruction(str, delimit[index].is, delimit[index].type);
+        data = create_instruction(str, delimit[index].type, delimit[index].attribut);
         if (!data)
             return EXIT_ERROR;
         insert_new_instruction(start, data);

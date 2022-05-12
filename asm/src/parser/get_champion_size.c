@@ -20,15 +20,15 @@ const char *cmd[] = {
     NULL,
 };
 
-static int get_params_size(TYPE type, bool index_params)
+static int get_params_size(ATTRIBUT attribut, bool index_params)
 {
-    if (type == D_REG)
+    if (attribut == D_REG)
         return 1;
-    if ((type == D_DIR || type == D_IND) && index_params)
+    if ((attribut == D_DIR || attribut == D_IND) && index_params)
         return 2;
-    if (type == D_DIR)
+    if (attribut == D_DIR)
         return DIR_SIZE;
-    if (type == D_IND)
+    if (attribut == D_IND)
         return IND_SIZE;
     return 0;
 }
@@ -53,8 +53,8 @@ static int compute_size(instruction_t *tmp)
         size++;
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
-        if (tmp->type >= D_REG)
-            size += get_params_size(tmp->type, index_params);
+        if (tmp->attribut >= D_REG)
+            size += get_params_size(tmp->attribut, index_params);
         tmp = tmp->next;
     }
     return size;
@@ -64,7 +64,7 @@ static int get_line_size(instruction_t *instruction)
 {
     instruction_t *tmp = instruction;
 
-    if (tmp->next->is == IS_LABEL) {
+    if (tmp->next->type == T_LABEL) {
         tmp = tmp->next;
         if (tmp->next != NULL)
             tmp = tmp->next->next;

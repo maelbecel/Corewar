@@ -13,7 +13,7 @@
 static void clear_space(instruction_t *instruction)
 {
     while (instruction->next != NULL) {
-        if (instruction->is == IS_SPACE && instruction->next->is == IS_SPACE)
+        if (instruction->type == T_SPACE && instruction->next->type == T_SPACE)
             pop_next(instruction);
         else
             break;
@@ -25,8 +25,8 @@ static void clear_space(instruction_t *instruction)
 static void clear_current(instruction_t *instruction)
 {
     while (instruction->next != NULL) {
-        if (instruction->is == IS_SPACE &&
-                                        instruction->next->is == IS_SEPARATOR)
+        if (instruction->type == T_SPACE &&
+                                        instruction->next->type == T_SEPARATOR)
             instruction = pop(instruction);
         else
             break;
@@ -38,8 +38,8 @@ static void clear_current(instruction_t *instruction)
 static void clear_next(instruction_t *instruction)
 {
     while (instruction->next != NULL) {
-        if (instruction->is == IS_SEPARATOR &&
-                                        instruction->next->is == IS_SPACE)
+        if (instruction->type == T_SEPARATOR &&
+                                        instruction->next->type == T_SPACE)
             pop_next(instruction);
         else
             break;
