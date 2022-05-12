@@ -213,6 +213,9 @@ bool check_error_label(instruction_t **instructions);
 bool count_nbr_label(char **list_label);
 char *my_charcat(char *str, char c);
 void get_champion_size(header_t *header, instruction_t **instructions);
+int get_instruction_size(instruction_t *instruction, bool is_short);
+short compute_size_short(instruction_t *tmp);
+bool is_index_type(char *str);
 
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array

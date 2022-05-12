@@ -60,24 +60,27 @@ static int compute_size(instruction_t *tmp)
     return size;
 }
 
-static int get_line_size(instruction_t *instruction)
+int get_instruction_size(instruction_t *instruction, bool is_short)
 {
     instruction_t *tmp = instruction;
 
     if (tmp->next->type == T_LABEL) {
         tmp = tmp->next;
-        if (tmp->next != NULL)
-            tmp = tmp->next->next;
-        else
+        if (!tmp->next)
             return 0;
+        else
+            tmp = tmp->next->next;
     }
-    return compute_size(tmp);
+    if (!is_short)
+        return compute_size(tmp);
+    else
+        return compute_size_short(tmp);
 }
 
 void get_champion_size(header_t *header, instruction_t **instructions)
 {
     for (size_t i = 0; instructions[i] != NULL; i++) {
-        header->prog_size += get_line_size(instructions[i]);
+        header->prog_size += get_instruction_size(instructions[i], false);
     }
     header->prog_size = htobe32(header->prog_size);
 }
