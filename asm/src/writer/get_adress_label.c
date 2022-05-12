@@ -10,19 +10,6 @@
 #include "asm.h"
 #include "op.h"
 
-static short get_params_size_short(ATTRIBUT attribut, bool index_params)
-{
-    if (attribut == D_REG)
-        return 1;
-    if ((attribut == D_DIR || attribut == D_IND) && index_params)
-        return 2;
-    if (attribut == D_DIR)
-        return DIR_SIZE;
-    if (attribut == D_IND)
-        return IND_SIZE;
-    return 0;
-}
-
 short compute_size_short(instruction_t *tmp)
 {
     short size = 1;
@@ -35,7 +22,7 @@ short compute_size_short(instruction_t *tmp)
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
         if (tmp->attribut >= D_REG)
-            size += get_params_size_short(tmp->attribut, index_params);
+            size += (short)get_params_size(tmp->attribut, index_params);
         tmp = tmp->next;
     }
     return size;
@@ -52,7 +39,7 @@ unsigned short get_adress_label_short(char *label,
             return adress;
         adress += get_instruction_size(instructions[pos], true);
     }
-    adress = 65535;
+    adress = SHORT_SIZE;
     for (ssize_t pos = index - 1; pos >= 0; pos--) {
         if (instructions[pos]->next->type == T_LABEL &&
                             my_strcmp(instructions[pos]->str, label) == 0) {
@@ -75,7 +62,7 @@ unsigned int get_adress_label(char *label, instruction_t **instructions,
             return adress;
         adress += get_instruction_size(instructions[pos], false);
     }
-    adress = 4294967295;
+    adress = UINT_SIZE;
     for (ssize_t pos = index - 1; pos >= 0; pos--) {
         if (instructions[pos]->next->type == T_LABEL &&
                             my_strcmp(instructions[pos]->str, label) == 0) {

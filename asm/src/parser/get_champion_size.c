@@ -20,23 +20,23 @@ const char *cmd[] = {
     NULL,
 };
 
-static int get_params_size(ATTRIBUT attribut, bool index_params)
+void *get_params_size(ATTRIBUT attribut, bool index_params)
 {
     if (attribut == D_REG)
-        return 1;
+        return (void *)1;
     if ((attribut == D_DIR || attribut == D_IND) && index_params)
-        return 2;
+        return (void *)2;
     if (attribut == D_DIR)
-        return DIR_SIZE;
+        return (void *)DIR_SIZE;
     if (attribut == D_IND)
-        return IND_SIZE;
+        return (void *)IND_SIZE;
     return 0;
 }
 
 bool is_index_type(char *str)
 {
-    for (size_t i = 0; cmd[i] != NULL; i++) {
-        if (my_strcmp(str, cmd[i]) == 0)
+    for (size_t pos = 0; cmd[pos] != NULL; pos++) {
+        if (my_strcmp(str, cmd[pos]) == 0)
             return true;
     }
     return false;
@@ -54,7 +54,7 @@ static int compute_size(instruction_t *tmp)
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
         if (tmp->attribut >= D_REG)
-            size += get_params_size(tmp->attribut, index_params);
+            size += (int)get_params_size(tmp->attribut, index_params);
         tmp = tmp->next;
     }
     return size;
@@ -79,8 +79,7 @@ int get_instruction_size(instruction_t *instruction, bool is_short)
 
 void get_champion_size(header_t *header, instruction_t **instructions)
 {
-    for (size_t i = 0; instructions[i] != NULL; i++) {
-        header->prog_size += get_instruction_size(instructions[i], false);
-    }
+    for (size_t pos = 0; instructions[pos] != NULL; pos++)
+        header->prog_size += get_instruction_size(instructions[pos], false);
     header->prog_size = htobe32(header->prog_size);
 }
