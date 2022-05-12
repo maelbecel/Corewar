@@ -16,13 +16,12 @@ PARSER_DIR  =    parser/
 INSTRUC_DIR =    instructions/
 HEADER      =    header/
 WRITER_DIR 	=	 writer/
+ERRORS_DIR 	=	 errors/
 
 SRC         = 	$(SRC_DIR)main.c 											  \
 				$(SRC_DIR)op.c 												  \
 				$(SRC_DIR)help.c 											  \
-				$(SRC_DIR)my_charcat.c 										  \
 				$(SRC_DIR)assembler.c 										  \
-				$(SRC_DIR)char_list_in_str.c 								  \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_header.c 				  \
 				$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_clean_line.c 			  \
@@ -39,14 +38,16 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)go_to_last.c			  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)pop_next.c			 	  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instruction.c	  \
-				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)error_params.c			  \
-				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_error_instruction.c\
-				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_instruction.c	  \
-				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)check_error_label.c	  \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)error_params.c			  \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_instruction.c\
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_instruction.c	  \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_label.c	  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)count_nbr_label.c		  \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
 				$(SRC_DIR)$(PARSER_DIR)get_champion_size.c					  \
+				$(SRC_DIR)$(PARSER_DIR)my_charcat.c 										  \
+				$(SRC_DIR)$(PARSER_DIR)char_list_in_str.c 								  \
 
 SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c \
 				$(SRC_DIR)$(WRITER_DIR)write_header.c \
