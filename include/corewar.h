@@ -34,7 +34,7 @@
         int load_address;
         char *name;
         char *buffer;
-        prog_t *prog;
+        prog_t **prog;
     };
 
     struct coord_s {
@@ -61,6 +61,10 @@
     char *int_to_hexa_string(int nb);
     char *get_data(champion_t *champ);
     bool fill_champ(vm_t *vm);
+    bool actions(vm_t *vm, champion_t *champ);
+    bool move_champs(champion_t *champ);
+
+
     void add(void);
     void aff(void);
     void and(void);
