@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void lfork(void)
+void lfork(UNUSED vm_t *vm, ...)
 {
     my_printf("lfork\n");
 }

@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void a_fork(void)
+void a_fork(UNUSED vm_t *vm, ...)
 {
     my_printf("fork\n");
 }

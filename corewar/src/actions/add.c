@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void add(void)
+void add(UNUSED vm_t *vm, ...)
 {
     my_printf("add\n");
 }

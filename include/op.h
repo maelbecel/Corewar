@@ -22,7 +22,6 @@
    # define SEPARATOR_CHAR          ','
 
    # define LABEL_CHARS             "abcdefghijklmnopqrstuvwxyz_0123456789"
-
    # define NAME_CMD_STRING         ".name"
    # define COMMENT_CMD_STRING      ".comment"
 
@@ -45,6 +44,9 @@ typedef char    args_type_t;
                                     into r1 (4 bytes )) */
    # define T_LAB           8       /* LABEL */
 
+
+typedef struct vm_s vm_t;
+
 struct  op_s
 {
    char         *mnemonique;
@@ -53,6 +55,7 @@ struct  op_s
    char         code;
    int          nbr_cycles;
    char         *comment;
+   void         (*func)(vm_t *vm, ...);
 };
 
 typedef struct op_s     op_t;
