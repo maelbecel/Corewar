@@ -33,6 +33,7 @@ bool verif_champ(vm_t *vm)
             error("Duplicate champion number\n");
         if (same_adress(vm, vm->champ[i]->load_address, i))
             error("Duplicate champion address\n");
+        vm->champ[i]->prog[0]->coord = (coord_t) {vm->champ[i]->load_address % IDX_MOD, vm->champ[i]->load_address / IDX_MOD};
     }
     return true;
 }

@@ -12,7 +12,9 @@
 
 int init_champ(champion_t *champ)
 {
-    champ->prog = init_prog(champ->load_address, champ->prog_nb);
+    champ->prog = malloc(sizeof(prog_t *) * 2);
+    champ->prog[0] = init_prog(champ->load_address, champ->prog_nb);
+    champ->prog[1] = NULL;
     if (!champ->prog)
         return -1;
     champ->buffer = get_data(champ);

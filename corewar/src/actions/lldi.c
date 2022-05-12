@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void lldi(void)
+void lldi(UNUSED vm_t *vm, ...)
 {
     my_printf("lldi\n");
 }

@@ -39,6 +39,31 @@ vm_t *init_vm(void)
     return vm;
 }
 
+bool move_champs(champion_t *champ)
+{
+    for (int i = 0; champ->prog[i]; i++) {
+        if (champ->prog[i]->coord.x == MEM_SIZE / NB_LINE - 1 &&
+            champ->prog[i]->coord.y == NB_LINE - 1)
+            champ->prog[i]->coord = (coord_t){0, 0};
+        else if (champ->prog[i]->coord.x == MEM_SIZE / NB_LINE - 1)
+            champ->prog[i]->coord = (coord_t){0, champ->prog[i]->coord.y + 1};
+        else
+            champ->prog[i]->coord.x++;
+    }
+    return true;
+}
+
+bool loop(vm_t *vm)
+{
+    for (int i = 0; i < vm->nb_cycle / 10; i++) {
+        for (int i = 0; i < vm->nb_champ; i++)
+            actions(vm, vm->champ[i]);
+        for (int i = 0; i < vm->nb_champ; i++)
+            move_champs(vm->champ[i]);
+    }
+    return true;
+}
+
 int main (int ac, char **av)
 {
     vm_t *vm = init_vm();
@@ -46,14 +71,12 @@ int main (int ac, char **av)
         return 0;
     get_option(ac, av, vm);
     fill_champ(vm);
-    my_printf("cycle to die : %i\nchampions :\n", vm->nb_cycle);
-    for (int i = 0; vm->champ[i]; i++)
-        my_printf("%i : %s -> %i\n", vm->champ[i]->prog_nb, vm->champ[i]->name, vm->champ[i]->load_address);
     my_printf("arena type :\n");
     for (int i = 0; i < NB_LINE; i++) {
         for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
-            my_printf("%s ", int_to_hexa_string(vm->arene[i][j]));
+            my_printf((vm->arene[i][j] != 0) ? "\e[32m%s \e[0m": "%s ", int_to_hexa_string(vm->arene[i][j]));
         my_printf("\n");
     }
+    loop(vm);
     return 0;
 }

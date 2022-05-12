@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void or(void)
+void or(UNUSED vm_t *vm, ...)
 {
     my_printf("or\n");
 }

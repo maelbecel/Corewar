@@ -34,7 +34,7 @@
         int load_address;
         char *name;
         char *buffer;
-        prog_t *prog;
+        prog_t **prog;
     };
 
     struct coord_s {
@@ -61,21 +61,25 @@
     char *int_to_hexa_string(int nb);
     char *get_data(champion_t *champ);
     bool fill_champ(vm_t *vm);
-    void add(void);
-    void aff(void);
-    void and(void);
-    void a_fork(void);
-    void ld(void);
-    void ldi(void);
-    void lfork(void);
-    void live(void);
-    void lld(void);
-    void lldi(void);
-    void or(void);
-    void st(void);
-    void sti(void);
-    void sub(void);
-    void xor(void);
-    void zjmp(void);
+    bool actions(vm_t *vm, champion_t *champ);
+    bool move_champs(champion_t *champ);
+
+
+    void add(vm_t *vm, ...);
+    void aff(vm_t *vm, ...);
+    void and(vm_t *vm, ...);
+    void a_fork(vm_t *vm, ...);
+    void ld(vm_t *vm, ...);
+    void ldi(vm_t *vm, ...);
+    void lfork(vm_t *vm, ...);
+    void live(vm_t *vm, ...);
+    void lld(vm_t *vm, ...);
+    void lldi(vm_t *vm, ...);
+    void or(vm_t *vm, ...);
+    void st(vm_t *vm, ...);
+    void sti(vm_t *vm, ...);
+    void sub(vm_t *vm, ...);
+    void xor(vm_t *vm, ...);
+    void zjmp(vm_t *vm, ...);
 
 #endif
