@@ -14,6 +14,9 @@ header_t *get_header(FILE *file_name, char **line)
 {
     header_t *header = malloc(sizeof(header_t));
 
+    if (!header)
+        return NULL;
+    header->magic = htobe32(COREWAR_EXEC_MAGIC);
     if (!((*line) = get_clean_line(file_name)))
         return NULL;
     my_strcpy(header->prog_name, get_name(*line));
