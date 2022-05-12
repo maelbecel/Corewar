@@ -15,6 +15,7 @@ SRC_DIR     =    src/
 PARSER_DIR  =    parser/
 INSTRUC_DIR =    instructions/
 HEADER      =    header/
+WRITER_DIR 	=	 writer/
 
 SRC         = 	$(SRC_DIR)main.c 											  \
 				$(SRC_DIR)op.c 												  \
@@ -46,6 +47,10 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		  \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
 				$(SRC_DIR)$(PARSER_DIR)get_champion_size.c					  \
+
+SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c \
+				$(SRC_DIR)$(WRITER_DIR)write_header.c \
+				$(SRC_DIR)$(WRITER_DIR)concatener.c \
 
 SRC_COUNT    	=         	$(words $(SRC))
 

@@ -76,7 +76,7 @@ extern  op_t    op_tab[];
    # define COMMENT_LENGTH          2048
    # define COREWAR_EXEC_MAGIC      0xea83f3        /* why not */
 
-__attribute__((packed)) struct header_s
+struct header_s
 {
    int  magic;
    char prog_name[PROG_NAME_LENGTH + 1];

@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "printf.h"
+#include "writer.h"
 #include "asm.h"
 #include "op.h"
 
@@ -27,6 +28,7 @@ int assembler(char *file_name)
     instructions = get_instructions(file, line);
     get_champion_size(header, instructions);
     fclose(file);
+    write_code(header, instructions);
     free(header);
     free_instructions(instructions);
     return EXIT_SUCCESS;
