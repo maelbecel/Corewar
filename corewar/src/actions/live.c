@@ -9,11 +9,27 @@
 #include "printf.h"
 #include "corewar.h"
 
+int int_from_byte(vm_t *vm, coord_t coord)
+{
+    int res = 0;
+    char add;
+    void *arrene = &vm->arene[coord.y][coord.x];
+
+    for (int i = 0; i < 4; i++) {
+        add = *(char *)arrene + i;
+        res |= (add << (8 * i));
+    }
+    return res;
+}
+
 void live(UNUSED vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    UNUSED int player = va_arg(arg, int);
-    my_printf("live for %s\n", int_to_hexa_string(player));
+    champion_t *champ = va_arg(arg, champion_t *);
+    prog_t *prog = va_arg(arg, prog_t *);
+
+    my_printf("live for %i\n", int_from_byte(vm, prog->coord));
+    move_champs(champ);
     va_end(arg);
 }
