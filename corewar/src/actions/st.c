@@ -16,6 +16,6 @@ void st(UNUSED vm_t *vm, ...)
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     va_end(arg);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 4; i++)
         move_champs(champ);
 }
