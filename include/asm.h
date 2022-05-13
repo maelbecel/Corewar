@@ -51,7 +51,7 @@
     /// Structures
     ////////////////////////////////////////////////////////////
     typedef struct instruction_s instruction_t;
-    typedef struct is_s is_t;
+    typedef struct separator_s separator_t;
 
     ////////////////////////////////////////////////////////////
     /// Enumerations
@@ -88,9 +88,9 @@
     /// Contain the char, it type and it attribut.
     /// Allow to get the type and attribut of a char.
     ///
-    /// \struct is_s is_t
+    /// \struct separator_s separator_t
     ////////////////////////////////////////////////////////////
-    struct is_s {
+    struct separator_s {
         char token;
         ATTRIBUT attribut;
         TYPE type;
@@ -102,7 +102,7 @@
     /// Contain all information of an instrution:
     /// It string, it attribut, it type, and the next/previous instruction.
     ///
-    /// \struct is_s is_t
+    /// \struct separator_s separator_t
     ////////////////////////////////////////////////////////////
     struct instruction_s {
         char *str;
@@ -273,11 +273,21 @@ void *get_params_size(ATTRIBUT attribut, bool index_params);
     ////////////////////////////////////////////////////////////
     /// \brief Create a new instruction in array
     ///
+    /// \param argv  the string of the instruction
+    ///
+    /// \return The created instruction if have no error, NULL otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    instruction_t *init_instruction(char *argv);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Create a new instruction in array
+    ///
     /// \param str  the string of the instruction
     /// \param type  the type of the instruction
     /// \param attribut  the attribut of the instruction
     ///
-    /// \return The created instruction if have no error, EXIT_ERROR otherwise
+    /// \return The created instruction if have no error, NULL otherwise
     ///
     ////////////////////////////////////////////////////////////
     instruction_t *create_instruction(char *str, TYPE type, ATTRIBUT attribut);
@@ -298,7 +308,7 @@ void *get_params_size(ATTRIBUT attribut, bool index_params);
     ///
     /// \param new  the new instruction that be added
     ///
-    /// \return EXIT_SUCCESS if have no error, EXIT_ERROR otherwise
+    /// \return the last instruction if have no error, NULL otherwise
     ///
     ////////////////////////////////////////////////////////////
     instruction_t *go_to_last(instruction_t *start);
