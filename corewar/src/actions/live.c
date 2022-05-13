@@ -22,7 +22,7 @@ int int_from_byte(vm_t *vm, coord_t coord)
     return res;
 }
 
-void live(UNUSED vm_t *vm, ...)
+void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
@@ -30,6 +30,7 @@ void live(UNUSED vm_t *vm, ...)
     prog_t *prog = va_arg(arg, prog_t *);
 
     my_printf("live for %i\n", int_from_byte(vm, prog->coord));
-    move_champs(champ);
+    for (int i = 0; i < 4; i++)
+        move_champs(champ);
     va_end(arg);
 }
