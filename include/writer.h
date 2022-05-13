@@ -61,7 +61,7 @@
     ///
     ////////////////////////////////////////////////////////////
     unsigned int write_instructions(instruction_t **instructions,
-    char *filename, FILE *file);
+        char *filename, FILE *file);
 
     ////////////////////////////////////////////////////////////
     /// \brief strcat like with malloc
@@ -70,7 +70,7 @@
     ///
     ////////////////////////////////////////////////////////////
     unsigned int write_instruction(instruction_t *instruction,
-    char *filename, FILE *file);
+        char *filename, FILE *file);
 
     ////////////////////////////////////////////////////////////
     /// \brief strcat like with malloc
@@ -79,5 +79,13 @@
     ///
     ////////////////////////////////////////////////////////////
     char *concatener(char *dest, char const *src);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief write codebyte parameters
+    ///
+    /// \return return void
+    ///
+    ////////////////////////////////////////////////////////////
+    void write_codebytes(instruction_t *instruction, FILE *file);
 
 #endif /* WRITER_H_ ! */
