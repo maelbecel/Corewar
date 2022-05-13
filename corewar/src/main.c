@@ -53,15 +53,23 @@ bool move_champs(champion_t *champ)
     return true;
 }
 
+bool move_prog(prog_t *prog)
+{
+    if (prog->coord.x == 511 && 11)
+        prog->coord = (coord_t){0, 0};
+    else if (prog->coord.x == 511)
+        prog->coord = (coord_t){0, prog->coord.y + 1};
+    else
+        prog->coord.x++;
+    return true;
+}
+
 bool loop(vm_t *vm)
 {
     while (!win(vm)) {
         for (int i = 0; i < vm->nb_champ; i++)
             actions(vm, vm->champ[i]);
-        for (int i = 0; i < vm->nb_champ; i++)
-            move_champs(vm->champ[i]);
         vm->nb_cycle++;
-        printf("nb : %i\n", vm->nb_cycle);
     }
     return true;
 }
