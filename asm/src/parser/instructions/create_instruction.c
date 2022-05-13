@@ -32,3 +32,13 @@ instruction_t *create_instruction(char *str, TYPE type, ATTRIBUT attribut)
     instruction->prev = NULL;
     return instruction;
 }
+
+instruction_t *init_instruction(char *argv)
+{
+    instruction_t *start = NULL;
+    char str[2] = {0};
+
+    str[0] = argv[0];
+    start = create_instruction(str, T_OTHER, D_NORMAL);
+    return start;
+}
