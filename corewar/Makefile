@@ -29,6 +29,7 @@ SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)my_calloc.c 		 	\
 						$(SOURCES)init_prog.c			\
 						$(SOURCES)get_data.c		 	\
+						$(SOURCES)win.c					\
 						$(SOURCES)$(ACTION)add.c		\
 						$(SOURCES)$(ACTION)aff.c		\
 						$(SOURCES)$(ACTION)and.c		\

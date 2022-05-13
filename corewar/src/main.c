@@ -33,7 +33,8 @@ vm_t *init_vm(void)
 {
     vm_t *vm = malloc(sizeof(vm_t));
 
-    vm->nb_cycle = CYCLE_TO_DIE;
+    vm->nb_cycle = 0;
+    vm->cycle_to_die = CYCLE_TO_DIE;
     vm->arene = init_arene();
     return vm;
 }
@@ -54,13 +55,25 @@ bool move_champs(champion_t *champ)
 
 bool loop(vm_t *vm)
 {
-    for (int i = 0; i < vm->nb_cycle / 10; i++) {
+    while (!win(vm)) {
         for (int i = 0; i < vm->nb_champ; i++)
             actions(vm, vm->champ[i]);
         for (int i = 0; i < vm->nb_champ; i++)
             move_champs(vm->champ[i]);
+        vm->nb_cycle++;
+        printf("nb : %i\n", vm->nb_cycle);
     }
     return true;
+}
+
+void print_arene(vm_t *vm)
+{
+    my_printf("arena type :\n");
+    for (int i = 0; i < NB_LINE; i++) {
+        for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
+            my_printf((vm->arene[i][j] != 0) ? "\e[32m%s \e[0m": "%s ", int_to_hexa_string(vm->arene[i][j]));
+        my_printf("\n");
+    }
 }
 
 int main (int ac, char **av)
@@ -70,12 +83,7 @@ int main (int ac, char **av)
         return 0;
     get_option(ac, av, vm);
     fill_champ(vm);
-    my_printf("arena type :\n");
-    for (int i = 0; i < NB_LINE; i++) {
-        for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
-            my_printf((vm->arene[i][j] != 0) ? "\e[32m%s \e[0m": "%s ", int_to_hexa_string(vm->arene[i][j]));
-        my_printf("\n");
-    }
+    print_arene(vm);
     loop(vm);
     return 0;
 }

@@ -24,6 +24,7 @@
 
     struct vm_s {
         int nb_cycle;
+        int cycle_to_die;
         int nb_champ;
         unsigned char **arene;
         champion_t **champ;
@@ -32,6 +33,7 @@
     struct champion_s {
         int prog_nb;
         int load_address;
+        bool live;
         char *name;
         char *buffer;
         prog_t **prog;
@@ -63,7 +65,7 @@
     bool fill_champ(vm_t *vm);
     bool actions(vm_t *vm, champion_t *champ);
     bool move_champs(champion_t *champ);
-
+    bool win(vm_t *vm);
 
     void add(vm_t *vm, ...);
     void aff(vm_t *vm, ...);

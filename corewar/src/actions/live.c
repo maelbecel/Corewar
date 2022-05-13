@@ -29,7 +29,7 @@ void live(vm_t *vm, ...)
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
 
-    my_printf("live for %x\n", int_from_byte(vm, prog->coord));
+    printf("live for %x\n", int_from_byte(vm, prog->coord));
     for (int i = 0; i < 4; i++)
         move_champs(champ);
     va_end(arg);
