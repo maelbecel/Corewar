@@ -10,25 +10,21 @@
 #include "corewar.h"
 #include "op.h"
 
-bool get_action(UNUSED vm_t *vm, int j, champion_t *champ, int c)
+bool get_action(vm_t *vm, int j, champion_t *champ, int i)
 {
+    int c = vm->arene[champ->prog[i]->coord.y][champ->prog[i]->coord.x];
+
     if (c == op_tab[j].code) {
-        op_tab[j].func(vm, 0);
-        //printf("%s : code = %s -> %s with %i arg\n",champ->name , int_to_hexa_string(c) ,op_tab[j].mnemonique, op_tab[j].nbr_args);
-        for (int i = 0; i < op_tab[j].nbr_args; i++)
-            move_champs(champ);
+        op_tab[j].func(vm, champ, champ->prog[i]);
     }
     return true;
 }
 
 bool actions(vm_t *vm, champion_t *champ)
 {
-    int c = 0;
-
     for (int i = 0; champ->prog[i]; i++) {
-        c = vm->arene[champ->prog[i]->coord.y][champ->prog[i]->coord.x];
         for (int j = 0; op_tab[j].code != 0; j++)
-            get_action(vm, j, champ, c);
+            get_action(vm, j, champ, i);
     }
     return true;
 }
