@@ -13,7 +13,8 @@
 bool get_action(UNUSED vm_t *vm, int j, champion_t *champ, int c)
 {
     if (c == op_tab[j].code) {
-        printf("%s : code = %s -> %s with %i arg\n",champ->name , int_to_hexa_string(c) ,op_tab[j].mnemonique, op_tab[j].nbr_args);
+        op_tab[j].func(vm, 0);
+        //printf("%s : code = %s -> %s with %i arg\n",champ->name , int_to_hexa_string(c) ,op_tab[j].mnemonique, op_tab[j].nbr_args);
         for (int i = 0; i < op_tab[j].nbr_args; i++)
             move_champs(champ);
     }

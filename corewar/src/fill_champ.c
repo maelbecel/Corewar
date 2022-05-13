@@ -29,6 +29,9 @@ static bool get_champ(champion_t *champ, vm_t *vm)
 
 bool fill_champ(vm_t *vm)
 {
+    for (int i = 0; vm->champ[i]; vm->nb_champ = ++i);
+    if (vm->nb_champ < 2)
+        error("Not enough champions\n");
     for (int i = 0; vm->champ[i]; i++)
         get_champ(vm->champ[i], vm);
     return true;
