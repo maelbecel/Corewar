@@ -16,20 +16,21 @@ int int_from_byte(vm_t *vm, coord_t coord)
     void *arrene = &vm->arene[coord.y][coord.x];
 
     for (int i = 0; i < 4; i++) {
-        add = *(char *)arrene + i;
+        add = (*((char *)((size_t)arrene + i))) & 0xFF;
         res |= (add << (8 * i));
     }
     return res;
 }
 
-void live(UNUSED vm_t *vm, ...)
+void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
 
-    my_printf("live for %i\n", int_from_byte(vm, prog->coord));
-    move_champs(champ);
+    my_printf("live for %x\n", int_from_byte(vm, prog->coord));
+    for (int i = 0; i < 4; i++)
+        move_champs(champ);
     va_end(arg);
 }
