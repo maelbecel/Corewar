@@ -51,7 +51,7 @@ static void test_write(instruction_t *instruction, int index,
     while (instruction) {
         if (instruction->attribut == D_REG) {
             count = my_getnbr(instruction->str);
-            printf("count = %d\n", count);
+            printf("str: %s | count = %d\n", instruction->str, count);
             fwrite(&count, 1, sizeof(char), file);
         }
         if (instruction->attribut == D_IND) {

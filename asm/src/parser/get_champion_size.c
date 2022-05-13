@@ -20,16 +20,16 @@ const char *cmd[] = {
     NULL,
 };
 
-void *get_params_size(ATTRIBUT attribut, bool index_params)
+int get_params_size(ATTRIBUT attribut, bool index_params)
 {
     if (attribut == D_REG)
-        return (void *)1;
+        return 1;
     if ((attribut == D_DIR || attribut == D_IND) && index_params)
-        return (void *)2;
+        return 2;
     if (attribut == D_DIR)
-        return (void *)DIR_SIZE;
+        return DIR_SIZE;
     if (attribut == D_IND)
-        return (void *)IND_SIZE;
+        return IND_SIZE;
     return 0;
 }
 
@@ -53,8 +53,10 @@ static int compute_size(instruction_t *tmp)
         size++;
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
-        if (tmp->attribut >= D_REG)
-            size += (int)get_params_size(tmp->attribut, index_params);
+        if (tmp->attribut >= D_REG) {
+            int result = get_params_size(tmp->attribut, index_params);
+            size += result;
+        }
         tmp = tmp->next;
     }
     return size;

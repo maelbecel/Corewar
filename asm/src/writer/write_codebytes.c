@@ -28,5 +28,5 @@ void write_codebytes(instruction_t *instruction, FILE *file)
         }
         instruction = instruction->next;
     }
-    fwrite(&count, 1, sizeof(unsigned int), file);
+    fwrite(&count, 1, sizeof(int), file);
 }

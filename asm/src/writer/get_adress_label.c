@@ -21,8 +21,10 @@ short compute_size_short(instruction_t *tmp)
         size++;
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
-        if (tmp->attribut >= D_REG)
-            size += (short)get_params_size(tmp->attribut, index_params);
+        if (tmp->attribut >= D_REG) {
+            short result = get_params_size(tmp->attribut, index_params);
+            size += result;
+        }
         tmp = tmp->next;
     }
     return size;

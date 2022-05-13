@@ -209,7 +209,7 @@ int check_error_instruction(instruction_t *instruction);
     ///
     /// \param str  the string
     ///
-    /// \return The pos (number) of the mnemonique
+    /// \return The pos (number) of the mnemonique, -1 otherwise
     ///
     ////////////////////////////////////////////////////////////
     int get_op(char *str);
@@ -225,7 +225,7 @@ void get_champion_size(header_t *header, instruction_t **instructions);
 int get_instruction_size(instruction_t *instruction, bool is_short);
 short compute_size_short(instruction_t *tmp);
 bool is_index_type(char *str);
-void *get_params_size(ATTRIBUT attribut, bool index_params);
+int get_params_size(ATTRIBUT attribut, bool index_params);
 
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array
