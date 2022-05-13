@@ -11,7 +11,7 @@
 
 void write_codebytes(instruction_t *instruction, FILE *file)
 {
-    unsigned int count = 0;
+    unsigned char count = 0;
 
     while (instruction) {
         if (instruction->attribut == D_REG) {
@@ -28,5 +28,6 @@ void write_codebytes(instruction_t *instruction, FILE *file)
         }
         instruction = instruction->next;
     }
-    fwrite(&count, 1, sizeof(int), file);
+    printf("%d\n", count);
+    fwrite(&count, 1, sizeof(char), file);
 }

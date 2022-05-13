@@ -38,7 +38,6 @@ char *filename, FILE *file)
         my_printf("failed to write instruction\n");
         return 84;
     }
-
     write_codebyte_parameters(instruction_tmp, index, file);
     return index;
 }
