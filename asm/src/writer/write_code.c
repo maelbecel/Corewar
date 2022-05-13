@@ -21,6 +21,6 @@ unsigned int write_code(header_t *header, UNUSED instruction_t **instructions)
         return 84;
 
     write_header(header, filename, file);
-    //write_instructions(instructions, filename, file);
+    write_instructions(instructions, filename, file);
     return 0;
 }
