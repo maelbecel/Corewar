@@ -12,4 +12,10 @@
 void sti(UNUSED vm_t *vm, ...)
 {
     my_printf("sti\n");
+    va_list arg;
+    va_start(arg, vm);
+    champion_t *champ = va_arg(arg, champion_t *);
+    va_end(arg);
+    for (int i = 0; i < 6; i++)
+        move_champs(champ);
 }

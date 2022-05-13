@@ -34,7 +34,6 @@ vm_t *init_vm(void)
     vm_t *vm = malloc(sizeof(vm_t));
 
     vm->nb_cycle = CYCLE_TO_DIE;
-    vm->nb_champ = 2;
     vm->arene = init_arene();
     return vm;
 }
