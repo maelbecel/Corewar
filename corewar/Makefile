@@ -19,6 +19,7 @@ ACTION 		 =  	   actions/
 SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)op.c 					\
 						$(SOURCES)errors.c 				\
+						$(SOURCES)param.c 				\
 						$(SOURCES)check_champion.c 		\
 						$(SOURCES)get_option.c			\
 						$(SOURCES)init_champ.c		 	\

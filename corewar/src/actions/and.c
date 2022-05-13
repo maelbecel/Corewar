@@ -11,11 +11,12 @@
 
 void and(UNUSED vm_t *vm, ...)
 {
-    my_printf("and\n");
     va_list arg;
     va_start(arg, vm);
-    champion_t *champ = va_arg(arg, champion_t *);
+    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 7; i++)
-        move_champs(champ);
+    for (int i = 0; i < 8; i++)
+        move_prog(prog);
+    printf("and [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }
