@@ -26,10 +26,11 @@ void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
 
+    champ->live = true;
     printf("live for %li ", get_param(vm, prog->coord, 4));
     for (int i = 0; i < 5; i++)
         move_prog(prog);
