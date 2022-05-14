@@ -19,7 +19,7 @@ void aff(vm_t *vm, ...)
 
     move_prog(prog);
     int reg = get_param(vm, prog->coord, 2) % 256;
-    my_printf("aff -> %c", prog->reg[reg]);
+    my_printf("aff r%i -> %c(%i)\n",reg ,prog->reg[reg], prog->reg[reg]);
 
     for (int i = 0; i < 2; i++)
         move_prog(prog);
