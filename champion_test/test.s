@@ -14,4 +14,5 @@ and r1,%0 ,r1
 live: live %1
 aff r1
 aff r3
+fork %:live
 zjmp %:live
