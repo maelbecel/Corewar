@@ -9,14 +9,18 @@
 #include "printf.h"
 #include "corewar.h"
 
-void aff(UNUSED vm_t *vm, ...)
+void aff(vm_t *vm, ...)
 {
-    my_printf("aff\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 1; i++)
+
+    move_prog(prog);
+    int reg = get_param(vm, prog->coord, 2) % 256;
+    my_printf("aff -> %c", prog->reg[reg]);
+
+    for (int i = 0; i < 2; i++)
         move_prog(prog);
 }

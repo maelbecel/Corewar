@@ -18,7 +18,7 @@ void zjmp(UNUSED vm_t *vm, ...)
     va_end(arg);
     prog->coord.x++;
     size_t jmp = get_param(vm, prog->coord, 2);
-    for (size_t i = 0; i < jmp - 1; i++)
+    for (size_t i = 0; i < (jmp - 1 % MEM_SIZE); i++)
         move_prog(prog);
     printf("zjmp to [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }
