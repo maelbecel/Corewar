@@ -17,6 +17,6 @@ void add(UNUSED vm_t *vm, ...)
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 5; i++)
         move_prog(prog);
 }
