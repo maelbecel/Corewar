@@ -15,8 +15,13 @@ bool get_action(vm_t *vm, int j, champion_t *champ, int i)
     int c = vm->arene[champ->prog[i]->coord.y][champ->prog[i]->coord.x];
 
     if (c == op_tab[j].code) {
-        op_tab[j].func(vm, champ, champ->prog[i]);
-        return (true);
+        champ->prog[i]->goal_cycle = op_tab[j].nbr_cycles;
+        champ->prog[i]->current_cycle += 1;
+        if (champ->prog[i]->goal_cycle == champ->prog[i]->current_cycle) {
+            op_tab[j].func(vm, champ, champ->prog[i]);
+            champ->prog[i]->current_cycle = 0;
+        }
+        return true;
     }
     if (op_tab[j + 1].code == 0) {
         my_printf("Error: unknown instruction [%i] at (%i, %i)\n", c,
