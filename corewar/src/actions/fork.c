@@ -20,11 +20,8 @@ int reset_prog(champion_t *champ, coord_t co, int adress)
     new[i] = init_prog(1, champ->prog_nb);
     new[i]->coord = (coord_t){co.x, co.y};
     new[i + 1] = NULL;
-    for (int x = 0; x < (adress - 1) % MEM_SIZE; x++) {
-        //my_printf("\tmove %i/%i (line %i, col %i)\n", x, adress, new[i]->coord.y, new[i]->coord.x);
+    for (int x = 0; x < (adress - 1) % IDX_MOD; x++)
         move_prog(new[i]);
-        //my_printf("\tsucess (line %i, col %i)\n",new[i]->coord.y, new[i]->coord.x);
-    }
     free(champ->prog);
     champ->prog = new;
     my_printf("nb process is now %d\n", size + 1);
