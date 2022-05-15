@@ -30,8 +30,8 @@ char *filename, FILE *file)
         }
         printf("Look forward\n");
         instruction_tmp = instruction_tmp->next->next->next;
-        index = get_op(instruction_tmp->str);
     }
+    index = get_op(instruction_tmp->str);
 
     err = fwrite(&(op_tab[index].code), 1, sizeof(char), file);
     if (err != sizeof(unsigned char)) {

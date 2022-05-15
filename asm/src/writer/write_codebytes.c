@@ -12,22 +12,24 @@
 void write_codebytes(instruction_t *instruction, FILE *file)
 {
     unsigned char count = 0;
+    int shift = 6;
 
-    while (instruction) {
-        if (instruction->attribut == D_REG) {
-            count += 1;
-            count *= 100;
+    for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
+        if (tmp->attribut == D_REG) {
+            count += (1 << shift);
+            shift -= 2;
+            continue;
         }
-        if (instruction->attribut == D_DIR) {
-            count += 10;
-            count *= 100;
+        if (tmp->attribut == D_IND) {
+            count += (3 << shift);
+            shift -= 2;
+            continue;
         }
-        if (instruction->attribut == D_IND) {
-            count += 11;
-            count *= 100;
+        if (tmp->attribut == D_DIR) {
+            count += (2 << shift);
+            shift -= 2;
+            continue;
         }
-        instruction = instruction->next;
     }
-    printf("%d\n", count);
     fwrite(&count, 1, sizeof(char), file);
 }
