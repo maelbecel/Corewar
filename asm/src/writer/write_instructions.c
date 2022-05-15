@@ -51,7 +51,6 @@ static void test_write(instruction_t *instruction, int index,
     while (instruction) {
         if (instruction->attribut == D_REG) {
             count = my_getnbr(instruction->str);
-            printf("str: %s | count = %d\n", instruction->str, count);
             fwrite(&count, 1, sizeof(char), file);
         }
         if (instruction->attribut == D_IND) {
@@ -70,7 +69,6 @@ unsigned int write_instructions(instruction_t **instructions,
     int index = 0;
 
     for (size_t i = 0; instructions[i]; i++) {
-        printf("Name: %s\n", instructions[i]->str);
         index = write_instruction(instructions[i], filename, file);
         test_write(instructions[i], i, file, instructions, index);
     }

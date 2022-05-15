@@ -25,17 +25,14 @@ char *filename, FILE *file)
 
     if (index == -1) {
         if (instruction->next->next == NULL) {
-            printf("NULL\n");
             return;
         }
-        printf("Look forward\n");
         instruction_tmp = instruction_tmp->next->next->next;
     }
     index = get_op(instruction_tmp->str);
 
     err = fwrite(&(op_tab[index].code), 1, sizeof(char), file);
     if (err != sizeof(unsigned char)) {
-        my_printf("failed to write instruction\n");
         return 84;
     }
     write_codebyte_parameters(instruction_tmp, index, file);
