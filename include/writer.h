@@ -15,22 +15,6 @@
     #include "op.h"
 
     ////////////////////////////////////////////////////////////
-    /// \brief Write char in byte
-    ///
-    /// \return return value (usigned int) 84 if error
-    ///
-    ////////////////////////////////////////////////////////////
-    unsigned int write_char(char c, char *filename, FILE *file);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Write char* in byte
-    ///
-    /// \return return value (usigned int) 84 if error
-    ///
-    ////////////////////////////////////////////////////////////
-    unsigned int write_str(char *str, char *filename, FILE *file);
-
-    ////////////////////////////////////////////////////////////
     /// \brief Write header_t* in byte
     ///
     /// \return return value (usigned int) 84 if error
