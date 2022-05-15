@@ -31,14 +31,6 @@
     unsigned int write_str(char *str, char *filename, FILE *file);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Write int in byte
-    ///
-    /// \return return value (usigned int) 84 if error
-    ///
-    ////////////////////////////////////////////////////////////
-    unsigned int write_nbr(int nbr, char *filename, FILE *file);
-
-    ////////////////////////////////////////////////////////////
     /// \brief Write header_t* in byte
     ///
     /// \return return value (usigned int) 84 if error
