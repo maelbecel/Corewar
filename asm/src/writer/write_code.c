@@ -15,6 +15,9 @@ unsigned int write_code(header_t *header, UNUSED instruction_t **instructions)
 
     filename = concatener(filename, EXTENTION);
 
+    if (!filename)
+        return 84;
+
     file = fopen(filename, "w");
 
     if (!file)
