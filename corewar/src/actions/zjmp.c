@@ -16,6 +16,10 @@ void zjmp(UNUSED vm_t *vm, ...)
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
+    if (!prog->carry) {
+        for (size_t i = 0; i < 3; move_prog(prog), i++);
+        return;
+    }
     move_prog(prog);
     size_t jmp = get_param(vm, prog->coord, 2);
     for (size_t i = 0; i < (jmp - 1 % MEM_SIZE); i++)
