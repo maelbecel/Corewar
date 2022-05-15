@@ -18,6 +18,11 @@
     #define EXIT_ERROR 84
     #define ACT_CASE(vm, x, y) vm->arene[y][x]
 
+    #define STI_RR 0x54
+    #define STI_NN 0x68
+    #define STI_RN 0x58
+    #define STI_NR 0x64
+
     typedef struct vm_s vm_t;
     typedef struct champion_s champion_t;
     typedef struct prog_s prog_t;
