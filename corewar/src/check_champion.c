@@ -66,6 +66,7 @@ bool check_cmp(vm_t *vm)
             check_number(vm, i);
         if (vm->champ[i]->load_address == -1)
             check_adress(vm, i);
+        vm->champ[i]->prog[0]->reg[0] = vm->champ[i]->prog_nb;
     }
     verif_champ(vm);
     return true;

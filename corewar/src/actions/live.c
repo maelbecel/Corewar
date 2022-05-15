@@ -30,9 +30,10 @@ void live(vm_t *vm, ...)
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
 
+    move_prog(prog);
     champ->live = true;
-    printf("live for %li ", get_param(vm, prog->coord, 4));
-    for (int i = 0; i < 5; i++)
+    printf("live for %li(%x %x %x %x) ", get_param(vm, prog->coord, 4), vm->arene[prog->coord.y][prog->coord.x], vm->arene[prog->coord.y][prog->coord.x + 1], vm->arene[prog->coord.y][prog->coord.x + 2], vm->arene[prog->coord.y][prog->coord.x + 3]);
+    for (int i = 0; i < 4; i++)
         move_prog(prog);
     printf("to [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }
