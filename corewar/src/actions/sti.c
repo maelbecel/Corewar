@@ -11,9 +11,16 @@
 
 void sti_rr(vm_t *vm, prog_t *prog)
 {
-    (void)vm;
-    (void)prog;
-    printf("sti rr\n");
+    move_prog(prog);
+    int reg = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int nb1 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int nb2 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 5);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    printf("sti r%i, r%i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti_nn(vm_t *vm, prog_t *prog)
@@ -32,18 +39,34 @@ void sti_nn(vm_t *vm, prog_t *prog)
     printf("sti r%i, %i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
-void sti_rn(vm_t *vm, prog_t *prog)
-{
-    (void)vm;
-    (void)prog;
-    printf("sti rn\n");
-}
-
 void sti_nr(vm_t *vm, prog_t *prog)
 {
-    (void)vm;
-    (void)prog;
-    printf("sti nr\n");
+    move_prog(prog);
+    int reg = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int nb1 = get_param(vm, prog->coord, 2);
+    move_prog(prog);
+    move_prog(prog);
+    int nb2 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    printf("sti r%i, %i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
+}
+
+void sti_rn(vm_t *vm, prog_t *prog)
+{
+    move_prog(prog);
+    int reg = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int nb1 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int nb2 = get_param(vm, prog->coord, 2);
+    move_prog(prog);
+    move_prog(prog);
+    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    printf("sti r%i, r%i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti(vm_t *vm, ...)
