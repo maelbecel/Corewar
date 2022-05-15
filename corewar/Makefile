@@ -19,6 +19,7 @@ ACTION 		 =  	   actions/
 SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)op.c 					\
 						$(SOURCES)errors.c 				\
+						$(SOURCES)param.c 				\
 						$(SOURCES)check_champion.c 		\
 						$(SOURCES)get_option.c			\
 						$(SOURCES)init_champ.c		 	\
@@ -29,6 +30,7 @@ SRC          =         	$(SOURCES)main.c 				\
 						$(SOURCES)my_calloc.c 		 	\
 						$(SOURCES)init_prog.c			\
 						$(SOURCES)get_data.c		 	\
+						$(SOURCES)win.c					\
 						$(SOURCES)$(ACTION)add.c		\
 						$(SOURCES)$(ACTION)aff.c		\
 						$(SOURCES)$(ACTION)and.c		\

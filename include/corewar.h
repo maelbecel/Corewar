@@ -16,6 +16,7 @@
     #include "op.h"
 
     #define EXIT_ERROR 84
+    #define ACT_CASE(vm, x, y) vm->arene[y][x]
 
     typedef struct vm_s vm_t;
     typedef struct champion_s champion_t;
@@ -24,6 +25,7 @@
 
     struct vm_s {
         int nb_cycle;
+        int cycle_to_die;
         int nb_champ;
         unsigned char **arene;
         champion_t **champ;
@@ -32,6 +34,7 @@
     struct champion_s {
         int prog_nb;
         int load_address;
+        bool live;
         char *name;
         char *buffer;
         prog_t **prog;
@@ -63,7 +66,10 @@
     bool fill_champ(vm_t *vm);
     bool actions(vm_t *vm, champion_t *champ);
     bool move_champs(champion_t *champ);
-
+    bool move_prog(prog_t *prog);
+    bool win(vm_t *vm);
+    int int_from_byte(vm_t *vm, coord_t coord);
+    size_t get_param(vm_t *vm, coord_t coord, size_t size);
 
     void add(vm_t *vm, ...);
     void aff(vm_t *vm, ...);

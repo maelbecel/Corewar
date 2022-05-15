@@ -28,9 +28,11 @@ void live(vm_t *vm, ...)
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
-
-    my_printf("live for %x\n", int_from_byte(vm, prog->coord));
-    for (int i = 0; i < 4; i++)
-        move_champs(champ);
     va_end(arg);
+
+    champ->live = true;
+    printf("live for %li ", get_param(vm, prog->coord, 4));
+    for (int i = 0; i < 5; i++)
+        move_prog(prog);
+    printf("to [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }

@@ -11,11 +11,19 @@
 
 void add(UNUSED vm_t *vm, ...)
 {
-    my_printf("add\n");
     va_list arg;
     va_start(arg, vm);
-    champion_t *champ = va_arg(arg, champion_t *);
+    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 3; i++)
-        move_champs(champ);
+    move_prog(prog);
+    move_prog(prog);
+    int reg1 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    int reg3 = get_param(vm, prog->coord, 1);
+    move_prog(prog);
+    printf("add r%i(%i) + r%i(%i) -> r%i now on %x (%i, %i)\n", reg1, prog->reg[reg1] , reg2, prog->reg[reg2] ,reg3, vm->arene[prog->coord.y][prog->coord.x], prog->coord.y, prog->coord.x);
+    prog->reg[reg3] = prog->reg[reg2] + prog->reg[reg1];
 }

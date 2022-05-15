@@ -45,6 +45,7 @@ bool get_option(int ac, char **av, vm_t *vm)
         vm->champ[i] = malloc(sizeof(champion_t));
         vm->champ[i]->load_address = -1;
         vm->champ[i]->prog_nb = -1;
+        vm->champ[i]->live = false;
         vm->champ[i]->name = NULL;
     }
     for (int i = 1; av[i]; i++) {

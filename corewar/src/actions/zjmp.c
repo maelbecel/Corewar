@@ -11,11 +11,14 @@
 
 void zjmp(UNUSED vm_t *vm, ...)
 {
-    my_printf("zjmp\n");
     va_list arg;
     va_start(arg, vm);
-    champion_t *champ = va_arg(arg, champion_t *);
+    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 2; i++)
-        move_champs(champ);
+    move_prog(prog);
+    size_t jmp = get_param(vm, prog->coord, 2);
+    for (size_t i = 0; i < (jmp - 1 % MEM_SIZE); i++)
+        move_prog(prog);
+    printf("zjmp of %li to [%s] at (line %i, col %i)\n",jmp ,int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }

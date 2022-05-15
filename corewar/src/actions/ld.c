@@ -14,8 +14,9 @@ void ld(UNUSED vm_t *vm, ...)
     my_printf("ld\n");
     va_list arg;
     va_start(arg, vm);
-    champion_t *champ = va_arg(arg, champion_t *);
+    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 6; i++)
-        move_champs(champ);
+    for (int i = 0; i < 7; i++)
+        move_prog(prog);
 }

@@ -20,7 +20,7 @@ prog_t *init_prog(int load_ad, int prog_nb)
     prog->goal_cycle = 0;
     prog->id_action = 0;
     for (int i = 0; i < REG_NUMBER; i++) {
-        prog->reg[i] = 0;
+        prog->reg[i] = i;
     }
     prog->reg[0] = prog_nb;
     return prog;
