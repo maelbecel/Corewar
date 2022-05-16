@@ -11,11 +11,12 @@
 
 void and_nn(prog_t *prog,vm_t *vm)
 {
+    printf("[%s]", __FUNCTION__);
     move_prog(prog);
-    int nb1 = get_param(vm, prog->coord, 2);
-    move_prog(prog), move_prog(prog);
-    int nb2 = get_param(vm, prog->coord, 2);
-    move_prog(prog), move_prog(prog);
+    int nb1 = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
+    int nb2 = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
     int reg = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg] = nb1 & nb2;
@@ -23,6 +24,7 @@ void and_nn(prog_t *prog,vm_t *vm)
 
 void and_rr(prog_t *prog,vm_t *vm)
 {
+    printf("[%s]", __FUNCTION__);
     move_prog(prog);
     int reg1 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
@@ -35,11 +37,12 @@ void and_rr(prog_t *prog,vm_t *vm)
 
 void and_rn(prog_t *prog,vm_t *vm)
 {
+    printf("[%s]", __FUNCTION__);
     move_prog(prog);
     int reg1 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
-    int nb = get_param(vm, prog->coord, 2);
-    move_prog(prog), move_prog(prog);
+    int nb = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
     int reg2 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg2] = prog->reg[reg1] & nb;
@@ -47,9 +50,10 @@ void and_rn(prog_t *prog,vm_t *vm)
 
 void and_nr(prog_t *prog,vm_t *vm)
 {
+    printf("[%s]", __FUNCTION__);
     move_prog(prog);
-    int nb = get_param(vm, prog->coord, 2);
-    move_prog(prog), move_prog(prog);
+    int nb = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
     int reg1 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     int reg2 = get_param(vm, prog->coord, 1) - 1;

@@ -28,6 +28,12 @@
     #define AND_RN 0x64
     #define AND_NR 0x94
 
+    #define LDI_AN 0xe4
+    #define LDI_NN 0xa4
+    #define LDI_AR 0xd4
+    #define LDI_RR 0x54
+    #define LDI_RN 0x64
+
     typedef struct vm_s vm_t;
     typedef struct champion_s champion_t;
     typedef struct prog_s prog_t;
