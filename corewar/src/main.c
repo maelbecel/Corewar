@@ -55,7 +55,7 @@ bool move_champs(champion_t *champ)
 
 bool move_prog(prog_t *prog)
 {
-    if (prog->coord.x == 511 && 11)
+    if (prog->coord.x == 511 && prog->coord.y == 11)
         prog->coord = (coord_t){0, 0};
     else if (prog->coord.x == 511)
         prog->coord = (coord_t){0, prog->coord.y + 1};
@@ -64,25 +64,30 @@ bool move_prog(prog_t *prog)
     return true;
 }
 
-bool loop(vm_t *vm)
-{
-    while (!win(vm)) {
-        printf("\ncycle %d\n", vm->nb_cycle);
-        for (int i = 0; i < vm->nb_champ; i++)
-            actions(vm, vm->champ[i]);
-        vm->nb_cycle++;
-    }
-    return true;
-}
-
 void print_arene(vm_t *vm)
 {
+    char **empty = malloc(sizeof(char *) * 2);
+    empty[0] = NULL;
+    for (int i = 0; i < 1000; printf("\n"), i++);
     my_printf("arena type :\n");
     for (int i = 0; i < NB_LINE; i++) {
         for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
             my_printf((vm->arene[i][j] != 0) ? "\e[32m%s \e[0m": "%s ", int_to_hexa_string(vm->arene[i][j]));
         my_printf("\n");
     }
+}
+
+bool loop(vm_t *vm)
+{
+    print_arene(vm);
+    while (!win(vm)) {
+        printf("\ncycle %d\n", vm->nb_cycle);
+        for (int i = 0; i < vm->nb_champ; i++) {
+            actions(vm, vm->champ[i]);
+        }
+        vm->nb_cycle++;
+    }
+    return true;
 }
 
 int main (int ac, char **av)
@@ -92,7 +97,6 @@ int main (int ac, char **av)
         return 0;
     get_option(ac, av, vm);
     fill_champ(vm);
-    print_arene(vm);
     loop(vm);
     return 0;
 }
