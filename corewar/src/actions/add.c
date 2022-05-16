@@ -19,11 +19,11 @@ void add(UNUSED vm_t *vm, ...)
     va_end(arg);
     move_prog(prog);
     move_prog(prog);
-    int reg1 = get_param(vm, prog->coord, 1);
+    int reg1 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
-    int reg2 = get_param(vm, prog->coord, 1);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
-    int reg3 = get_param(vm, prog->coord, 1);
+    int reg3 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     printf("add r%i(%i) + r%i(%i) -> r%i now on %x (%i, %i)\n", reg1, prog->reg[reg1] , reg2, prog->reg[reg2] ,reg3, vm->arene[prog->coord.y][prog->coord.x], prog->coord.y, prog->coord.x);
     nb = prog->reg[reg2] + prog->reg[reg1];

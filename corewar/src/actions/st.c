@@ -22,15 +22,18 @@ void st(vm_t *vm, ...)
     int value = 0;
     int is_reg = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int reg = get_param(vm, prog->coord, 1);
+    int reg = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     if (is_reg == 80) {
-        value = prog->reg[get_param(vm, prog->coord, 1)];
+        value = prog->reg[get_param(vm, prog->coord, 1) - 1];
         move_prog(prog);
+        prog->reg[reg] = value;
+        return;
     } else {
         value = get_param(vm, prog->coord, 2);
         move_prog(prog), move_prog(prog);
+        int adress = (prog->coord.y * IDX_MOD + prog->coord.x + value - 4);
+        vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg];
     }
     printf("st r%i, %i", reg, value);
-    prog->reg[reg - 1] = value;
 }
