@@ -32,5 +32,5 @@ void st(vm_t *vm, ...)
         move_prog(prog), move_prog(prog);
     }
     printf("st r%i, %i", reg, value);
-    prog->reg[reg] = value;
+    prog->reg[reg - 1] = value;
 }
