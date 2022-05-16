@@ -8,9 +8,22 @@
 #include "writer.h"
 #include "my.h"
 
-unsigned int write_code(header_t *header, UNUSED instruction_t **instructions)
+static char *remove_extension(char *filename)
 {
-    char *filename = my_strdup(header->prog_name);
+    for (size_t pos = my_strlen(filename) - 1; pos > 1; pos--) {
+        if (filename[pos] == '.') {
+            filename[pos] = '\0';
+            break;
+        }
+        filename[pos] = '\0';
+    }
+    return filename;
+}
+
+unsigned int write_code(header_t *header, instruction_t **instructions,
+                                                        char *filename_origin)
+{
+    char *filename = remove_extension(my_strdup(filename_origin));
     FILE *file = NULL;
 
     filename = concatener(filename, EXTENTION);

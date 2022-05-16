@@ -28,7 +28,7 @@ int assembler(char *file_name)
     instructions = get_instructions(file, line);
     get_champion_size(header, instructions);
     fclose(file);
-    write_code(header, instructions);
+    write_code(header, instructions, file_name);
     free(header);
     free_instructions(instructions);
     return EXIT_SUCCESS;

@@ -28,7 +28,8 @@
     /// \return return value (usigned int) 84 if error
     ///
     ////////////////////////////////////////////////////////////
-    unsigned int write_code(header_t *header, instruction_t **instructions);
+    unsigned int write_code(header_t *header, instruction_t **instructions,
+                                                            char *filename);
 
     ////////////////////////////////////////////////////////////
     /// \brief Handler of the compilation of instructions
