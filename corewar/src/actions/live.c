@@ -26,13 +26,18 @@ void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    champion_t *champ = va_arg(arg, champion_t *);
+    UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
+    move_prog(prog);
 
-    champ->live = true;
-    printf("live for %li ", get_param(vm, prog->coord, 4));
-    for (int i = 0; i < 5; i++)
+    int parm = get_param(vm, prog->coord, 4);
+
+    for (int i = 0; vm->champ[i]; i++)
+        if (vm->champ[i]->prog_nb == parm)
+            vm->champ[i]->live = true;
+    printf("live for %i(%x %x %x %x) ", parm, vm->arene[prog->coord.y][prog->coord.x], vm->arene[prog->coord.y][prog->coord.x + 1], vm->arene[prog->coord.y][prog->coord.x + 2], vm->arene[prog->coord.y][prog->coord.x + 3]);
+    for (int i = 0; i < 4; i++)
         move_prog(prog);
     printf("to [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }

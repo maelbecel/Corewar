@@ -26,7 +26,6 @@ bool get_action(vm_t *vm, int j, champion_t *champ, int i)
     if (op_tab[j + 1].code == 0) {
         my_printf("Error: unknown instruction [%i] at (%i, %i)\n", c,
                             champ->prog[i]->coord.y, champ->prog[i]->coord.x);
-        exit(84);
     }
     return false;
 }
