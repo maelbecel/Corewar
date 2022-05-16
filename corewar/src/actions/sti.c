@@ -9,6 +9,14 @@
 #include "printf.h"
 #include "corewar.h"
 
+int endian(int nb)
+{
+    return ((nb & 0xff000000) >> 24) |
+            ((nb & 0x00ff0000) >> 8) |
+            ((nb & 0x0000ff00) << 8) |
+            ((nb & 0x000000ff) << 24);
+}
+
 void sti_rr(vm_t *vm, prog_t *prog)
 {
     move_prog(prog);
@@ -19,7 +27,11 @@ void sti_rr(vm_t *vm, prog_t *prog)
     int nb2 = get_param(vm, prog->coord, 1);
     move_prog(prog);
     int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 5);
-    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    int res = endian(prog->reg[reg - 1]);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
+    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
+    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
+    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
     printf("sti r%i, r%i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
@@ -35,7 +47,11 @@ void sti_nn(vm_t *vm, prog_t *prog)
     move_prog(prog);
     move_prog(prog);
     int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 7);
-    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    int res = endian(prog->reg[reg - 1]);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
+    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
+    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
+    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
     printf("sti r%i, %i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
@@ -50,7 +66,11 @@ void sti_nr(vm_t *vm, prog_t *prog)
     int nb2 = get_param(vm, prog->coord, 1);
     move_prog(prog);
     int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
-    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    int res = endian(prog->reg[reg - 1]);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
+    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
+    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
+    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
     printf("sti r%i, %i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
@@ -65,7 +85,11 @@ void sti_rn(vm_t *vm, prog_t *prog)
     move_prog(prog);
     move_prog(prog);
     int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
-    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg - 1];
+    int res = endian(prog->reg[reg - 1]);
+    vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
+    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
+    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
+    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
     printf("sti r%i, r%i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
