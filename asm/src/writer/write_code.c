@@ -11,19 +11,19 @@
 unsigned int write_code(header_t *header, UNUSED instruction_t **instructions)
 {
     char *filename = my_strdup(header->prog_name);
-    FILE *file;
+    FILE *file = NULL;
 
     filename = concatener(filename, EXTENTION);
 
     if (!filename)
-        return 84;
+        return EXIT_ERROR;
 
     file = fopen(filename, "w");
 
     if (!file)
-        return 84;
+        return EXIT_ERROR;
 
     write_header(header, filename, file);
-    write_instructions(instructions, filename, file);
-    return 0;
+    write_instructions(instructions, file);
+    return EXIT_SUCCESS;
 }

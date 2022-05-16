@@ -202,8 +202,6 @@
     ////////////////////////////////////////////////////////////
     void free_instructions(instruction_t **instructions);
 
-int check_error_instruction(instruction_t *instruction);
-
     ////////////////////////////////////////////////////////////
     /// \brief Return the mnemonique associated to a string
     ///
@@ -214,6 +212,7 @@ int check_error_instruction(instruction_t *instruction);
     ////////////////////////////////////////////////////////////
     int get_op(char *str);
 
+int check_error_instruction(instruction_t *instruction);
 int error_params(instruction_t *instruction);
 instruction_t *parse_instruction(char *av);
 void clean_instruction(instruction_t *instruction);
@@ -226,7 +225,10 @@ int get_instruction_size(instruction_t *instruction, bool is_short);
 short compute_size_short(instruction_t *tmp);
 bool is_index_type(char *str);
 int get_params_size(ATTRIBUT attribut, bool index_params);
-
+unsigned int get_size_label(char *label, instruction_t **instructions,
+                                                                    int index);
+unsigned short get_size_label_short(char *label,
+                                    instruction_t **instructions, int index);
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array
     ///

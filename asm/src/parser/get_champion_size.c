@@ -47,6 +47,7 @@ static int compute_size(instruction_t *tmp)
     int size = 1;
     int index = 0;
     bool index_params;
+    int result = 0;
 
     index = get_op(tmp->str);
     if (op_tab[index].nbr_args != 1 || op_tab[index].code == 16)
@@ -54,7 +55,7 @@ static int compute_size(instruction_t *tmp)
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
         if (tmp->attribut >= D_REG) {
-            int result = get_params_size(tmp->attribut, index_params);
+            result = get_params_size(tmp->attribut, index_params);
             size += result;
         }
         tmp = tmp->next;

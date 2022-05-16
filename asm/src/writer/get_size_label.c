@@ -15,6 +15,7 @@ short compute_size_short(instruction_t *tmp)
     short size = 1;
     int index = 0;
     bool index_params;
+    short result = 0;
 
     index = get_op(tmp->str);
     if (op_tab[index].nbr_args != 1 || op_tab[index].code == 16)
@@ -22,7 +23,7 @@ short compute_size_short(instruction_t *tmp)
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
         if (tmp->attribut >= D_REG) {
-            short result = get_params_size(tmp->attribut, index_params);
+            result = get_params_size(tmp->attribut, index_params);
             size += result;
         }
         tmp = tmp->next;
@@ -30,7 +31,7 @@ short compute_size_short(instruction_t *tmp)
     return size;
 }
 
-unsigned short get_adress_label_short(char *label,
+unsigned short get_size_label_short(char *label,
                                     instruction_t **instructions, int index)
 {
     unsigned short adress = 0;
@@ -53,7 +54,7 @@ unsigned short get_adress_label_short(char *label,
     return 0;
 }
 
-unsigned int get_adress_label(char *label, instruction_t **instructions,
+unsigned int get_size_label(char *label, instruction_t **instructions,
                                                                     int index)
 {
     unsigned int adress = 0;

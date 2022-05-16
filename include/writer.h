@@ -36,8 +36,7 @@
     /// \return return value (usigned int) 84 if error
     ///
     ////////////////////////////////////////////////////////////
-    unsigned int write_instructions(instruction_t **instructions,
-        char *filename, FILE *file);
+    unsigned int write_instructions(instruction_t **instructions, FILE *file);
 
     ////////////////////////////////////////////////////////////
     /// \brief strcat like with malloc
@@ -45,8 +44,7 @@
     /// \return return value (unsigned int) 84 if error
     ///
     ////////////////////////////////////////////////////////////
-    unsigned int write_instruction(instruction_t *instruction,
-        char *filename, FILE *file);
+    unsigned int write_instruction(instruction_t *instruction, FILE *file);
 
     ////////////////////////////////////////////////////////////
     /// \brief strcat like with malloc

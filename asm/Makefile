@@ -52,7 +52,7 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
 SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c \
 				$(SRC_DIR)$(WRITER_DIR)write_header.c \
 				$(SRC_DIR)$(WRITER_DIR)concatener.c \
-				$(SRC_DIR)$(WRITER_DIR)get_adress_label.c \
+				$(SRC_DIR)$(WRITER_DIR)get_size_label.c \
 				$(SRC_DIR)$(WRITER_DIR)write_instruction.c \
 				$(SRC_DIR)$(WRITER_DIR)write_instructions.c \
 				$(SRC_DIR)$(WRITER_DIR)write_codebytes.c \

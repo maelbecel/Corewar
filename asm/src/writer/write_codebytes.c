@@ -20,13 +20,13 @@ void write_codebytes(instruction_t *instruction, FILE *file)
             shift -= 2;
             continue;
         }
-        if (tmp->attribut == D_IND) {
-            count += (3 << shift);
+        if (tmp->attribut == D_DIR) {
+            count += (2 << shift);
             shift -= 2;
             continue;
         }
-        if (tmp->attribut == D_DIR) {
-            count += (2 << shift);
+        if (tmp->attribut == D_IND) {
+            count += (3 << shift);
             shift -= 2;
             continue;
         }
