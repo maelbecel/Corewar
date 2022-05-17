@@ -28,7 +28,7 @@
 
     # define T_REG           1       /* register */
     # define T_DIR           2       /* direct  (ld  #1, r1  put 1 into r1)*/
-    # define T_IND           4       /*indirect always relative */(
+    # define T_IND           4       /*indirect always relative */
     # define T_LAB           8       /* LABEL */
 
     # define PROG_NAME_LENGTH        128
@@ -39,14 +39,12 @@
     # define CYCLE_DELTA     5
     # define NBR_LIVE        40
 
-    extern  op_t    op_tab[];
 
     typedef struct vm_s vm_t;
-    typedef struct op_s op_t;
     typedef char args_type_t;
     typedef struct header_s header_t;
 
-    struct  op_s
+    typedef struct
     {
         char         *mnemonique;
         char         nbr_args;
@@ -55,7 +53,9 @@
         int          nbr_cycles;
         char         *comment;
         void         (*func)(vm_t *vm, ...);
-    };
+    } op_t;
+
+    extern const op_t op_tab[];
 
     struct header_s
     {
@@ -64,6 +64,7 @@
         int  prog_size;
         char comment[COMMENT_LENGTH + 1];
     };
+
 
 
 #endif

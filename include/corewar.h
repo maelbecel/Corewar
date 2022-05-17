@@ -86,11 +86,24 @@
     char *get_data(champion_t *champ);
     bool fill_champ(vm_t *vm);
     bool actions(vm_t *vm, champion_t *champ);
-    bool move_champs(champion_t *champ);
     bool move_prog(prog_t *prog);
     bool win(vm_t *vm);
     int int_from_byte(vm_t *vm, coord_t coord);
     size_t get_param(vm_t *vm, coord_t coord, size_t size);
+    void print_arene(vm_t *vm);
+    bool verif_champ(vm_t *vm);
+
+    void ldi_ar(vm_t *vm, prog_t *prog);
+    void ldi_an(vm_t *vm, prog_t *prog);
+    void ldi_rr(vm_t *vm, prog_t *prog);
+    void ldi_rn(vm_t *vm, prog_t *prog);
+    void ldi_nn(vm_t *vm, prog_t *prog);
+    void lldi_ar(vm_t *vm, prog_t *prog);
+    void lldi_an(vm_t *vm, prog_t *prog);
+    void lldi_rr(vm_t *vm, prog_t *prog);
+    void lldi_rn(vm_t *vm, prog_t *prog);
+    void lldi_nn(vm_t *vm, prog_t *prog);
+
 
     void add(vm_t *vm, ...);
     void aff(vm_t *vm, ...);

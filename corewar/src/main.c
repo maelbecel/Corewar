@@ -39,20 +39,6 @@ vm_t *init_vm(void)
     return vm;
 }
 
-bool move_champs(champion_t *champ)
-{
-    for (int i = 0; champ->prog[i]; i++) {
-        if (champ->prog[i]->coord.x == MEM_SIZE / NB_LINE - 1 &&
-            champ->prog[i]->coord.y == NB_LINE - 1)
-            champ->prog[i]->coord = (coord_t){0, 0};
-        else if (champ->prog[i]->coord.x == MEM_SIZE / NB_LINE - 1)
-            champ->prog[i]->coord = (coord_t){0, champ->prog[i]->coord.y + 1};
-        else
-            champ->prog[i]->coord.x++;
-    }
-    return true;
-}
-
 bool move_prog(prog_t *prog)
 {
     if (prog->coord.x == 511 && prog->coord.y == 11)
@@ -64,22 +50,8 @@ bool move_prog(prog_t *prog)
     return true;
 }
 
-void print_arene(vm_t *vm)
-{
-    char **empty = malloc(sizeof(char *) * 2);
-    empty[0] = NULL;
-    for (int i = 0; i < 1000; printf("\n"), i++);
-    my_printf("arena type :\n");
-    for (int i = 0; i < NB_LINE; i++) {
-        for (int j = 0; j < MEM_SIZE / NB_LINE; j++)
-            my_printf((vm->arene[i][j] != 0) ? "\e[32m%s \e[0m": "%s ", int_to_hexa_string(vm->arene[i][j]));
-        my_printf("\n");
-    }
-}
-
 bool loop(vm_t *vm)
 {
-    print_arene(vm);
     while (!win(vm)) {
         for (int i = 0; i < vm->nb_champ; i++) {
             actions(vm, vm->champ[i]);
