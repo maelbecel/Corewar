@@ -10,6 +10,16 @@
 #include "corewar.h"
 #include "op.h"
 
+bool del_prog(champion_t *champ, int i)
+{
+    int x = i;
+
+    for (; champ->prog[x + 1]; x++)
+        champ->prog[x] = champ->prog[x + 1];
+    champ->prog[x] = NULL;
+    return true;
+}
+
 bool get_action(vm_t *vm, int j, champion_t *champ, int i)
 {
     int c = vm->arene[champ->prog[i]->coord.y][champ->prog[i]->coord.x];
@@ -24,8 +34,7 @@ bool get_action(vm_t *vm, int j, champion_t *champ, int i)
         return true;
     }
     if (op_tab[j + 1].code == 0) {
-        my_printf("Error: unknown instruction [%i] at (%i, %i)\n", c,
-                            champ->prog[i]->coord.y, champ->prog[i]->coord.x);
+        del_prog(champ, i);
     }
     return false;
 }
