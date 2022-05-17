@@ -36,7 +36,7 @@ void a_fork(vm_t *vm, ...)
     va_end(arg);
     move_prog(prog);
     int adress = (get_param(vm, prog->coord, 2));
-    int x = reset_prog(champ, prog->coord, adress);
+    reset_prog(champ, prog->coord, adress);
     for (int i = 0; i < 2; i++)
         move_prog(prog);
 }

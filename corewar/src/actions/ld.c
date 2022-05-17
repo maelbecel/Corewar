@@ -11,7 +11,6 @@
 
 void ld(vm_t *vm, ...)
 {
-    my_printf("ld\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
@@ -33,4 +32,5 @@ void ld(vm_t *vm, ...)
     int reg = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg] = value % IDX_MOD;
+    prog->carry = 1;
 }

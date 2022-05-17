@@ -80,7 +80,6 @@ void ldi_rn(vm_t *vm, prog_t *prog)
 
 void ldi(vm_t *vm, ...)
 {
-    my_printf("ldi\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
@@ -99,7 +98,6 @@ void ldi(vm_t *vm, ...)
             break;
         case LDI_RN: ldi_rn(vm, prog);
             break;
-        default:
-            error("ldi: unknown parameter\n");
     }
+    prog->carry = 1;
 }

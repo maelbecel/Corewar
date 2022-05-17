@@ -80,7 +80,6 @@ void lldi_rn(vm_t *vm, prog_t *prog)
 
 void lldi(vm_t *vm, ...)
 {
-    my_printf("lldi\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
@@ -99,7 +98,6 @@ void lldi(vm_t *vm, ...)
             break;
         case LDI_RN: lldi_rn(vm, prog);
             break;
-        default:
-            error("lldi: unknown parameter\n");
     }
+    prog->carry = 1;
 }
