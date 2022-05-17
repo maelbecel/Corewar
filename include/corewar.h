@@ -24,8 +24,13 @@
     #define STI_NR 0x64
 
     #define AND_NN 0xa4
+    #define AND_NA 0xb4
+    #define AND_AR 0xd4
+    #define AND_AN 0xe4
+    #define AND_AA 0xf4
     #define AND_RR 0x54
     #define AND_RN 0x64
+    #define AND_RA 0x74
     #define AND_NR 0x94
 
     #define LDI_AN 0xe4

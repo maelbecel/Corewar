@@ -61,6 +61,83 @@ void and_nr(prog_t *prog,vm_t *vm)
     prog->reg[reg2] = prog->reg[reg1] & nb;
 }
 
+void and_an(prog_t *prog,vm_t *vm)
+{
+    printf("[%s]", __FUNCTION__);
+    move_prog(prog);
+    int value = get_param(vm, prog->coord, 2);
+    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + value - 2);
+    adress = vm->arene[adress / IDX_MOD][adress % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    int nb = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    prog->reg[reg2] = adress & nb;
+}
+
+void and_aa(prog_t *prog,vm_t *vm)
+{
+    printf("[%s]", __FUNCTION__);
+    move_prog(prog);
+    int value = get_param(vm, prog->coord, 2);
+    int ad1 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 2);
+    ad1 = vm->arene[ad1 / IDX_MOD][ad1 % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    value = get_param(vm, prog->coord, 2);
+    int ad2 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 4);
+    ad2 = vm->arene[ad2 / IDX_MOD][ad2 % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    prog->reg[reg2] = ad1 & ad2;
+}
+
+void and_na(prog_t *prog,vm_t *vm)
+{
+    printf("[%s]", __FUNCTION__);
+    move_prog(prog);
+    int nb = get_param(vm, prog->coord, 4);
+    move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
+    int value = get_param(vm, prog->coord, 2);
+    int ad2 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 6);
+    ad2 = vm->arene[ad2 / IDX_MOD][ad2 % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    prog->reg[reg2] = nb & ad2;
+}
+
+void and_ra(prog_t *prog,vm_t *vm)
+{
+    printf("[%s]", __FUNCTION__);
+    move_prog(prog);
+    int reg1 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    int value = get_param(vm, prog->coord, 2);
+    int ad2 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 3);
+    ad2 = vm->arene[ad2 / IDX_MOD][ad2 % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    prog->reg[reg2] = prog->reg[reg1] & ad2;
+}
+
+void and_ar(prog_t *prog,vm_t *vm)
+{
+    printf("[%s]", __FUNCTION__);
+    move_prog(prog);
+    int value = get_param(vm, prog->coord, 2);
+    int ad2 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 2);
+    ad2 = vm->arene[ad2 / IDX_MOD][ad2 % IDX_MOD];
+    move_prog(prog), move_prog(prog);
+    int reg1 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    move_prog(prog);
+    prog->reg[reg2] = prog->reg[reg1] & ad2;
+}
+
 void and(vm_t *vm, ...)
 {
     va_list arg;
@@ -77,6 +154,16 @@ void and(vm_t *vm, ...)
         case AND_NR : and_nr(prog, vm);
             break;
         case AND_RN : and_rn(prog, vm);
+            break;
+        case AND_AN : and_an(prog, vm);
+            break;
+        case AND_AA : and_aa(prog, vm);
+            break;
+        case AND_NA : and_na(prog, vm);
+            break;
+        case AND_RA : and_ra(prog, vm);
+            break;
+        case AND_AR : and_ar(prog, vm);
             break;
     }
     printf("and [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
