@@ -81,7 +81,6 @@ bool loop(vm_t *vm)
 {
     print_arene(vm);
     while (!win(vm)) {
-        printf("\ncycle %d\n", vm->nb_cycle);
         for (int i = 0; i < vm->nb_champ; i++) {
             actions(vm, vm->champ[i]);
         }
