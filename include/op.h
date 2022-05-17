@@ -39,7 +39,6 @@
     # define CYCLE_DELTA     5
     # define NBR_LIVE        40
 
-
     typedef struct vm_s vm_t;
     typedef char args_type_t;
     typedef struct header_s header_t;
@@ -64,7 +63,5 @@
         int  prog_size;
         char comment[COMMENT_LENGTH + 1];
     };
-
-
 
 #endif

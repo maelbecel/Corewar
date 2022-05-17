@@ -32,10 +32,12 @@ SRC          =         	$(SOURCES)main.c 					\
 						$(SOURCES)my_calloc.c 		 		\
 						$(SOURCES)init_prog.c				\
 						$(SOURCES)get_data.c		 		\
+						$(SOURCES)endian.c			 		\
 						$(SOURCES)win.c						\
 						$(SOURCES)$(ACTION)add.c			\
 						$(SOURCES)$(ACTION)aff.c			\
 						$(SOURCES)$(ACTION)and.c			\
+						$(SOURCES)$(ACTION)and_adress.c		\
 						$(SOURCES)$(ACTION)fork.c			\
 						$(SOURCES)$(ACTION)ld.c		 		\
 						$(SOURCES)$(ACTION)ldi.c			\
@@ -46,10 +48,12 @@ SRC          =         	$(SOURCES)main.c 					\
 						$(SOURCES)$(ACTION)lld.c			\
 						$(SOURCES)$(ACTION)lldi.c			\
 						$(SOURCES)$(ACTION)or.c		 		\
+						$(SOURCES)$(ACTION)or_adress.c 		\
 						$(SOURCES)$(ACTION)st.c		 		\
 						$(SOURCES)$(ACTION)sti.c			\
 						$(SOURCES)$(ACTION)sub.c			\
 						$(SOURCES)$(ACTION)xor.c			\
+						$(SOURCES)$(ACTION)xor_adress.c 	\
 						$(SOURCES)$(ACTION)zjmp.c			\
 
 SRC_COUNT    =         $(words $(SRC))

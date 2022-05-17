@@ -43,6 +43,13 @@
     typedef struct champion_s champion_t;
     typedef struct prog_s prog_t;
     typedef struct coord_s coord_t;
+    typedef struct codaction_s codaction_t;
+    typedef int CODE;
+
+    struct codaction_s {
+        CODE code;
+        void (*action)(prog_t *prog, vm_t *vm);
+    };
 
     struct vm_s {
         int nb_cycle;
@@ -92,6 +99,7 @@
     size_t get_param(vm_t *vm, coord_t coord, size_t size);
     void print_arene(vm_t *vm);
     bool verif_champ(vm_t *vm);
+    int endian(int nb);
 
     void ldi_ar(vm_t *vm, prog_t *prog);
     void ldi_an(vm_t *vm, prog_t *prog);
@@ -104,6 +112,35 @@
     void lldi_rn(vm_t *vm, prog_t *prog);
     void lldi_nn(vm_t *vm, prog_t *prog);
 
+    void and_nn(prog_t *prog, vm_t *vm);
+    void and_rr(prog_t *prog, vm_t *vm);
+    void and_nr(prog_t *prog, vm_t *vm);
+    void and_rn(prog_t *prog, vm_t *vm);
+    void and_an(prog_t *prog, vm_t *vm);
+    void and_aa(prog_t *prog, vm_t *vm);
+    void and_na(prog_t *prog, vm_t *vm);
+    void and_ar(prog_t *prog, vm_t *vm);
+    void and_ra(prog_t *prog, vm_t *vm);
+
+    void or_nn(prog_t *prog, vm_t *vm);
+    void or_rr(prog_t *prog, vm_t *vm);
+    void or_nr(prog_t *prog, vm_t *vm);
+    void or_rn(prog_t *prog, vm_t *vm);
+    void or_an(prog_t *prog, vm_t *vm);
+    void or_aa(prog_t *prog, vm_t *vm);
+    void or_na(prog_t *prog, vm_t *vm);
+    void or_ar(prog_t *prog, vm_t *vm);
+    void or_ra(prog_t *prog, vm_t *vm);
+
+    void xor_nn(prog_t *prog, vm_t *vm);
+    void xor_rr(prog_t *prog, vm_t *vm);
+    void xor_nr(prog_t *prog, vm_t *vm);
+    void xor_rn(prog_t *prog, vm_t *vm);
+    void xor_an(prog_t *prog, vm_t *vm);
+    void xor_aa(prog_t *prog, vm_t *vm);
+    void xor_na(prog_t *prog, vm_t *vm);
+    void xor_ar(prog_t *prog, vm_t *vm);
+    void xor_ra(prog_t *prog, vm_t *vm);
 
     void add(vm_t *vm, ...);
     void aff(vm_t *vm, ...);

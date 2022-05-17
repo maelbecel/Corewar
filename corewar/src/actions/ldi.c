@@ -18,7 +18,7 @@ void ldi(vm_t *vm, ...)
     va_end(arg);
     move_prog(prog);
 
-    switch(get_param(vm, prog->coord, 1)) {
+    switch (get_param(vm, prog->coord, 1)) {
         case LDI_AN: ldi_an(vm, prog);
             break;
         case LDI_NN: ldi_nn(vm, prog);
