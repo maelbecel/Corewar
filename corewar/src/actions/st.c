@@ -11,7 +11,6 @@
 
 void st(vm_t *vm, ...)
 {
-    my_printf("st\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
@@ -35,5 +34,4 @@ void st(vm_t *vm, ...)
         int adress = (prog->coord.y * IDX_MOD + prog->coord.x + value - 4);
         vm->arene[adress / IDX_MOD][adress % IDX_MOD] = prog->reg[reg];
     }
-    printf("st r%i, %i", reg, value);
 }

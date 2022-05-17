@@ -32,7 +32,6 @@ void sti_rr(vm_t *vm, prog_t *prog)
     vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
     vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
     vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
-    printf("sti r%i, r%i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti_nn(vm_t *vm, prog_t *prog)
@@ -52,7 +51,6 @@ void sti_nn(vm_t *vm, prog_t *prog)
     vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
     vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
     vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
-    printf("sti r%i, %i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti_nr(vm_t *vm, prog_t *prog)
@@ -71,7 +69,6 @@ void sti_nr(vm_t *vm, prog_t *prog)
     vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
     vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
     vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
-    printf("sti r%i, %i, r%i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti_rn(vm_t *vm, prog_t *prog)
@@ -90,7 +87,6 @@ void sti_rn(vm_t *vm, prog_t *prog)
     vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
     vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
     vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
-    printf("sti r%i, r%i, %i -> (%i, %i) = %i\n", reg, nb1, nb2, adress / IDX_MOD, adress % IDX_MOD, prog->reg[reg - 1]);
 }
 
 void sti(vm_t *vm, ...)
