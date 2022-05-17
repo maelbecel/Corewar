@@ -110,13 +110,6 @@ void sti(vm_t *vm, ...)
             break;
         case STI_NR: sti_nr(vm, prog);
             break;
-        default: error("sti: unknown instruction");
+        default: error("sti: unknown instruction\n");
     }
 }
-
-/*
-    si 2 registre : 54 r1 r2
-    si 2 nombres : 68 n1n1 n2n2
-    si 1 registre et 1 nombre : 58 r1 n1n1
-    si 1 nombre et 1 registre : 64 n1n1 r1
-*/

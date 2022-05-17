@@ -15,7 +15,7 @@ char *get_data(champion_t *champ)
     struct stat file;
 
     if (fd == -1)
-        error("Can't open file");
+        error("Can't open file\n");
     if (stat(champ->name, &file) == -1)
         return NULL;
     champ->buffer = malloc(sizeof(unsigned char) * file.st_size);
