@@ -15,7 +15,7 @@
     #include "op.h"
 
     ////////////////////////////////////////////////////////////
-    /// \brief Write header_t* in byte
+    /// \brief Write header_t * in byte
     ///
     /// \return return value (usigned int) 84 if error
     ///
@@ -63,4 +63,4 @@
     ////////////////////////////////////////////////////////////
     void write_codebytes(instruction_t *instruction, FILE *file);
 
-#endif /* WRITER_H_ ! */
+#endif

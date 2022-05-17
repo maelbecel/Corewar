@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+
 int my_strlen(char const *str);
 
 static int count_line(char *str, char separator)
