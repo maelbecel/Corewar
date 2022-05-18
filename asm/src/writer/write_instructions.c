@@ -66,7 +66,7 @@ unsigned int write_instructions(instruction_t **instructions, FILE *file)
     write.mnemonique = 0;
 
     for (size_t i = 0; instructions[i]; i++) {
-            write.mnemonique = write_instruction(instructions[i], file);
+        write.mnemonique = write_instruction(instructions[i], file);
         test_write(instructions[i], i, instructions, write);
     }
     return 0;

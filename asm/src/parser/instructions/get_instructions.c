@@ -11,7 +11,7 @@
 #include "op.h"
 
 static instruction_t **interprate_file(instruction_t **instruction_line,
-    FILE *source_file, char *line)
+                                            FILE *source_file, char *line)
 {
     size_t array = 2;
 

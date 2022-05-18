@@ -10,8 +10,8 @@
 #include "asm.h"
 #include "op.h"
 
-static unsigned int check(instruction_t **array, char ***list_label, size_t pos,
-                                                            size_t *pos_list)
+static unsigned int check(instruction_t **array, char ***list_label,
+                                        size_t pos, size_t *pos_list)
 {
     if (array[pos]->next->type == T_LABEL) {
         if (!((*list_label)[(*pos_list)] = my_strdup(array[pos]->str)))
@@ -34,12 +34,6 @@ static char **create_label_list(instruction_t **array)
     for (size_t pos = 0; array[pos] != NULL; pos++) {
         if (check(array, &list_label, pos, &pos_list) == EXIT_ERROR)
             return NULL;
-        // if (array[pos]->next->type == T_LABEL) {
-        //     if (!(list_label[(pos_list)] = my_strdup(array[pos]->str)))
-        //         return NULL;
-        //     list_label = my_array_realloc(list_label);
-        //     (pos_list)++;
-        // }
     }
     return list_label;
 }
