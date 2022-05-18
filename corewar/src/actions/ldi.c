@@ -9,14 +9,26 @@
 #include "printf.h"
 #include "corewar.h"
 
-void ldi(UNUSED vm_t *vm, ...)
+void ldi(vm_t *vm, ...)
 {
-    my_printf("ldi\n");
     va_list arg;
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
-    for (int i = 0; i < 6; i++)
-        move_prog(prog);
+    move_prog(prog);
+
+    switch (get_param(vm, prog->coord, 1)) {
+        case LDI_AN: ldi_an(vm, prog);
+            break;
+        case LDI_NN: ldi_nn(vm, prog);
+            break;
+        case LDI_AR: ldi_ar(vm, prog);
+            break;
+        case LDI_RR: ldi_rr(vm, prog);
+            break;
+        case LDI_RN: ldi_rn(vm, prog);
+            break;
+    }
+    prog->carry = 1;
 }

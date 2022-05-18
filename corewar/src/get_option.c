@@ -35,12 +35,8 @@ bool get_dump(char **av, vm_t *vm)
     return true;
 }
 
-bool get_option(int ac, char **av, vm_t *vm)
+static void init_cmp(int ac, vm_t *vm)
 {
-    int champ = 0;
-
-    get_dump(av, vm);
-    vm->champ = malloc(sizeof(champion_t *) * ac);
     for (int i = 0; i < ac - 1; i++) {
         vm->champ[i] = malloc(sizeof(champion_t));
         vm->champ[i]->load_address = -1;
@@ -48,12 +44,20 @@ bool get_option(int ac, char **av, vm_t *vm)
         vm->champ[i]->live = false;
         vm->champ[i]->name = NULL;
     }
+}
+
+static int opt_get(char **av, vm_t *vm)
+{
+    int champ = 0;
+
     for (int i = 1; av[i]; i++) {
         if (my_strcmp(av[i], "-n") == 0 && av[i + 1]) {
-            vm->champ[champ]->prog_nb = (my_str_isnum(av[i + 1])) ? my_getnbr(av[++i]) : error("Invalid number of champion\n");
+            vm->champ[champ]->prog_nb = (my_str_isnum(av[i + 1])) ?
+            my_getnbr(av[++i]) : error("Invalid number of champion\n");
             continue;
         } if (my_strcmp(av[i], "-a") == 0 && av[i + 1]) {
-            vm->champ[champ]->load_address = (my_str_isnum(av[i + 1])) ? my_getnbr(av[++i]) : error("Invalid adress of champion\n");
+            vm->champ[champ]->load_address = (my_str_isnum(av[i + 1])) ?
+                    my_getnbr(av[++i]) : error("Invalid adress of champion\n");
             continue;
         } if (av[i][0] != '-') {
             vm->champ[champ]->name = av[i];
@@ -62,7 +66,18 @@ bool get_option(int ac, char **av, vm_t *vm)
         } if (my_strcmp(av[i++], "-dump") != 0)
             error("Invalid flag\n");
     }
-    vm->champ[champ] = NULL;
+    return champ;
+}
+
+bool get_option(int ac, char **av, vm_t *vm)
+{
+    int chmp = 0;
+
+    get_dump(av, vm);
+    vm->champ = malloc(sizeof(champion_t *) * ac);
+    init_cmp(ac, vm);
+    chmp = opt_get(av, vm);
+    vm->champ[chmp] = NULL;
     check_cmp(vm);
     return false;
 }

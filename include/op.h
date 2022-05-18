@@ -1,99 +1,178 @@
 /*
-** op.h for  korewar
-**
-** Made by Astek
-** Login   <astek@epitech.net>
-**
-** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Tue Mar 22 16:44:20 2011 Astek
+** EPITECH PROJECT, 2022
+** corewar.c
+** File description:
+** corewar
 */
 
 #ifndef _OP_H_
-   # define _OP_H_
+    # define _OP_H_
 
-   # define MEM_SIZE                (6*1024)
-   # define IDX_MOD                 512   /* modulo of the index < */
-   # define NB_LINE                 12    /* nb of lines */
-   # define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
+    ////////////////////////////////////////////////////////////
+    /// \brief Memory size
+    ////////////////////////////////////////////////////////////
+    # define MEM_SIZE                (6*1024)
 
-   # define COMMENT_CHAR            '#'
-   # define LABEL_CHAR              ':'
-   # define DIRECT_CHAR             '%'
-   # define SEPARATOR_CHAR          ','
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of a line in memory
+    ////////////////////////////////////////////////////////////
+    # define IDX_MOD                 512
 
-   # define LABEL_CHARS             "abcdefghijklmnopqrstuvwxyz_0123456789"
-   # define NAME_CMD_STRING         ".name"
-   # define COMMENT_CMD_STRING      ".comment"
+    ////////////////////////////////////////////////////////////
+    /// \brief Number of lines in memory
+    ////////////////////////////////////////////////////////////
+    # define NB_LINE                 12
 
-/*
-** regs
-*/
+    ////////////////////////////////////////////////////////////
+    /// \brief Number maximum of arguments
+    ////////////////////////////////////////////////////////////
+    # define MAX_ARGS_NUMBER         4
 
-   # define REG_NUMBER      16              /* r1 <--> rx */
+    ////////////////////////////////////////////////////////////
+    /// \brief Char associated to comment
+    ////////////////////////////////////////////////////////////
+    # define COMMENT_CHAR            '#'
 
-/*
-**
-*/
+    ////////////////////////////////////////////////////////////
+    /// \brief Char associated to label
+    ////////////////////////////////////////////////////////////
+    # define LABEL_CHAR              ':'
 
-typedef char    args_type_t;
+    ////////////////////////////////////////////////////////////
+    /// \brief Char associated to direct
+    ////////////////////////////////////////////////////////////
+    # define DIRECT_CHAR             '%'
 
-   # define T_REG           1       /* register */
-   # define T_DIR           2       /* direct  (ld  #1,r1  put 1 into r1) */
-   # define T_IND           4       /* indirect always relative
-                                    ( ld 1,r1 put whats in the address (1+pc)
-                                    into r1 (4 bytes )) */
-   # define T_LAB           8       /* LABEL */
+    ////////////////////////////////////////////////////////////
+    /// \brief Char associated to separator
+    ////////////////////////////////////////////////////////////
+    # define SEPARATOR_CHAR          44     /* ', ' */
 
+    ////////////////////////////////////////////////////////////
+    /// \brief Chars associated to label
+    ////////////////////////////////////////////////////////////
+    # define LABEL_CHARS             "abcdefghijklmnopqrstuvwxyz_0123456789"
 
-typedef struct vm_s vm_t;
+    ////////////////////////////////////////////////////////////
+    /// \brief Command associated to name
+    ////////////////////////////////////////////////////////////
+    # define NAME_CMD_STRING         ".name"
 
-struct  op_s
-{
-   char         *mnemonique;
-   char         nbr_args;
-   args_type_t  attribut[MAX_ARGS_NUMBER];
-   char         code;
-   int          nbr_cycles;
-   char         *comment;
-   void         (*func)(vm_t *vm, ...);
-};
+    ////////////////////////////////////////////////////////////
+    /// \brief Command associated to comment
+    ////////////////////////////////////////////////////////////
+    # define COMMENT_CMD_STRING      ".comment"
 
-typedef struct op_s     op_t;
+    ////////////////////////////////////////////////////////////
+    /// \brief Number of register
+    ////////////////////////////////////////////////////////////
+    # define REG_NUMBER      16              /* r1 < - > rx */
 
-/*
-** size (in bytes)
-*/
-   # define IND_SIZE        2
-   # define DIR_SIZE        4
-   # define REG_SIZE        DIR_SIZE
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of indirect value
+    ////////////////////////////////////////////////////////////
+    # define IND_SIZE        2
 
-/*
-** op_tab
-*/
-extern  op_t    op_tab[];
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of direct value
+    ////////////////////////////////////////////////////////////
+    # define DIR_SIZE        4
 
-/*
-** header
-*/
-   # define PROG_NAME_LENGTH        128
-   # define COMMENT_LENGTH          2048
-   # define COREWAR_EXEC_MAGIC      0xea83f3        /* why not */
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of register value
+    ////////////////////////////////////////////////////////////
+    # define REG_SIZE        DIR_SIZE
 
-struct header_s
-{
-   int  magic;
-   char prog_name[PROG_NAME_LENGTH + 1];
-   int  prog_size;
-   char comment[COMMENT_LENGTH + 1];
-};
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of register in memory
+    ////////////////////////////////////////////////////////////
+    # define T_REG           1
 
-typedef struct header_s header_t;
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of direct in memory
+    ////////////////////////////////////////////////////////////
+    # define T_DIR           2
 
-/*
-** live
-*/
-   # define CYCLE_TO_DIE    1536   /* number of cycle before beig declared dead */
-   # define CYCLE_DELTA     5
-   # define NBR_LIVE        40
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of indirect in memory
+    ////////////////////////////////////////////////////////////
+    # define T_IND           4
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Size of label in memory
+    ////////////////////////////////////////////////////////////
+    # define T_LAB           8
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Length of program name
+    ////////////////////////////////////////////////////////////
+    # define PROG_NAME_LENGTH        128
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Length of program comment
+    ////////////////////////////////////////////////////////////
+    # define COMMENT_LENGTH          2048
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Magic number
+    ////////////////////////////////////////////////////////////
+    # define COREWAR_EXEC_MAGIC      0xea83f3        /* why not */
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Number of cycles to die
+    ////////////////////////////////////////////////////////////
+    # define CYCLE_TO_DIE    1536
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Delta number sub to \a CYCLE_TO_DIE
+    ////////////////////////////////////////////////////////////
+    # define CYCLE_DELTA     5
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Number of live
+    ////////////////////////////////////////////////////////////
+    # define NBR_LIVE        40
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Rename char for args
+    ////////////////////////////////////////////////////////////
+    typedef char args_type_t;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Basic structures
+    ////////////////////////////////////////////////////////////
+    typedef struct vm_s vm_t;
+    typedef struct header_s header_t;
+    typedef struct op_s op_t;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Main structure of all function and info
+    ////////////////////////////////////////////////////////////
+    struct op_s
+    {
+        char         *mnemonique;
+        char         nbr_args;
+        args_type_t  attribut[MAX_ARGS_NUMBER];
+        char         code;
+        int          nbr_cycles;
+        char         *comment;
+        void         (*func)(vm_t *vm, ...);
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Set the op_tab[] acessible from evrywhere
+    ////////////////////////////////////////////////////////////
+    extern const op_t op_tab[];
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Structure where all header information is stored
+    ////////////////////////////////////////////////////////////
+    struct header_s
+    {
+        int  magic;
+        char prog_name[PROG_NAME_LENGTH + 1];
+        int  prog_size;
+        char comment[COMMENT_LENGTH + 1];
+    };
 
 #endif

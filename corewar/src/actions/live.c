@@ -36,8 +36,6 @@ void live(vm_t *vm, ...)
     for (int i = 0; vm->champ[i]; i++)
         if (vm->champ[i]->prog_nb == parm)
             vm->champ[i]->live = true;
-    printf("live for %i(%x %x %x %x) ", parm, vm->arene[prog->coord.y][prog->coord.x], vm->arene[prog->coord.y][prog->coord.x + 1], vm->arene[prog->coord.y][prog->coord.x + 2], vm->arene[prog->coord.y][prog->coord.x + 3]);
     for (int i = 0; i < 4; i++)
         move_prog(prog);
-    printf("to [%s] at (line %i, col %i)\n", int_to_hexa_string(vm->arene[prog->coord.y][prog->coord.x]),prog->coord.y, prog->coord.x);
 }
