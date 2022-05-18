@@ -14,6 +14,11 @@
     #include "asm.h"
     #include "op.h"
 
+    typedef struct writer_s {
+        int mnemonique;
+        FILE *file;
+    } writer_t;
+
     ////////////////////////////////////////////////////////////
     /// \brief Write header_t * in byte
     ///

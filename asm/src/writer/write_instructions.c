@@ -24,35 +24,35 @@ static void write_indirect(int index, instruction_t *instruction,
 }
 
 static void write_direct(int index, instruction_t *instruction,
-                    FILE *file, instruction_t **instructions, int mnemonique)
+                    writer_t write, instruction_t **instructions)
 {
     unsigned int count = 0;
 
-    if (is_index_type(op_tab[mnemonique].mnemonique) == true)
-        return write_indirect(index, instruction, file, instructions);
+    if (is_index_type(op_tab[write.mnemonique].mnemonique) == true)
+        return write_indirect(index, instruction, write.file, instructions);
     if (instruction->prev->type == T_LABEL)
         count = get_size_label(instruction->str, instructions, index);
     else
         count = my_getnbr(instruction->str);
     count = htobe32(count);
-    fwrite(&count, 1, sizeof(int), file);
+    fwrite(&count, 1, sizeof(int), write.file);
     return;
 }
 
 static void test_write(instruction_t *instruction, int index,
-                    FILE *file, instruction_t **instructions, int mnemonique)
+                    instruction_t **instructions, writer_t write)
 {
     unsigned char count = 0;
 
     while (instruction) {
         if (instruction->attribut == D_REG) {
             count = my_getnbr(instruction->str);
-            fwrite(&count, 1, sizeof(char), file);
+            fwrite(&count, 1, sizeof(char), write.file);
         }
         if (instruction->attribut == D_IND)
-            write_indirect(index, instruction, file, instructions);
+            write_indirect(index, instruction, write.file, instructions);
         if (instruction->attribut == D_DIR)
-            write_direct(index, instruction, file, instructions, mnemonique);
+            write_direct(index, instruction, write, instructions);
         instruction = instruction->next;
     }
 }
@@ -60,10 +60,14 @@ static void test_write(instruction_t *instruction, int index,
 unsigned int write_instructions(instruction_t **instructions, FILE *file)
 {
     int index = 0;
+    writer_t write;
+
+    write.file = file;
+    write.mnemonique = 0;
 
     for (size_t i = 0; instructions[i]; i++) {
-        index = write_instruction(instructions[i], file);
-        test_write(instructions[i], i, file, instructions, index);
+            write.mnemonique = write_instruction(instructions[i], file);
+        test_write(instructions[i], i, instructions, write);
     }
     return 0;
 }
