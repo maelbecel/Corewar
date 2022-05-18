@@ -14,7 +14,7 @@ bool win(vm_t *vm)
     int nb_live = 0;
 
     if (vm->nb_cycle > vm->cycle_to_die) {
-        my_printf("Draw\n");
+        my_printf("Draw (cycle > cycle to die)\n");
         return true;
     }
     if (vm->nb_cycle != vm->cycle_to_die)
@@ -31,7 +31,7 @@ bool win(vm_t *vm)
         my_printf("Win.\n");
         return true;
     } else if (nb_live == 0) {
-        my_printf("Draw\n");
+        my_printf("Draw.\n");
         return true;
     } else {
         vm->cycle_to_die -= CYCLE_DELTA;

@@ -21,7 +21,7 @@ int reset_prog(champion_t *champ, coord_t co, int adress)
     new[i] = init_prog(1, champ->prog_nb);
     new[i]->coord = (coord_t){co.x, co.y};
     new[i + 1] = NULL;
-    for (int x = 0; x < (adress - 1) % IDX_MOD; x++)
+    for (int x = 0; x < (adress - 1 % MEM_SIZE + IDX_MOD * 4); x++)
         move_prog(new[i]);
     free(champ->prog);
     champ->prog = new;
@@ -38,7 +38,7 @@ void a_fork(vm_t *vm, ...)
 
     va_end(arg);
     move_prog(prog);
-    adress = get_param(vm, prog->coord, 2);
+    adress = get_param(vm, prog->coord, 2) % MEM_SIZE;
     reset_prog(champ, prog->coord, adress);
     move_prog(prog), move_prog(prog);
 }

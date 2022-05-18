@@ -23,7 +23,7 @@ static int long_value(vm_t *vm, prog_t *prog)
     int value = 0;
     coord_t coord = prog->coord;
     int adress = (prog->coord.y * IDX_MOD + prog->coord.x +
-                                            get_param(vm, prog->coord, 4) - 2);
+                                get_param(vm, prog->coord, 4) - 2) % MEM_SIZE;
 
     coord.x = adress % IDX_MOD;
     coord.y = adress / IDX_MOD;

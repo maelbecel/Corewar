@@ -34,7 +34,7 @@ bool get_action(vm_t *vm, int j, champion_t *champ, int i)
         return true;
     }
     if (op_tab[j + 1].code == 0) {
-        del_prog(champ, i);
+        move_prog(champ->prog[i]);
     }
     return false;
 }
