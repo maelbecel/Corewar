@@ -10,7 +10,7 @@
 #include "corewar.h"
 #include "op.h"
 
-static bool get_champ(champion_t *champ, vm_t *vm)
+static bool get_champ(champion_t *champ, vm_t *vm, int nb)
 {
     int x = 0;
     int y = 0;
@@ -23,6 +23,7 @@ static bool get_champ(champion_t *champ, vm_t *vm)
         x = (champ->load_address + i) / IDX_MOD;
         y = (champ->load_address + i) % IDX_MOD;
         vm->arene[x][y] = champ->buffer[i];
+        vm->color[x][y] = nb;
     }
     return true;
 }
@@ -33,6 +34,6 @@ bool fill_champ(vm_t *vm)
     if (vm->nb_champ < 2)
         error("Not enough champions\n");
     for (int i = 0; vm->champ[i]; i++)
-        get_champ(vm->champ[i], vm);
+        get_champ(vm->champ[i], vm, i + 1);
     return true;
 }

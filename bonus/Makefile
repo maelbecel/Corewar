@@ -8,7 +8,7 @@
 NAME         =		    corewar
 
 INCLUDE      =         -I ../include/ -I ../include/lib/ \
-						-L ../lib/ \
+						-L ../lib/  -lm \
 						-lmy -lmyprintf -lcsfml-graphics -lcsfml-window \
 						-lcsfml-system
 
@@ -37,6 +37,7 @@ SRC          =         	$(SOURCES)main.c 					\
 						$(SOURCES)get_data.c		 		\
 						$(SOURCES)endian.c			 		\
 						$(SOURCES)win.c						\
+						$(SOURCES)ftoa.c						\
 						$(SOURCES)$(ACTION)add.c			\
 						$(SOURCES)$(ACTION)aff.c			\
 						$(SOURCES)$(ACTION)and.c			\

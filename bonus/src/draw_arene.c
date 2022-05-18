@@ -35,7 +35,7 @@ static char *process(champion_t *champ)
     return inttochar(i);
 }
 
-static char *coverage(vm_t *vm, int nb)
+static char *size(vm_t *vm, int nb)
 {
     int oc = 0;
 
@@ -43,6 +43,26 @@ static char *coverage(vm_t *vm, int nb)
         for (int j = 0; j < IDX_MOD; j++)
             oc = (nb == vm->color[i][j]) ? oc + 1 : oc;
     return inttochar(oc);
+}
+
+static char *coverage(vm_t *vm, int nb)
+{
+    int oc = 0;
+    char *ret;
+    char *res;
+
+    for (int i = 0; i < NB_LINE; i++)
+        for (int j = 0; j < IDX_MOD; j++)
+            oc = (nb == vm->color[i][j]) ? oc + 1 : oc;
+    res = inttochar(oc * 100 / (NB_LINE * IDX_MOD));
+    ret = malloc(my_strlen(res) + 3);
+    for (int i = 0; res[i]; i++)
+        ret[i] = res[i];
+    ret[my_strlen(res)] = ' ';
+    ret[my_strlen(res) + 1] = '%';
+    ret[my_strlen(res) + 2] = '\0';
+    return ret;
+
 }
 
 void text(vm_t *vm, sfRenderWindow *window)
@@ -55,16 +75,20 @@ void text(vm_t *vm, sfRenderWindow *window)
     draw_text(vm->champ[1]->name, (sfVector3f){1000, 580, 20}, window);
     draw_text("ID :", (sfVector3f){30, 620, 20}, window);
     draw_text("ID :", (sfVector3f){1000, 620, 20}, window);
-    draw_text(inttochar(vm->champ[0]->prog_nb), (sfVector3f){180, 620, 20}, window);
-    draw_text(inttochar(vm->champ[1]->prog_nb), (sfVector3f){1150, 620, 20}, window);
+    draw_text(inttochar(vm->champ[0]->prog_nb), (sfVector3f){80, 620, 20}, window);
+    draw_text(inttochar(vm->champ[1]->prog_nb), (sfVector3f){1050, 620, 20}, window);
     draw_text("Processes :", (sfVector3f){30, 660, 20}, window);
     draw_text("Processes :", (sfVector3f){1000, 660, 20}, window);
-    draw_text(process(vm->champ[0]), (sfVector3f){280, 660, 20}, window);
-    draw_text(process(vm->champ[1]), (sfVector3f){1250, 660, 20}, window);
+    draw_text(process(vm->champ[0]), (sfVector3f){180, 660, 20}, window);
+    draw_text(process(vm->champ[1]), (sfVector3f){1150, 660, 20}, window);
     draw_text("Size :", (sfVector3f){30, 700, 20}, window);
     draw_text("Size :", (sfVector3f){1000, 700, 20}, window);
-    draw_text(coverage(vm, 1), (sfVector3f){180, 700, 20}, window);
-    draw_text(coverage(vm, 2), (sfVector3f){1150, 700, 20}, window);
+    draw_text(size(vm, 1), (sfVector3f){80, 700, 20}, window);
+    draw_text(size(vm, 2), (sfVector3f){1050, 700, 20}, window);
+    draw_text("Coverage :", (sfVector3f){30, 740, 20}, window);
+    draw_text("Coverage :", (sfVector3f){1000, 740, 20}, window);
+    draw_text(coverage(vm, 1), (sfVector3f){180, 740, 20}, window);
+    draw_text(coverage(vm, 2), (sfVector3f){1150, 740, 20}, window);
 }
 
 void draw_pointers(vm_t *vm, sfRenderWindow *window)
