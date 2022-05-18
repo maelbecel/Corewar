@@ -21,7 +21,7 @@ void add(vm_t *vm, ...)
     int reg3 = 0;
 
     va_end(arg);
-    move_prog(prog),move_prog(prog);
+    move_prog(prog), move_prog(prog);
     reg1 = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     reg2 = get_param(vm, prog->coord, 1) - 1;

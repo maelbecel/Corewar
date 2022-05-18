@@ -15,7 +15,7 @@ int reset_prog(champion_t *champ, coord_t co, int adress)
     int i = 0;
     prog_t **new;
 
-    for(; champ->prog[size]; size++);
+    for (; champ->prog[size]; size++);
     new = malloc(sizeof(prog_t *) * (size + 2));
     for (; i < size; new[i] = champ->prog[i], i++);
     new[i] = init_prog(1, champ->prog_nb);

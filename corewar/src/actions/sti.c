@@ -9,84 +9,93 @@
 #include "printf.h"
 #include "corewar.h"
 
-int endian(int nb)
-{
-    return ((nb & 0xff000000) >> 24) |
-            ((nb & 0x00ff0000) >> 8) |
-            ((nb & 0x0000ff00) << 8) |
-            ((nb & 0x000000ff) << 24);
-}
-
 void sti_rr(vm_t *vm, prog_t *prog)
 {
+    int res;
+    int nb;
+    int reg;
+    int adress;
+
     move_prog(prog);
-    int reg = get_param(vm, prog->coord, 1);
+    reg = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb1 = get_param(vm, prog->coord, 1);
+    nb = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb2 = get_param(vm, prog->coord, 1);
+    nb += get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 5);
-    int res = endian(prog->reg[reg - 1]);
+    adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb - 5);
+    res = endian(prog->reg[reg - 1]);
     vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
-    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
-    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
-    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
+    vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
+    vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
+    vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
 }
 
 void sti_nn(vm_t *vm, prog_t *prog)
 {
+    int res;
+    int nb;
+    int adress;
+    int reg;
+
     move_prog(prog);
-    int reg = get_param(vm, prog->coord, 1);
+    reg = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb1 = get_param(vm, prog->coord, 2);
-    move_prog(prog);
-    move_prog(prog);
-    int nb2 = get_param(vm, prog->coord, 2);
-    move_prog(prog);
-    move_prog(prog);
-    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 7);
-    int res = endian(prog->reg[reg - 1]);
+    nb = get_param(vm, prog->coord, 2);
+    move_prog(prog), move_prog(prog);
+    nb += get_param(vm, prog->coord, 2);
+    move_prog(prog), move_prog(prog);
+    adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb - 7);
+    res = endian(prog->reg[reg - 1]);
     vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
-    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
-    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
-    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
+    vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
+    vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
+    vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
 }
 
 void sti_nr(vm_t *vm, prog_t *prog)
 {
+    int res;
+    int nb;
+    int adress;
+    int reg;
+
     move_prog(prog);
-    int reg = get_param(vm, prog->coord, 1);
+    reg = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb1 = get_param(vm, prog->coord, 2);
+    nb = get_param(vm, prog->coord, 2);
+    move_prog(prog), move_prog(prog);
+    nb += get_param(vm, prog->coord, 1);
     move_prog(prog);
-    move_prog(prog);
-    int nb2 = get_param(vm, prog->coord, 1);
-    move_prog(prog);
-    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
-    int res = endian(prog->reg[reg - 1]);
+    adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb - 6);
+    res = endian(prog->reg[reg - 1]);
     vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
-    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
-    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
-    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
+    vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
+    vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
+    vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
 }
 
 void sti_rn(vm_t *vm, prog_t *prog)
 {
+    int res;
+    int nb;
+    int adress;
+    int reg;
+
     move_prog(prog);
-    int reg = get_param(vm, prog->coord, 1);
+    reg = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb1 = get_param(vm, prog->coord, 1);
+    nb = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    int nb2 = get_param(vm, prog->coord, 2);
+    nb += get_param(vm, prog->coord, 2);
     move_prog(prog);
     move_prog(prog);
-    int adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb1 + nb2 - 6);
-    int res = endian(prog->reg[reg - 1]);
+    adress = (prog->coord.y * IDX_MOD + prog->coord.x + nb - 6);
+    res = endian(prog->reg[reg - 1]);
     vm->arene[adress / IDX_MOD][adress % IDX_MOD] = res;
-    vm->arene[adress / IDX_MOD][adress + 1 % IDX_MOD] = res >> 8;
-    vm->arene[adress / IDX_MOD][adress + 2 % IDX_MOD] = res >> 16;
-    vm->arene[adress / IDX_MOD][adress + 3 % IDX_MOD] = res >> 24;
+    vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
+    vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
+    vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
 }
 
 void sti(vm_t *vm, ...)

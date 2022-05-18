@@ -16,37 +16,45 @@ SOURCES      =         src/
 
 ACTION 		 =  	   actions/
 
-SRC          =         	$(SOURCES)main.c 				\
-						$(SOURCES)op.c 					\
-						$(SOURCES)errors.c 				\
-						$(SOURCES)param.c 				\
-						$(SOURCES)check_champion.c 		\
-						$(SOURCES)get_option.c			\
-						$(SOURCES)init_champ.c		 	\
-						$(SOURCES)init_arene.c		 	\
-						$(SOURCES)int_to_hexa.c		 	\
-						$(SOURCES)fill_champ.c		 	\
-						$(SOURCES)action.c			 	\
-						$(SOURCES)my_calloc.c 		 	\
-						$(SOURCES)init_prog.c			\
-						$(SOURCES)get_data.c		 	\
-						$(SOURCES)win.c					\
-						$(SOURCES)$(ACTION)add.c		\
-						$(SOURCES)$(ACTION)aff.c		\
-						$(SOURCES)$(ACTION)and.c		\
-						$(SOURCES)$(ACTION)fork.c		\
-						$(SOURCES)$(ACTION)ld.c		 	\
-						$(SOURCES)$(ACTION)ldi.c		\
-						$(SOURCES)$(ACTION)lfork.c		\
-						$(SOURCES)$(ACTION)live.c		\
-						$(SOURCES)$(ACTION)lld.c		\
-						$(SOURCES)$(ACTION)lldi.c		\
-						$(SOURCES)$(ACTION)or.c		 	\
-						$(SOURCES)$(ACTION)st.c		 	\
-						$(SOURCES)$(ACTION)sti.c		\
-						$(SOURCES)$(ACTION)sub.c		\
-						$(SOURCES)$(ACTION)xor.c		\
-						$(SOURCES)$(ACTION)zjmp.c		\
+SRC          =         	$(SOURCES)main.c 					\
+						$(SOURCES)op.c 						\
+						$(SOURCES)errors.c 					\
+						$(SOURCES)param.c 					\
+						$(SOURCES)check_champion.c 			\
+						$(SOURCES)print_arene.c 			\
+						$(SOURCES)get_option.c				\
+						$(SOURCES)verif_champion.c			\
+						$(SOURCES)init_champ.c		 		\
+						$(SOURCES)init_arene.c		 		\
+						$(SOURCES)int_to_hexa.c		 		\
+						$(SOURCES)fill_champ.c		 		\
+						$(SOURCES)action.c			 		\
+						$(SOURCES)my_calloc.c 		 		\
+						$(SOURCES)init_prog.c				\
+						$(SOURCES)get_data.c		 		\
+						$(SOURCES)endian.c			 		\
+						$(SOURCES)win.c						\
+						$(SOURCES)$(ACTION)add.c			\
+						$(SOURCES)$(ACTION)aff.c			\
+						$(SOURCES)$(ACTION)and.c			\
+						$(SOURCES)$(ACTION)and_adress.c		\
+						$(SOURCES)$(ACTION)fork.c			\
+						$(SOURCES)$(ACTION)ld.c		 		\
+						$(SOURCES)$(ACTION)ldi.c			\
+						$(SOURCES)$(ACTION)ldi_actions.c	\
+						$(SOURCES)$(ACTION)lldi_actions.c	\
+						$(SOURCES)$(ACTION)lfork.c			\
+						$(SOURCES)$(ACTION)live.c			\
+						$(SOURCES)$(ACTION)lld.c			\
+						$(SOURCES)$(ACTION)lldi.c			\
+						$(SOURCES)$(ACTION)or.c		 		\
+						$(SOURCES)$(ACTION)or_adress.c 		\
+						$(SOURCES)$(ACTION)st.c		 		\
+						$(SOURCES)$(ACTION)sti.c			\
+						$(SOURCES)$(ACTION)sub.c			\
+						$(SOURCES)$(ACTION)xor.c			\
+						$(SOURCES)$(ACTION)xor_adress.c 	\
+						$(SOURCES)$(ACTION)zjmp.c			\
 
 SRC_COUNT    =         $(words $(SRC))
 
