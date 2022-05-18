@@ -148,6 +148,7 @@
         int cycle_to_die;
         int nb_champ;
         unsigned char **arene;
+        unsigned char **color;
         champion_t **champ;
     };
 

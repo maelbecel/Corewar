@@ -11,6 +11,62 @@
 #include "bonus.h"
 #include "op.h"
 
+int draw_text(char *text, sfVector3f pos, sfRenderWindow *window)
+{
+    sfText *score = sfText_create();
+
+    if (!score)
+        return EXIT_FAILURE;
+    sfText_setColor(score, sfBlack);
+    sfText_setString(score, text);
+    sfText_setFont(score, sfFont_createFromFile("zorque.ttf"));
+    sfText_setCharacterSize(score, pos.z);
+    sfText_setPosition(score, (sfVector2f){pos.x, pos.y});
+    sfRenderWindow_drawText(window, score, NULL);
+    sfText_destroy(score);
+    return EXIT_SUCCESS;
+}
+
+static char *process(champion_t *champ)
+{
+    int i = 0;
+
+    for (; champ->prog[i]; i++);
+    return inttochar(i);
+}
+
+static char *coverage(vm_t *vm, int nb)
+{
+    int oc = 0;
+
+    for (int i = 0; i < NB_LINE; i++)
+        for (int j = 0; j < IDX_MOD; j++)
+            oc = (nb == vm->color[i][j]) ? oc + 1 : oc;
+    return inttochar(oc);
+}
+
+void text(vm_t *vm, sfRenderWindow *window)
+{
+    draw_text("Cycle : ", (sfVector3f){520, 510, 30}, window);
+    draw_text(inttochar(vm->nb_cycle), (sfVector3f){670, 510, 30}, window);
+    draw_text("Cycle to die : ", (sfVector3f){420, 550, 30}, window);
+    draw_text(inttochar(vm->cycle_to_die), (sfVector3f){670, 550, 30}, window);
+    draw_text(vm->champ[0]->name, (sfVector3f){30, 580, 20}, window);
+    draw_text(vm->champ[1]->name, (sfVector3f){1000, 580, 20}, window);
+    draw_text("ID :", (sfVector3f){30, 620, 20}, window);
+    draw_text("ID :", (sfVector3f){1000, 620, 20}, window);
+    draw_text(inttochar(vm->champ[0]->prog_nb), (sfVector3f){180, 620, 20}, window);
+    draw_text(inttochar(vm->champ[1]->prog_nb), (sfVector3f){1150, 620, 20}, window);
+    draw_text("Processes :", (sfVector3f){30, 660, 20}, window);
+    draw_text("Processes :", (sfVector3f){1000, 660, 20}, window);
+    draw_text(process(vm->champ[0]), (sfVector3f){280, 660, 20}, window);
+    draw_text(process(vm->champ[1]), (sfVector3f){1250, 660, 20}, window);
+    draw_text("Size :", (sfVector3f){30, 700, 20}, window);
+    draw_text("Size :", (sfVector3f){1000, 700, 20}, window);
+    draw_text(coverage(vm, 1), (sfVector3f){180, 700, 20}, window);
+    draw_text(coverage(vm, 2), (sfVector3f){1150, 700, 20}, window);
+}
+
 void draw_pointers(vm_t *vm, sfRenderWindow *window)
 {
     sfRectangleShape *pt = sfRectangleShape_create();
@@ -20,19 +76,20 @@ void draw_pointers(vm_t *vm, sfRenderWindow *window)
     sfRectangleShape_setSize(pt, (sfVector2f){10, 10});
     for (int i = 0; vm->champ[i]; i++) {
         for (int j = 0; vm->champ[i]->prog[j] ; j++) {
-            adress = (vm->champ[i]->prog[j]->coord.x + vm->champ[i]->prog[j]->coord.y * 128);
+            adress = (vm->champ[i]->prog[j]->coord.x + vm->champ[i]->prog[j]->coord.y * 512);
+            vm->color[vm->champ[i]->prog[j]->coord.y][vm->champ[i]->prog[j]->coord.x] = i + 1;
             sfRectangleShape_setPosition(pt, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
-            printf("adress = line %i, column %i\n", adress / 128, adress % 128);
             sfRenderWindow_drawRectangleShape(window, pt, NULL);
         }
     }
 }
 
-void draw_arene(UNUSED vm_t *vm, sfRenderWindow *window)
+void draw_arene(vm_t *vm, sfRenderWindow *window)
 {
     sfRectangleShape *red = sfRectangleShape_create();
     sfRectangleShape *grey = sfRectangleShape_create();
     sfRectangleShape *blue = sfRectangleShape_create();
+    int adress = 0;
     sfRectangleShape_setFillColor(red, sfRed);
     sfRectangleShape_setFillColor(grey, sfBlack);
     sfRectangleShape_setFillColor(blue, sfBlue);
@@ -41,13 +98,23 @@ void draw_arene(UNUSED vm_t *vm, sfRenderWindow *window)
     sfRectangleShape_setSize(blue, (sfVector2f){10, 10});
 
     sfRenderWindow_clear(window, sfWhite);
-    for (int i = 0; i < 48; i++)
-        for (int j = 0; j < 128; j++) {
-            sfRectangleShape_setPosition(red, (sfVector2f){30 + j * 10, 30 + i * 10});
-            sfRenderWindow_drawRectangleShape(window, red, NULL);
+    for (int i = 0; i < NB_LINE; i++) {
+        for (int j = 0; j < IDX_MOD; j++) {
+            adress = (j + i * 512);
+            if (vm->color[i][j] == 0) {
+                sfRectangleShape_setPosition(grey, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
+                sfRenderWindow_drawRectangleShape(window, grey, NULL);
+            } else if (vm->color[i][j] == 1) {
+                sfRectangleShape_setPosition(red, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
+                sfRenderWindow_drawRectangleShape(window, red, NULL);
+            } else {
+                sfRectangleShape_setPosition(blue, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
+                sfRenderWindow_drawRectangleShape(window, blue, NULL);
+            }
         }
-
+    }
     draw_pointers(vm, window);
+    text(vm, window);
     sfRenderWindow_display(window);
     sfRectangleShape_destroy(red);
     sfRectangleShape_destroy(grey);

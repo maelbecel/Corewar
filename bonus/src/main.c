@@ -37,6 +37,7 @@ vm_t *init_vm(void)
     vm->nb_cycle = 0;
     vm->cycle_to_die = CYCLE_TO_DIE;
     vm->arene = init_arene();
+    vm->color = init_arene();
     return vm;
 }
 
@@ -73,7 +74,7 @@ int main (int ac, char **av)
     sfEvent event;
     vm_t *vm = init_vm();
 
-    sfRenderWindow_setFramerateLimit(window, 30);
+    sfRenderWindow_setFramerateLimit(window, 0);
     if (usage(ac, av) )
         return 0;
     get_option(ac, av, vm);

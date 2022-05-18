@@ -8,11 +8,12 @@
 .name "zork"
 .comment "just a basic living program"
 
-live: live %0
-    add r1, r1, r1
-    add r1, r1, r1
-    add r1, r1, r1
-    add r1, r1, r1
-    add r1, r1, r1
+l2:
+    sti r1,%:live,%1
+    and r1,%0 ,r1
+
+live: live %1
     add r1, r1, r1
     aff r1
+    fork %:live
+    zjmp %:live
