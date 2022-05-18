@@ -6,13 +6,14 @@
 */
 
 #include "my.h"
+#include "corewar.h"
 #include "printf.h"
 #include "asm.h"
 #include "op.h"
 
 header_t *get_header(FILE *file_name, char **line)
 {
-    header_t *header = malloc(sizeof(header_t));
+    header_t *header = my_calloc(sizeof(header_t));
 
     if (!header)
         return NULL;
