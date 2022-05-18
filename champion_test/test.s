@@ -13,7 +13,5 @@ l2:
     and r1,%0 ,r1
 
 live: live %1
-    add r1, r1, r1
-    aff r1
-    fork %:live
+    fork %:l2
     zjmp %:live
