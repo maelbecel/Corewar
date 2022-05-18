@@ -78,7 +78,7 @@ int main(int ac, char **av)
     sfEvent event;
     vm_t *vm = init_vm();
 
-    sfRenderWindow_setFramerateLimit(window, 30);
+    sfRenderWindow_setFramerateLimit(window, 0);
     if (usage(ac, av) )
         return 0;
     get_option(ac, av, vm);

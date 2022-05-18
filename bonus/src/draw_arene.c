@@ -34,19 +34,29 @@ static char *coverage(vm_t *vm, int nb)
     int oc = 0;
     char *ret;
     char *res;
+    int x = 0;
 
     for (int i = 0; i < NB_LINE; i++)
         for (int j = 0; j < IDX_MOD; j++)
             oc = (nb == vm->color[i][j]) ? oc + 1 : oc;
     res = inttochar(oc * 100 / (NB_LINE * IDX_MOD));
-    ret = malloc(my_strlen(res) + 3);
-    for (int i = 0; res[i]; i++)
-        ret[i] = res[i];
-    ret[my_strlen(res)] = ' ';
-    ret[my_strlen(res) + 1] = '%';
-    ret[my_strlen(res) + 2] = '\0';
+    ret = malloc(sizeof(char) * 10);
+    for (; res[x]; x++)
+        ret[x] = res[x];
+    ret[x] = ' ';
+    ret[x + 1] = '%';
+    ret[x + 2] = '\0';
     return ret;
 
+}
+
+static char *getname(char *name)
+{
+    char **tab = my_str_to_word_array(name, '/');
+    char *file = my_strdup(tab[my_strarraylen(tab) - 1]);
+    for (int i = 0; tab[i]; free(tab[i]), i++);
+    free(tab);
+    return file;
 }
 
 void text(vm_t *vm, sfRenderWindow *window)
@@ -55,8 +65,8 @@ void text(vm_t *vm, sfRenderWindow *window)
     draw_text(inttochar(vm->nb_cycle), (sfVector3f){670, 510, 30}, window);
     draw_text("Cycle to die : ", (sfVector3f){420, 550, 30}, window);
     draw_text(inttochar(vm->cycle_to_die), (sfVector3f){670, 550, 30}, window);
-    draw_text(vm->champ[0]->name, (sfVector3f){30, 580, 20}, window);
-    draw_text(vm->champ[1]->name, (sfVector3f){1000, 580, 20}, window);
+    draw_text(getname(vm->champ[0]->name), (sfVector3f){30, 580, 20}, window);
+    draw_text(getname(vm->champ[1]->name), (sfVector3f){1000, 580, 20}, window);
     draw_text("ID :", (sfVector3f){30, 620, 20}, window);
     draw_text("ID :", (sfVector3f){1000, 620, 20}, window);
     draw_text(inttochar(vm->champ[0]->prog_nb), (sfVector3f){80, 620, 20}, window);
@@ -67,12 +77,17 @@ void text(vm_t *vm, sfRenderWindow *window)
     draw_text(process(vm->champ[1]), (sfVector3f){1150, 660, 20}, window);
     draw_text("Size :", (sfVector3f){30, 700, 20}, window);
     draw_text("Size :", (sfVector3f){1000, 700, 20}, window);
-    draw_text(size(vm, 1), (sfVector3f){80, 700, 20}, window);
-    draw_text(size(vm, 2), (sfVector3f){1050, 700, 20}, window);
+    draw_text(size(vm, 1), (sfVector3f){130, 700, 20}, window);
+    draw_text(size(vm, 2), (sfVector3f){1100, 700, 20}, window);
     draw_text("Coverage :", (sfVector3f){30, 740, 20}, window);
     draw_text("Coverage :", (sfVector3f){1000, 740, 20}, window);
     draw_text(coverage(vm, 1), (sfVector3f){180, 740, 20}, window);
     draw_text(coverage(vm, 2), (sfVector3f){1150, 740, 20}, window);
+    draw_text("Live :", (sfVector3f){30, 780, 20}, window);
+    draw_text("Live :", (sfVector3f){1000, 780, 20}, window);
+    draw_text((vm->champ[0]->live) ? "Yes" : "No", (sfVector3f){130, 780, 20}, window);
+    draw_text((vm->champ[1]->live) ? "Yes" : "No", (sfVector3f){1100, 780, 20}, window);
+
 }
 
 void draw_pointers(vm_t *vm, sfRenderWindow *window)
@@ -85,7 +100,6 @@ void draw_pointers(vm_t *vm, sfRenderWindow *window)
     for (int i = 0; vm->champ[i]; i++) {
         for (int j = 0; vm->champ[i]->prog[j] ; j++) {
             adress = (vm->champ[i]->prog[j]->coord.x + vm->champ[i]->prog[j]->coord.y * 512);
-            vm->color[vm->champ[i]->prog[j]->coord.y][vm->champ[i]->prog[j]->coord.x] = i + 1;
             sfRectangleShape_setPosition(pt, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
             sfRenderWindow_drawRectangleShape(window, pt, NULL);
         }
@@ -115,7 +129,7 @@ void draw_arene(vm_t *vm, sfRenderWindow *window)
             } else if (vm->color[i][j] == 1) {
                 sfRectangleShape_setPosition(red, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
                 sfRenderWindow_drawRectangleShape(window, red, NULL);
-            } else {
+            } else if (vm->color[i][j] == 2) {
                 sfRectangleShape_setPosition(blue, (sfVector2f){30 + (adress % 128) * 10, 30 + (adress / 128) * 10});
                 sfRenderWindow_drawRectangleShape(window, blue, NULL);
             }

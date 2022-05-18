@@ -33,6 +33,7 @@ void live(vm_t *vm, ...)
 
     int parm = get_param(vm, prog->coord, 4);
 
+    my_printf("Champion %i is in  live !\n", parm);
     for (int i = 0; vm->champ[i]; i++)
         if (vm->champ[i]->prog_nb == parm)
             vm->champ[i]->live = true;
