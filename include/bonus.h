@@ -14,5 +14,6 @@
 
     void draw_arene(vm_t *vm, sfRenderWindow *window);
     bool handle_event(sfRenderWindow *window, sfEvent *event);
+    void ftoa(float n, char *res, int afterpoint);
 
 #endif
