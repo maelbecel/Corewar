@@ -58,6 +58,7 @@ SRC          =         	$(SOURCES)main.c 					\
 						$(SOURCES)$(ACTION)xor.c			\
 						$(SOURCES)$(ACTION)xor_adress.c 	\
 						$(SOURCES)$(ACTION)zjmp.c			\
+						$(SOURCES)event.c					\
 
 SRC_COUNT    =         $(words $(SRC))
 

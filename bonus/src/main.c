@@ -51,12 +51,14 @@ bool move_prog(prog_t *prog)
     return true;
 }
 
-bool loop(vm_t *vm, sfRenderWindow *window)
+bool loop(vm_t *vm, sfRenderWindow *window, sfEvent *event)
 {
     while (!win(vm)) {
         for (int i = 0; i < vm->nb_champ; i++) {
             actions(vm, vm->champ[i]);
         }
+        if (handle_event(window, event))
+            return true;
         draw_arene(vm, window);
         vm->nb_cycle++;
     }
@@ -67,7 +69,8 @@ int main (int ac, char **av)
 {
     sfVideoMode mode = {1340, 880, 32};
     sfRenderWindow *window = sfRenderWindow_create(mode,
-                                                  "Corewar", sfClose, NULL);
+                                                    "Corewar", sfClose, NULL);
+    sfEvent event;
     vm_t *vm = init_vm();
 
     sfRenderWindow_setFramerateLimit(window, 30);
@@ -75,6 +78,6 @@ int main (int ac, char **av)
         return 0;
     get_option(ac, av, vm);
     fill_champ(vm);
-    loop(vm, window);
+    loop(vm, window, &event);
     return 0;
 }
