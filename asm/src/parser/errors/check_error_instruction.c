@@ -23,7 +23,7 @@ static instruction_t *check_label(instruction_t *tmp)
 {
     if (!tmp->next)
         return NULL;
-    else if (tmp->next->type == T_LABEL) {
+    if (tmp->next->type == T_LABEL) {
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return NULL;
         if (!tmp->next->next)
