@@ -144,6 +144,7 @@
     /// \brief Structure to handle virtual machine
     ////////////////////////////////////////////////////////////
     struct vm_s {
+        bool pause;
         int nb_cycle;
         int cycle_to_die;
         int nb_champ;

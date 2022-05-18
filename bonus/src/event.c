@@ -11,12 +11,23 @@
 #include "op.h"
 #include "bonus.h"
 
-bool handle_event(sfRenderWindow *window, sfEvent *event)
+int pause_vm(vm_t *vm)
+{
+    if (vm->pause)
+        vm->pause = false;
+    else
+        vm->pause = true;
+    return 0;
+}
+
+bool handle_event(sfRenderWindow *window, sfEvent *event, vm_t *vm)
 {
     while (sfRenderWindow_pollEvent(window, event)) {
         if (event->type == sfEvtClosed) {
             return true;
         }
+        if (event->type == sfEvtKeyPressed && event->key.code == sfKeySpace)
+            pause_vm(vm);
     }
     return false;
 }

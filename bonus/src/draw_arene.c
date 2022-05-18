@@ -11,22 +11,6 @@
 #include "bonus.h"
 #include "op.h"
 
-int draw_text(char *text, sfVector3f pos, sfRenderWindow *window)
-{
-    sfText *score = sfText_create();
-
-    if (!score)
-        return EXIT_FAILURE;
-    sfText_setColor(score, sfBlack);
-    sfText_setString(score, text);
-    sfText_setFont(score, sfFont_createFromFile("zorque.ttf"));
-    sfText_setCharacterSize(score, pos.z);
-    sfText_setPosition(score, (sfVector2f){pos.x, pos.y});
-    sfRenderWindow_drawText(window, score, NULL);
-    sfText_destroy(score);
-    return EXIT_SUCCESS;
-}
-
 static char *process(champion_t *champ)
 {
     int i = 0;
@@ -139,7 +123,6 @@ void draw_arene(vm_t *vm, sfRenderWindow *window)
     }
     draw_pointers(vm, window);
     text(vm, window);
-    sfRenderWindow_display(window);
     sfRectangleShape_destroy(red);
     sfRectangleShape_destroy(grey);
     sfRectangleShape_destroy(blue);
