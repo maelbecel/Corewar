@@ -11,7 +11,7 @@
 #include "op.h"
 #include "bonus.h"
 
-bool handle_event(UNUSED sfRenderWindow *window, sfEvent *event)
+bool handle_event(sfRenderWindow *window, sfEvent *event)
 {
     while (sfRenderWindow_pollEvent(window, event)) {
         if (event->type == sfEvtClosed) {
