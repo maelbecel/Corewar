@@ -53,6 +53,7 @@ dkms.conf
 
 asm/asm
 corewar/corewar
+bonus/corewar
 .vscode
 vgcore*
 doc/

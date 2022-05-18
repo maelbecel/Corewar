@@ -13,5 +13,6 @@
     #include <SFML/Window.h>
 
     void draw_arene(vm_t *vm, sfRenderWindow *window);
+    bool handle_event(sfRenderWindow *window, sfEvent *event);
 
 #endif
