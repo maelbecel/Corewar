@@ -59,7 +59,6 @@ static void test_write(instruction_t *instruction, int index,
 
 unsigned int write_instructions(instruction_t **instructions, FILE *file)
 {
-    int index = 0;
     writer_t write;
 
     write.file = file;

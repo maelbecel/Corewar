@@ -18,15 +18,12 @@ static void check(char **list_label, size_t pos, size_t *count)
     }
 }
 
-bool count_nbr_label(char **list_label)
+size_t count_nbr_label(char **list_label)
 {
     size_t count = 0;
 
     for (size_t pos = 0; list_label[pos] != NULL; pos++) {
-        count = 0;
-        check(list_label, pos, &count);
-        if (count != 1)
-            return true;
+        check(list_label, pos, &count);;
     }
-    return false;
+    return count;
 }

@@ -41,8 +41,9 @@ static char **create_label_list(instruction_t **array)
 static bool find_label_on_list(char **list_label, char *label)
 {
     for (size_t pos = 0; list_label[pos] != NULL; pos++) {
-        if (my_strcmp(label, list_label[pos]) == 0)
+        if (my_strcmp(label, list_label[pos]) == 0) {
             return true;
+        }
     }
     return false;
 }
@@ -51,7 +52,7 @@ static bool check_label(instruction_t *instruction, char **list_label)
 {
     for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
         if (tmp->attribut > D_REG && tmp->prev->type == T_LABEL &&
-            !find_label_on_list(list_label, tmp->str)) {
+            find_label_on_list(list_label, tmp->str) == false) {
             return true;
         }
     }
@@ -70,7 +71,7 @@ bool check_error_label(instruction_t **instructions)
             return true;
         }
     }
-    if (count_nbr_label(list_label) == true) {
+    if (count_nbr_label(list_label) != 1) {
         my_free_2d_array(list_label);
         return true;
     }
