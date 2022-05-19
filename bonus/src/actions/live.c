@@ -26,14 +26,13 @@ void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int parm = get_param(vm, prog->coord, 4);
     va_end(arg);
     move_prog(prog);
 
-    int parm = get_param(vm, prog->coord, 4);
-
-    my_printf("Champion %i is in  live !\n", parm);
+    my_printf("The player %i(%s) is alive\n", parm, getname(champ->name));
     for (int i = 0; vm->champ[i]; i++)
         if (vm->champ[i]->prog_nb == parm)
             vm->champ[i]->live = true;

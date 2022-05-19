@@ -22,17 +22,27 @@ int int_from_byte(vm_t *vm, coord_t coord)
     return res;
 }
 
+char *getname(char *name)
+{
+    char **tab = my_str_to_word_array(name, '/');
+    char *file = my_strdup(tab[my_strarraylen(tab) - 1]);
+    for (int i = 0; tab[i]; free(tab[i]), i++);
+    free(tab);
+    return file;
+}
+
 void live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     va_end(arg);
     move_prog(prog);
 
     int parm = get_param(vm, prog->coord, 4);
 
+    my_printf("The player %i(%s) is alive\n", parm, getname(champ->name));
     for (int i = 0; vm->champ[i]; i++)
         if (vm->champ[i]->prog_nb == parm)
             vm->champ[i]->live = true;

@@ -50,7 +50,7 @@ static char *coverage(vm_t *vm, int nb)
 
 }
 
-static char *getname(char *name)
+char *getname(char *name)
 {
     char **tab = my_str_to_word_array(name, '/');
     char *file = my_strdup(tab[my_strarraylen(tab) - 1]);
