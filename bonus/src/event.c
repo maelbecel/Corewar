@@ -28,6 +28,8 @@ bool handle_event(sfRenderWindow *window, sfEvent *event, vm_t *vm)
         }
         if (event->type == sfEvtKeyPressed && event->key.code == sfKeySpace)
             pause_vm(vm);
+        if (event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
+            return true;
     }
     return false;
 }

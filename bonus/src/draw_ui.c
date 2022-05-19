@@ -136,10 +136,10 @@ button_t *init_button(char *text, char *texture,
     if (!(button->base = init_button_type(text, texture, size)))
         return NULL;
     if (!(button->hoover = init_button_type(text,
-                                            "assets/button1_hoover.png", size)))
+                                            "assets/bt_hover.png", size)))
         return NULL;
     if (!(button->clicked = init_button_type(text,
-                                            "assets/button1_clicked.png", size)))
+                                            "assets/bt_click.png", size)))
         return NULL;
     button->pos.x = pos.x;
     button->pos.y = pos.y;
@@ -152,8 +152,8 @@ button_t **init_buttons(void)
 {
     button_t **buttons = malloc(sizeof(button_t *) * 2);
 
-    // buttons[0] = init_button("pause", "assets/button1.png",
-    //                             (sfVector2f){500, 600}, (sfVector2i){792, 206});
+    // buttons[0] = init_button("pause", "assets/bt.png",
+    //                             (sfVector2f){500, 600}, (sfVector2i){760, 350});
     // buttons[0]->base->scale = (sfVector2f){0.5, 0.4};
     // buttons[0]->hoover->scale = (sfVector2f){0.5, 0.4};
     // buttons[0]->clicked->scale = (sfVector2f){0.5, 0.4};
