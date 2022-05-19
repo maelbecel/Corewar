@@ -145,6 +145,7 @@
     ////////////////////////////////////////////////////////////
     struct vm_s {
         bool pause;
+        int speed;
         int nb_cycle;
         int cycle_to_die;
         int nb_champ;
