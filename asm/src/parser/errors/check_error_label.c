@@ -24,9 +24,11 @@ static unsigned int check(instruction_t **array, char ***list_label,
 
 static char **create_label_list(instruction_t **array)
 {
+    static int zzz = 0;
     size_t pos_list = 0;
     char **list_label = malloc(sizeof(char *) * 2);
 
+    zzz++;
     if (!list_label)
         return NULL;
     list_label[0] = NULL;
@@ -68,10 +70,11 @@ bool check_error_label(instruction_t **instructions)
     for (size_t pos = 0; instructions[pos] != NULL; pos++) {
         if (check_label(instructions[pos], list_label) == true) {
             my_free_2d_array(list_label);
+            printf("oui\n");
             return true;
         }
     }
-    if (count_nbr_label(list_label) != 1) {
+    if (count_nbr_label(list_label) == true) {
         my_free_2d_array(list_label);
         return true;
     }

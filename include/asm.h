@@ -218,7 +218,7 @@ instruction_t *parse_instruction(char *av);
 void clean_instruction(instruction_t *instruction);
 bool check_instruction(instruction_t *line);
 bool check_error_label(instruction_t **instructions);
-size_t count_nbr_label(char **list_label);
+bool count_nbr_label(char **list_label);
 char *my_charcat(char *str, char c);
 void get_champion_size(header_t *header, instruction_t **instructions);
 int get_instruction_size(instruction_t *instruction, bool is_short);
