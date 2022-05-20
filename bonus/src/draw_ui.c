@@ -18,7 +18,7 @@ int draw_text(char *text, sfVector3f pos, sfRenderWindow *window)
 
     if (!score)
         return EXIT_FAILURE;
-    sfText_setColor(score, sfBlack);
+    sfText_setColor(score, sfWhite);
     sfText_setString(score, text);
     sfText_setFont(score, font);
     sfText_setCharacterSize(score, pos.z);

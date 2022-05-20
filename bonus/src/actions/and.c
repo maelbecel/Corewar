@@ -82,13 +82,17 @@ void and(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
-    UNUSED champion_t *champ = va_arg(arg, champion_t *);
+    champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int j = va_arg(arg, int);
     va_end(arg);
     move_prog(prog);
     int i = get_param(vm, prog->coord, 1);
 
     for (int x = 0; and_tab[x].code != 0; x++)
-        if (and_tab[x].code == i)
+        if (and_tab[x].code == i) {
             and_tab[x].action(prog, vm);
+            return;
+        }
+    del_prog(champ, j);
 }

@@ -61,9 +61,9 @@ bool loop(vm_t *vm, sfRenderWindow *window, sfEvent *event)
             for (int i = 0; i < vm->nb_champ; i++) {
                 actions(vm, vm->champ[i]);
             }
-            draw_arene(vm, window);
             vm->nb_cycle++;
         }
+        draw_arene(vm, window);
         if (handle_event(window, event, vm))
             return true;
         draw_ui(vm, window, event);

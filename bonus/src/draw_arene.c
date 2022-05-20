@@ -111,7 +111,13 @@ void draw_arene(vm_t *vm, sfRenderWindow *window)
     sfRectangleShape *red = sfRectangleShape_create();
     sfRectangleShape *grey = sfRectangleShape_create();
     sfRectangleShape *blue = sfRectangleShape_create();
+    sfSprite *bg = sfSprite_create();
+    sfTexture *texture = sfTexture_createFromFile("assets/background.png", NULL);
+    sfSprite *pause = sfSprite_create();
+    sfTexture *text_pause = sfTexture_createFromFile("assets/pause.png", NULL);
+    sfSprite_setTexture(pause, text_pause, sfTrue);
     int adress = 0;
+    sfSprite_setTexture(bg, texture, sfTrue);
     sfRectangleShape_setFillColor(red, sfRed);
     sfRectangleShape_setFillColor(grey, sfBlack);
     sfRectangleShape_setFillColor(blue, sfBlue);
@@ -120,6 +126,7 @@ void draw_arene(vm_t *vm, sfRenderWindow *window)
     sfRectangleShape_setSize(blue, (sfVector2f){10, 10});
 
     sfRenderWindow_clear(window, sfWhite);
+    sfRenderWindow_drawSprite(window, bg, NULL);
     for (int i = 0; i < NB_LINE; i++) {
         for (int j = 0; j < IDX_MOD; j++) {
             adress = (j + i * 512);
@@ -137,6 +144,14 @@ void draw_arene(vm_t *vm, sfRenderWindow *window)
     }
     draw_pointers(vm, window);
     text(vm, window);
+    sfSprite_setScale(pause, (sfVector2f){0.4, 0.4});
+    sfSprite_setPosition(pause, (sfVector2f){570, 170});
+    if (vm->pause)
+        sfRenderWindow_drawSprite(window, pause, NULL);
+    sfSprite_destroy(bg);
+    sfTexture_destroy(texture);
+    sfSprite_destroy(pause);
+    sfTexture_destroy(text_pause);
     sfRectangleShape_destroy(red);
     sfRectangleShape_destroy(grey);
     sfRectangleShape_destroy(blue);

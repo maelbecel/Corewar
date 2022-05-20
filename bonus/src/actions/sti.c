@@ -120,13 +120,13 @@ void sti(vm_t *vm, ...)
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int j = va_arg(arg, int);
     va_end(arg);
     move_prog(prog);
     int i = 0;
 
     for (; vm->champ[i]->prog_nb != champ->prog_nb; i++);
     i++;
-    my_printf("DRAW with sti\n");
     switch (get_param(vm, prog->coord, 1)) {
         case STI_RR: sti_rr(vm, prog, i);
             break;
@@ -136,6 +136,8 @@ void sti(vm_t *vm, ...)
             break;
         case STI_NR: sti_nr(vm, prog, i);
             break;
-        default: error("sti: unknown instruction\n");
+        default: my_printf("sti: unknown instruction (%i)\n",
+                                                get_param(vm, prog->coord, 1));
+            del_prog(champ, j);
     }
 }
