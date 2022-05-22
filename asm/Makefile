@@ -47,8 +47,8 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		  \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
 				$(SRC_DIR)$(PARSER_DIR)get_champion_size.c					  \
-				$(SRC_DIR)$(PARSER_DIR)my_charcat.c 										  \
-				$(SRC_DIR)$(PARSER_DIR)char_list_in_str.c 								  \
+				$(SRC_DIR)$(PARSER_DIR)my_charcat.c 						  \
+				$(SRC_DIR)$(PARSER_DIR)char_list_in_str.c 					  \
 
 SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c \
 				$(SRC_DIR)$(WRITER_DIR)write_header.c \

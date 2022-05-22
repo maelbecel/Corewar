@@ -21,7 +21,8 @@ char *getname(char *name)
 bool check_win(int nb_live, vm_t *vm, champion_t *tmp)
 {
     if (nb_live == 1) {
-        my_printf("The player %i(%s) has won\n", tmp->prog_nb, getname(tmp->name));
+        my_printf("The player %i(%s) has won\n", tmp->prog_nb,
+                                                        getname(tmp->name));
         return true;
     } else if (nb_live == 0) {
         my_printf("Draw\n");

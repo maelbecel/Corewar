@@ -78,7 +78,7 @@ void and_nr(prog_t *prog, vm_t *vm)
 
 }
 
-void and(vm_t *vm, ...)
+void do_and(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

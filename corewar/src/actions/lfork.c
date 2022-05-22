@@ -29,7 +29,7 @@ int long_reset_prog(champion_t *champ, coord_t co, int adress, vm_t *vm)
     return 11;
 }
 
-void lfork(UNUSED vm_t *vm, ...)
+void do_lfork(UNUSED vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

@@ -22,7 +22,7 @@ int int_from_byte(vm_t *vm, coord_t coord)
     return res;
 }
 
-void live(vm_t *vm, ...)
+void do_live(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

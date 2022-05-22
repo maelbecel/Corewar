@@ -114,7 +114,7 @@ void sti_rn(vm_t *vm, prog_t *prog, int c)
     vm->color[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = c;
 }
 
-void sti(vm_t *vm, ...)
+void do_sti(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

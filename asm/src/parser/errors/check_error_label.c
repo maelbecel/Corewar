@@ -70,7 +70,6 @@ bool check_error_label(instruction_t **instructions)
     for (size_t pos = 0; instructions[pos] != NULL; pos++) {
         if (check_label(instructions[pos], list_label) == true) {
             my_free_2d_array(list_label);
-            printf("oui\n");
             return true;
         }
     }

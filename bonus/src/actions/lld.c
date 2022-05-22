@@ -32,7 +32,7 @@ static int long_value(vm_t *vm, prog_t *prog)
     return value;
 }
 
-void lld(vm_t *vm, ...)
+void do_lld(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
