@@ -39,6 +39,6 @@ instruction_t *init_instruction(char *argv)
     char str[2] = {0};
 
     str[0] = argv[0];
-    start = create_instruction(str, T_OTHER, D_NORMAL);
+    start = create_instruction(str, T_OTHER, A_NORMAL);
     return start;
 }

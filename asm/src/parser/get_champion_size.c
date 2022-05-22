@@ -22,13 +22,13 @@ const char *cmd[] = {
 
 int get_params_size(ATTRIBUT attribut, bool index_params)
 {
-    if (attribut == D_REG)
+    if (attribut == A_REG)
         return 1;
-    if ((attribut == D_DIR || attribut == D_IND) && index_params)
+    if ((attribut == A_DIR || attribut == A_IND) && index_params)
         return 2;
-    if (attribut == D_DIR)
+    if (attribut == A_DIR)
         return DIR_SIZE;
-    if (attribut == D_IND)
+    if (attribut == A_IND)
         return IND_SIZE;
     return 0;
 }
@@ -42,7 +42,7 @@ bool is_index_type(char *str)
     return false;
 }
 
-static int compute_size(instruction_t *tmp)
+static int convert_size_to_int(instruction_t *tmp)
 {
     int size = 1;
     int index = 0;
@@ -54,7 +54,7 @@ static int compute_size(instruction_t *tmp)
         size++;
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
-        if (tmp->attribut >= D_REG) {
+        if (tmp->attribut >= A_REG) {
             result = get_params_size(tmp->attribut, index_params);
             size += result;
         }
@@ -75,9 +75,9 @@ int get_instruction_size(instruction_t *instruction, bool is_short)
             tmp = tmp->next->next;
     }
     if (!is_short)
-        return compute_size(tmp);
+        return convert_size_to_int(tmp);
     else
-        return compute_size_short(tmp);
+        return convert_size_to_short(tmp);
 }
 
 void get_champion_size(header_t *header, instruction_t **instructions)

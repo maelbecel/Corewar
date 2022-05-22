@@ -15,7 +15,7 @@ static void write_indirect(int index, instruction_t *instruction,
     unsigned short count = 0;
 
     if (instruction->prev->type == T_LABEL)
-        count = get_size_label_short(instruction->str, instructions, index);
+        count = get_label_adress_short(instruction->str, instructions, index);
     else
         count = my_getnbr(instruction->str);
     count = htobe16(count);
@@ -31,7 +31,7 @@ static void write_direct(int index, instruction_t *instruction,
     if (is_index_type(op_tab[write.mnemonique].mnemonique) == true)
         return write_indirect(index, instruction, write.file, instructions);
     if (instruction->prev->type == T_LABEL)
-        count = get_size_label(instruction->str, instructions, index);
+        count = get_label_adress(instruction->str, instructions, index);
     else
         count = my_getnbr(instruction->str);
     count = htobe32(count);
@@ -39,19 +39,19 @@ static void write_direct(int index, instruction_t *instruction,
     return;
 }
 
-static void test_write(instruction_t *instruction, int index,
+static void write_args(instruction_t *instruction, int index,
                     instruction_t **instructions, writer_t write)
 {
     unsigned char count = 0;
 
     while (instruction) {
-        if (instruction->attribut == D_REG) {
+        if (instruction->attribut == A_REG) {
             count = my_getnbr(instruction->str);
             fwrite(&count, 1, sizeof(char), write.file);
         }
-        if (instruction->attribut == D_IND)
+        if (instruction->attribut == A_IND)
             write_indirect(index, instruction, write.file, instructions);
-        if (instruction->attribut == D_DIR)
+        if (instruction->attribut == A_DIR)
             write_direct(index, instruction, write, instructions);
         instruction = instruction->next;
     }
@@ -66,7 +66,7 @@ unsigned int write_instructions(instruction_t **instructions, FILE *file)
 
     for (size_t i = 0; instructions[i]; i++) {
         write.mnemonique = write_instruction(instructions[i], file);
-        test_write(instructions[i], i, instructions, write);
+        write_args(instructions[i], i, instructions, write);
     }
     return 0;
 }

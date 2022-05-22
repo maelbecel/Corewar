@@ -14,7 +14,7 @@ static int error_register(instruction_t *instruction)
 {
     int nbr_reg = 0;
 
-    instruction->attribut = D_REG;
+    instruction->attribut = A_REG;
     nbr_reg = my_getnbr(instruction->str + 1);
     if (nbr_reg < 1 || nbr_reg > REG_NUMBER)
         return EXIT_ERROR;
@@ -31,11 +31,11 @@ static int error_direct(instruction_t *instruction)
         tmp = tmp->next;
         if (!tmp || tmp->type != T_OTHER)
             return EXIT_ERROR;
-        tmp->attribut = D_DIR;
+        tmp->attribut = A_DIR;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return EXIT_ERROR;
     } else {
-        tmp->attribut = D_DIR;
+        tmp->attribut = A_DIR;
         if (tmp->type != T_OTHER ||
                         char_list_in_str(tmp->str, "0123456789-") == false)
             return EXIT_ERROR;
@@ -51,13 +51,13 @@ static int error_indirect(instruction_t *instruction)
         tmp = tmp->next;
         if (!tmp || tmp->type != T_OTHER)
             return EXIT_ERROR;
-        tmp->attribut = D_IND;
+        tmp->attribut = A_IND;
         if (char_list_in_str(tmp->str, LABEL_CHARS) == false)
             return EXIT_ERROR;
     } else {
         if (char_list_in_str(instruction->str, "0123456789-") == false)
             return EXIT_ERROR;
-        tmp->attribut = D_IND;
+        tmp->attribut = A_IND;
     }
     return EXIT_SUCCESS;
 }
@@ -86,7 +86,7 @@ int error_params(instruction_t *instruction)
 
     if (error_one_params(tmp) == EXIT_ERROR)
         return EXIT_ERROR;
-    while (tmp->attribut < D_REG)
+    while (tmp->attribut < A_REG)
         tmp = tmp->next;
     if (tmp->next != NULL) {
         if (tmp->next->type == T_SEPARATOR && tmp->next->next != NULL)

@@ -53,7 +53,7 @@ static bool find_label_on_list(char **list_label, char *label)
 static bool check_label(instruction_t *instruction, char **list_label)
 {
     for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
-        if (tmp->attribut > D_REG && tmp->prev->type == T_LABEL &&
+        if (tmp->attribut > A_REG && tmp->prev->type == T_LABEL &&
             find_label_on_list(list_label, tmp->str) == false) {
             return true;
         }

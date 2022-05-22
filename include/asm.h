@@ -74,12 +74,12 @@
     /// \brief Enumerates attribut of type of asm.
     ////////////////////////////////////////////////////////////
     enum attribut {
-        D_NORMAL,
-        D_GET,
-        D_SEPARATOR,
-        D_REG,
-        D_DIR,
-        D_IND,
+        A_NORMAL,
+        A_GET,
+        A_SEPARATOR,
+        A_REG,
+        A_DIR,
+        A_IND,
     };
 
     ////////////////////////////////////////////////////////////
@@ -222,12 +222,12 @@ bool count_nbr_label(char **list_label);
 char *my_charcat(char *str, char c);
 void get_champion_size(header_t *header, instruction_t **instructions);
 int get_instruction_size(instruction_t *instruction, bool is_short);
-short compute_size_short(instruction_t *tmp);
+short convert_size_to_short(instruction_t *tmp);
 bool is_index_type(char *str);
 int get_params_size(ATTRIBUT attribut, bool index_params);
-unsigned int get_size_label(char *label, instruction_t **instructions,
+unsigned int get_label_adress(char *label, instruction_t **instructions,
                                                                     int index);
-unsigned short get_size_label_short(char *label,
+unsigned short get_label_adress_short(char *label,
                                     instruction_t **instructions, int index);
     ////////////////////////////////////////////////////////////
     /// \brief Realloc the instruction array

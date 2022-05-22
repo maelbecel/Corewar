@@ -10,7 +10,7 @@
 #include "asm.h"
 #include "op.h"
 
-short compute_size_short(instruction_t *tmp)
+short convert_size_to_short(instruction_t *tmp)
 {
     short size = 1;
     int index = 0;
@@ -22,7 +22,7 @@ short compute_size_short(instruction_t *tmp)
         size++;
     index_params = is_index_type(tmp->str);
     while (tmp != NULL) {
-        if (tmp->attribut >= D_REG) {
+        if (tmp->attribut >= A_REG) {
             result = get_params_size(tmp->attribut, index_params);
             size += result;
         }
@@ -31,7 +31,7 @@ short compute_size_short(instruction_t *tmp)
     return size;
 }
 
-unsigned short get_size_label_short(char *label,
+unsigned short get_label_adress_short(char *label,
                                     instruction_t **instructions, int index)
 {
     unsigned short adress = 0;
@@ -54,7 +54,7 @@ unsigned short get_size_label_short(char *label,
     return 0;
 }
 
-unsigned int get_size_label(char *label, instruction_t **instructions,
+unsigned int get_label_adress(char *label, instruction_t **instructions,
                                                                     int index)
 {
     unsigned int adress = 0;

@@ -12,11 +12,11 @@
 
 const separator_t separator[] =
 {
-    {SEPARATOR_CHAR, D_SEPARATOR, T_SEPARATOR},
-    {DIRECT_CHAR, D_GET, T_DIR},
-    {LABEL_CHAR, D_GET, T_LABEL},
-    {TAB, D_NORMAL, T_SPACE},
-    {SPACE, D_NORMAL, T_SPACE},
+    {SEPARATOR_CHAR, A_SEPARATOR, T_SEPARATOR},
+    {DIRECT_CHAR, A_GET, T_DIR},
+    {LABEL_CHAR, A_GET, T_LABEL},
+    {TAB, A_NORMAL, T_SPACE},
+    {SPACE, A_NORMAL, T_SPACE},
     {0, T_OTHER, T_OTHER},
 };
 
@@ -54,8 +54,8 @@ static int add_special_token(int index, instruction_t *start,
     return EXIT_SUCCESS;
 }
 
-static int parsing(instruction_t *start,  instruction_t *last, char *argv,
-                                                                    size_t i)
+static int get_instruction(instruction_t *start,  instruction_t *last,
+                                                        char *argv, size_t i)
 {
     int separator_type = 0;
 
@@ -79,7 +79,7 @@ instruction_t *parse_instruction(char *argv)
         return NULL;
     for (size_t i = 1; argv[i] != '\0'; i++) {
         last = go_to_last(start);
-        if (parsing(start, last, argv, i) == EXIT_ERROR)
+        if (get_instruction(start, last, argv, i) == EXIT_ERROR)
             return NULL;
     }
     return start;

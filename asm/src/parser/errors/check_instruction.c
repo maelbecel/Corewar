@@ -12,18 +12,18 @@
 
 static int get_type(ATTRIBUT attribut)
 {
-    if (attribut == D_REG)
+    if (attribut == A_REG)
         return T_REG;
-    if (attribut == D_DIR)
+    if (attribut == A_DIR)
         return T_DIR;
-    if (attribut == D_IND)
+    if (attribut == A_IND)
         return T_IND;
     return 0;
 }
 
 static int check_type(instruction_t *move, op_t op, size_t *arg)
 {
-    if (move->attribut > D_SEPARATOR) {
+    if (move->attribut > A_SEPARATOR) {
         if ((get_type(move->attribut) & op.attribut[(*arg)]) == 0)
             return EXIT_ERROR;
         (*arg)++;
@@ -50,7 +50,7 @@ static char get_argc(instruction_t *instruction)
     instruction_t *move = instruction;
 
     for (size_t i = 0; move; i++) {
-        if (move->attribut >= D_REG)
+        if (move->attribut >= A_REG)
             nb++;
         move = move->next;
     }
