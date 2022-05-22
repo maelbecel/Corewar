@@ -40,9 +40,9 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)get_instructions.c		  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)pop_next.c			 	  \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)clean_instruction.c	  \
 				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)error_params.c			  \
-				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_instruction.c\
-				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_instruction.c	  \
-				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_label.c	  \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_instruction.c \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_instruction.c	      \
+				$(SRC_DIR)$(PARSER_DIR)$(ERRORS_DIR)check_error_label.c	      \
 				$(SRC_DIR)$(PARSER_DIR)$(INSTRUC_DIR)count_nbr_label.c		  \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
@@ -50,13 +50,13 @@ SRC		   +=	$(SRC_DIR)$(PARSER_DIR)parse_instruction.c					  \
 				$(SRC_DIR)$(PARSER_DIR)my_charcat.c 						  \
 				$(SRC_DIR)$(PARSER_DIR)char_list_in_str.c 					  \
 
-SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c \
-				$(SRC_DIR)$(WRITER_DIR)write_header.c \
-				$(SRC_DIR)$(WRITER_DIR)concatener.c \
-				$(SRC_DIR)$(WRITER_DIR)get_size_label.c \
-				$(SRC_DIR)$(WRITER_DIR)write_instruction.c \
-				$(SRC_DIR)$(WRITER_DIR)write_instructions.c \
-				$(SRC_DIR)$(WRITER_DIR)write_codebytes.c \
+SRC +=			$(SRC_DIR)$(WRITER_DIR)write_code.c 						  \
+				$(SRC_DIR)$(WRITER_DIR)write_header.c 						  \
+				$(SRC_DIR)$(WRITER_DIR)concatener.c 						  \
+				$(SRC_DIR)$(WRITER_DIR)get_size_label.c 					  \
+				$(SRC_DIR)$(WRITER_DIR)write_instruction.c 					  \
+				$(SRC_DIR)$(WRITER_DIR)write_instructions.c 				  \
+				$(SRC_DIR)$(WRITER_DIR)write_codebytes.c 					  \
 
 SRC_COUNT    	=         	$(words $(SRC))
 
