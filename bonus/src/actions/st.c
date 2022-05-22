@@ -38,7 +38,7 @@ static void adresse(int reg, vm_t *vm, prog_t *prog, int c)
     my_printf("DRAW with st\n");
 }
 
-void st(vm_t *vm, ...)
+void do_st(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

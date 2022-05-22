@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void zjmp(UNUSED vm_t *vm, ...)
+void do_zjmp(UNUSED vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

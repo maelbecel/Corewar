@@ -14,6 +14,7 @@ static int short_value(vm_t *vm, prog_t *prog)
     int value = 0;
 
     value = get_param(vm, prog->coord, 2);
+    prog->carry = 1;
     move_prog(prog), move_prog(prog);
     return value;
 }
@@ -28,11 +29,12 @@ static int long_value(vm_t *vm, prog_t *prog)
     coord.x = adress % IDX_MOD;
     coord.y = adress / IDX_MOD;
     value = get_param(vm, coord, 1);
+    prog->carry = 1;
     move_prog(prog), move_prog(prog), move_prog(prog), move_prog(prog);
     return value;
 }
 
-void lld(vm_t *vm, ...)
+void do_lld(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
@@ -52,7 +54,6 @@ void lld(vm_t *vm, ...)
     reg = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg] = value;
-    prog->carry = 1;
     if (value == -1)
         del_prog(champ, i);
 }

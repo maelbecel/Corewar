@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void sti_rr(vm_t *vm, prog_t *prog, int c)
+void sti_rr(vm_t *vm, prog_t *prog, UNUSED int c)
 {
     int res;
     int nb;
@@ -29,13 +29,9 @@ void sti_rr(vm_t *vm, prog_t *prog, int c)
     vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
     vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
     vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
-    vm->color[adress / IDX_MOD][adress % IDX_MOD] = c;
-    vm->color[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = c;
-    vm->color[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = c;
-    vm->color[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = c;
 }
 
-void sti_nn(vm_t *vm, prog_t *prog, int c)
+void sti_nn(vm_t *vm, prog_t *prog, UNUSED int c)
 {
     int res;
     int nb;
@@ -55,13 +51,9 @@ void sti_nn(vm_t *vm, prog_t *prog, int c)
     vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
     vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
     vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
-    vm->color[adress / IDX_MOD][adress % IDX_MOD] = c;
-    vm->color[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = c;
-    vm->color[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = c;
-    vm->color[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = c;
 }
 
-void sti_nr(vm_t *vm, prog_t *prog, int c)
+void sti_nr(vm_t *vm, prog_t *prog, UNUSED int c)
 {
     int res;
     int nb;
@@ -81,13 +73,9 @@ void sti_nr(vm_t *vm, prog_t *prog, int c)
     vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
     vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
     vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
-    vm->color[adress / IDX_MOD][adress % IDX_MOD] = c;
-    vm->color[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = c;
-    vm->color[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = c;
-    vm->color[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = c;
 }
 
-void sti_rn(vm_t *vm, prog_t *prog, int c)
+void sti_rn(vm_t *vm, prog_t *prog, UNUSED int c)
 {
     int res;
     int nb;
@@ -108,36 +96,28 @@ void sti_rn(vm_t *vm, prog_t *prog, int c)
     vm->arene[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = res >> 8;
     vm->arene[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = res >> 16;
     vm->arene[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = res >> 24;
-    vm->color[adress / IDX_MOD][adress % IDX_MOD] = c;
-    vm->color[(adress + 1) / IDX_MOD][(adress + 1) % IDX_MOD] = c;
-    vm->color[(adress + 2) / IDX_MOD][(adress + 2) % IDX_MOD] = c;
-    vm->color[(adress + 3) / IDX_MOD][(adress + 3) % IDX_MOD] = c;
 }
 
-void sti(vm_t *vm, ...)
+void do_sti(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
     int j = va_arg(arg, int);
-    va_end(arg);
-    move_prog(prog);
+    va_end(arg), move_prog(prog);
     int i = 0;
 
     for (; vm->champ[i]->prog_nb != champ->prog_nb; i++);
-    i++;
     switch (get_param(vm, prog->coord, 1)) {
-        case STI_RR: sti_rr(vm, prog, i);
+        case STI_RR: sti_rr(vm, prog, i + 1);
             break;
-        case STI_NN: sti_nn(vm, prog, i);
+        case STI_NN: sti_nn(vm, prog, i + 1);
             break;
-        case STI_RN: sti_rn(vm, prog, i);
+        case STI_RN: sti_rn(vm, prog, i + 1);
             break;
-        case STI_NR: sti_nr(vm, prog, i);
+        case STI_NR: sti_nr(vm, prog, i + 1);
             break;
-        default: my_printf("sti: unknown instruction (%i)\n",
-                                                get_param(vm, prog->coord, 1));
-            del_prog(champ, j);
+        default: del_prog(champ, j);
     }
 }

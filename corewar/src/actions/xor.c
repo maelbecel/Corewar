@@ -74,7 +74,7 @@ void xor_rn(prog_t *prog, vm_t *vm)
     prog->carry = (prog->reg[reg2] == 0) ? 1 : 0;
 }
 
-void xor(vm_t *vm, ...)
+void do_xor(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

@@ -30,7 +30,7 @@ int reset_prog(champion_t *champ, coord_t co, int adress, vm_t *vm)
     return 1;
 }
 
-void a_fork(vm_t *vm, ...)
+void do_fork(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);

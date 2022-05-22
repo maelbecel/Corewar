@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-void ldi(vm_t *vm, ...)
+void do_ldi(vm_t *vm, ...)
 {
     va_list arg;
     va_start(arg, vm);
