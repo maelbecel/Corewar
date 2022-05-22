@@ -22,6 +22,7 @@ SRC         = 	$(SRC_DIR)main.c 											  \
 				$(SRC_DIR)op.c 												  \
 				$(SRC_DIR)help.c 											  \
 				$(SRC_DIR)assembler.c 										  \
+				$(SRC_DIR)my_calloc.c									      \
 
 SRC		   +=	$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_header.c 				  \
 				$(SRC_DIR)$(PARSER_DIR)$(HEADER)get_clean_line.c 			  \

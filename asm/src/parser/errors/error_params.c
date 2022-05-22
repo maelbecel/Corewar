@@ -67,7 +67,9 @@ static int error_one_params(instruction_t *tmp)
     if (tmp->str[0] == 'r') {
         if (error_register(tmp) == EXIT_ERROR)
             return EXIT_ERROR;
-    } else if (tmp->type == T_DIR) {
+        return EXIT_SUCCESS;
+    }
+    if (tmp->type == T_DIR) {
         if (error_direct(tmp->next) == EXIT_ERROR)
             return EXIT_ERROR;
     } else {

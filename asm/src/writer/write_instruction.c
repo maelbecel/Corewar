@@ -8,7 +8,7 @@
 #include "writer.h"
 
 static void write_codebyte_parameters(instruction_t *instruction, int index,
-FILE *file)
+                                                                FILE *file)
 {
     if (op_tab[index].code == 16 || op_tab[index].nbr_args != 1)
         write_codebytes(instruction, file);

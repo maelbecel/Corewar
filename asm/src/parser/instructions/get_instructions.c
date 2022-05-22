@@ -11,7 +11,7 @@
 #include "op.h"
 
 static instruction_t **interprate_file(instruction_t **instruction_line,
-    FILE *source_file, char *line)
+                                            FILE *source_file, char *line)
 {
     size_t array = 2;
 
@@ -43,9 +43,8 @@ instruction_t **get_instructions(FILE *source_file, char *line)
         return NULL;
     instruction_line[0] = NULL;
     instruction_line[1] = NULL;
-    if (!(instruction_line =
-                interprate_file(instruction_line, source_file, line)) ||
-                                        check_error_label(instruction_line)) {
+    instruction_line = interprate_file(instruction_line, source_file, line);
+    if (!instruction_line || check_error_label(instruction_line) == true) {
         free_instructions(instruction_line);
         return NULL;
     }

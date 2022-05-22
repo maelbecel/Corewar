@@ -25,7 +25,8 @@ int assembler(char *file_name)
         return EXIT_ERROR;
     if (!line)
         line = get_clean_line(file);
-    instructions = get_instructions(file, line);
+    if (!(instructions = get_instructions(file, line)))
+        return EXIT_ERROR;
     get_champion_size(header, instructions);
     fclose(file);
     write_code(header, instructions, file_name);

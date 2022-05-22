@@ -24,7 +24,7 @@ bool count_nbr_label(char **list_label)
 
     for (size_t pos = 0; list_label[pos] != NULL; pos++) {
         count = 0;
-        check(list_label, pos, &count);
+        check(list_label, pos, &count);;
         if (count != 1)
             return true;
     }

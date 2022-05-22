@@ -1,20 +1,17 @@
 /*
-** op.c for  korewar
-**
-** Made by Astek
-** Login   <astek@epitech.net>
-**
-** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Tue Mar 22 16:44:20 2011 Astek
+** EPITECH PROJECT, 2022
+** corewar.c
+** File description:
+** corewar
 */
 
 #include "op.h"
-#include <stddef.h>
+#include "corewar.h"
 
 const op_t op_tab[] =
-  {
+{
     {"live", 1, {T_DIR}, 1, 10, "alive", NULL},
-    {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", NULL},
+    {"ld", 2, {(T_DIR | T_IND), T_REG}, 2, 5, "load", NULL},
     {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", NULL},
     {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", NULL},
     {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", NULL},
@@ -23,7 +20,7 @@ const op_t op_tab[] =
     {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
         "ou  (or   r1, r2, r3   r1 | r2 -> r3", NULL},
     {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
-        "ou (xor  r1, r2, r3   r1^r2 -> r3", NULL},
+        "ou (xor  r1, r2, r3   r1 ^ r2 -> r3", NULL},
     {"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", NULL},
     {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
         "load index", NULL},
@@ -36,4 +33,4 @@ const op_t op_tab[] =
     {"lfork", 1, {T_DIR}, 15, 1000, "long fork", NULL},
     {"aff", 1, {T_REG}, 16, 2, "aff", NULL},
     {0, 0, {0}, 0, 0, 0, NULL}
-  };
+};
