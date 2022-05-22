@@ -38,17 +38,21 @@ void ld(vm_t *vm, ...)
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int i = va_arg(arg, int);
     va_end(arg);
     int is_long = 0;
     int reg = 0;
-    int value = 0;
+    int value = -1;
 
     move_prog(prog);
     is_long = get_param(vm, prog->coord, 1);
     move_prog(prog);
-    value = (is_long == 0x90) ? long_value(vm, prog) : short_value(vm, prog);
+    value = (is_long == 0x90) ? long_value(vm, prog) : value;
+    value = (is_long == 0x90) ? short_value(vm, prog) : value;
     reg = get_param(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg] = value % IDX_MOD;
     prog->carry = 1;
+    if (value == -1)
+        del_prog(champ, i);
 }

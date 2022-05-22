@@ -22,15 +22,6 @@ int int_from_byte(vm_t *vm, coord_t coord)
     return res;
 }
 
-char *getname(char *name)
-{
-    char **tab = my_str_to_word_array(name, '/');
-    char *file = my_strdup(tab[my_strarraylen(tab) - 1]);
-    for (int i = 0; tab[i]; free(tab[i]), i++);
-    free(tab);
-    return file;
-}
-
 void live(vm_t *vm, ...)
 {
     va_list arg;

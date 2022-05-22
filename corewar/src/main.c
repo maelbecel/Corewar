@@ -36,6 +36,9 @@ vm_t *init_vm(void)
     vm->nb_cycle = 0;
     vm->cycle_to_die = CYCLE_TO_DIE;
     vm->arene = init_arene();
+    vm->color = init_arene();
+    vm->pause = false;
+    vm->speed = 10;
     return vm;
 }
 

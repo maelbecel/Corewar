@@ -9,7 +9,7 @@
 #include "printf.h"
 #include "corewar.h"
 
-int long_reset_prog(champion_t *champ, coord_t co, int adress)
+int long_reset_prog(champion_t *champ, coord_t co, int adress, vm_t *vm)
 {
     int size = 0;
     int i = 0;
@@ -20,11 +20,13 @@ int long_reset_prog(champion_t *champ, coord_t co, int adress)
     new[i] = init_prog(1, champ->prog_nb);
     new[i]->coord = (coord_t){co.x, co.y};
     new[i + 1] = NULL;
+    if (vm->arene[co.y][co.x] > 0x0f)
+        return 0;
     for (int x = 0; x < (adress - 1) % MEM_SIZE; x++)
         move_prog(new[i]);
     free(champ->prog);
     champ->prog = new;
-    return i;
+    return 11;
 }
 
 void lfork(UNUSED vm_t *vm, ...)
@@ -33,10 +35,12 @@ void lfork(UNUSED vm_t *vm, ...)
     va_start(arg, vm);
     champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int i = va_arg(arg, int);
     va_end(arg);
     move_prog(prog);
     int adress = (get_param(vm, prog->coord, 2));
-    long_reset_prog(champ, prog->coord, adress);
-    for (int i = 0; i < 2; i++)
-        move_prog(prog);
+    if (!long_reset_prog(champ, prog->coord, adress, vm))
+        del_prog(champ, i);
+    else
+        move_prog(prog), move_prog(prog);
 }

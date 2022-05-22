@@ -15,6 +15,7 @@ void ldi(vm_t *vm, ...)
     va_start(arg, vm);
     UNUSED champion_t *champ = va_arg(arg, champion_t *);
     prog_t *prog = va_arg(arg, prog_t *);
+    int i = va_arg(arg, int);
     va_end(arg);
     move_prog(prog);
 
@@ -29,6 +30,8 @@ void ldi(vm_t *vm, ...)
             break;
         case LDI_RN: ldi_rn(vm, prog);
             break;
+        default: del_prog(champ, i);
+            return;
     }
     prog->carry = 1;
 }

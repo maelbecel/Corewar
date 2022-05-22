@@ -28,8 +28,8 @@ bool get_action(vm_t *vm, int j, champion_t *champ, int i)
         champ->prog[i]->goal_cycle = op_tab[j].nbr_cycles;
         champ->prog[i]->current_cycle += 1;
         if (champ->prog[i]->goal_cycle == champ->prog[i]->current_cycle) {
-            op_tab[j].func(vm, champ, champ->prog[i]);
             champ->prog[i]->current_cycle = 0;
+            op_tab[j].func(vm, champ, champ->prog[i], i);
         }
         return true;
     }
