@@ -82,7 +82,11 @@ int get_instruction_size(instruction_t *instruction, bool is_short)
 
 void get_champion_size(header_t *header, instruction_t **instructions)
 {
-    for (size_t pos = 0; instructions[pos] != NULL; pos++)
+    for (size_t pos = 0; instructions[pos] != NULL; pos++) {
         header->prog_size += get_instruction_size(instructions[pos], false);
+        // printf("prog_size: %d\n", header->prog_size);
+        // printf("instruction_size: %d\n", get_instruction_size(instructions[pos], false));
+        // printf("instruction: %s\n", instructions[pos]->str);
+    }
     header->prog_size = htobe32(header->prog_size);
 }

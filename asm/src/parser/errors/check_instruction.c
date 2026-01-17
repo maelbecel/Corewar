@@ -24,8 +24,9 @@ static int get_type(ATTRIBUT attribut)
 static int check_type(instruction_t *move, op_t op, size_t *arg)
 {
     if (move->attribut > A_SEPARATOR) {
-        if ((get_type(move->attribut) & op.attribut[(*arg)]) == 0)
+        if ((get_type(move->attribut) & op.attribut[(*arg)]) == 0) {
             return EXIT_ERROR;
+        }
         (*arg)++;
     }
     return EXIT_SUCCESS;

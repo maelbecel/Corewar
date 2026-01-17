@@ -60,8 +60,7 @@ unsigned int get_label_adress(char *label, instruction_t **instructions,
     unsigned int adress = 0;
 
     for (size_t pos = index; instructions[pos] != NULL; pos++) {
-        if (instructions[pos]->next->type == T_LABEL &&
-                                my_strcmp(instructions[pos]->str, label) == 0)
+        if (instructions[pos]->next->type == T_LABEL && my_strcmp(instructions[pos]->str, label) == 0)
             return adress;
         adress += get_instruction_size(instructions[pos], false);
     }

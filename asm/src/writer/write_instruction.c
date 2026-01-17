@@ -10,8 +10,10 @@
 static void write_codebyte_parameters(instruction_t *instruction, int index,
                                                                 FILE *file)
 {
-    if (op_tab[index].code == 16 || op_tab[index].nbr_args != 1)
+    if (op_tab[index].code == 16 || op_tab[index].nbr_args != 1) {
+        printf("I'm writing codebytes\n");
         write_codebytes(instruction, file);
+    }
     return;
 }
 
@@ -28,6 +30,7 @@ unsigned int write_instruction(instruction_t *instruction, FILE *file)
     }
     index = get_op(instruction_tmp->str);
 
+    printf("index = %d\n", index);
     err = fwrite(&(op_tab[index].code), 1, sizeof(char), file);
     if (err != sizeof(unsigned char))
         return EXIT_ERROR;

@@ -71,6 +71,7 @@ int main (int ac, char **av)
         return 0;
     get_option(ac, av, vm);
     fill_champ(vm);
-    loop(vm);
+    print_arene(vm);
+    // loop(vm);
     return 0;
 }

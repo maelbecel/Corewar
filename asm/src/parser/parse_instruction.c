@@ -43,13 +43,15 @@ static int add_special_token(int index, instruction_t *start,
     } else {
         data = create_instruction(str, separator[index].type,
                                                     separator[index].attribut);
-        if (!data)
+        if (!data) {
             return EXIT_ERROR;
+        }
         insert_new_instruction(start, data);
     }
     data = create_instruction(NULL, 0, 0);
-    if (!data)
+    if (!data) {
         return EXIT_ERROR;
+    }
     insert_new_instruction(start, data);
     return EXIT_SUCCESS;
 }
@@ -64,8 +66,9 @@ static int get_instruction(instruction_t *start,  instruction_t *last,
         if (!(last->str = my_charcat(last->str, argv[i])))
             return EXIT_ERROR;
     } else {
-        if (add_special_token(separator_type, start, last) == EXIT_ERROR)
+        if (add_special_token(separator_type, start, last) == EXIT_ERROR) {
             return EXIT_ERROR;
+        }
     }
     return EXIT_SUCCESS;
 }

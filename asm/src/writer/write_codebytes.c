@@ -15,6 +15,7 @@ void write_codebytes(instruction_t *instruction, FILE *file)
     int byteshift = 6;
 
     for (instruction_t *tmp = instruction; tmp != NULL; tmp = tmp->next) {
+        // printf("tmp->str = %s\n", tmp->str);
         if (tmp->attribut == A_REG) {
             count += (1 << byteshift);
             byteshift -= 2;
@@ -28,5 +29,6 @@ void write_codebytes(instruction_t *instruction, FILE *file)
             byteshift -= 2;
         }
     }
+    printf("write_codebytes: count = %d\n", count) ;
     fwrite(&count, 1, sizeof(char), file);
 }

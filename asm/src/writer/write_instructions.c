@@ -14,10 +14,13 @@ static void write_indirect(int index, instruction_t *instruction,
 {
     unsigned short count = 0;
 
-    if (instruction->prev->type == T_LABEL)
+    if (instruction->prev->type == T_LABEL) {
+        printf("label ind: %s\n", instruction->str);
         count = get_label_adress_short(instruction->str, instructions, index);
+    }
     else
         count = my_getnbr(instruction->str);
+    printf("count = %d\n", count);
     count = htobe16(count);
     fwrite(&count, 1, sizeof(short), file);
     return;
@@ -28,12 +31,18 @@ static void write_direct(int index, instruction_t *instruction,
 {
     unsigned int count = 0;
 
-    if (is_index_type(op_tab[write.mnemonique].mnemonique) == true)
+    if (is_index_type(op_tab[write.mnemonique].mnemonique) == true) {
+        printf("Sorry its indirect\n");
         return write_indirect(index, instruction, write.file, instructions);
-    if (instruction->prev->type == T_LABEL)
+    }
+    if (instruction->prev->type == T_LABEL) {
+        printf("label: %s\n", instruction->str);
         count = get_label_adress(instruction->str, instructions, index);
-    else
+    }
+    else {
+        printf("nbr: %s\n", instruction->str);
         count = my_getnbr(instruction->str);
+    }
     count = htobe32(count);
     fwrite(&count, 1, sizeof(int), write.file);
     return;
@@ -47,12 +56,17 @@ static void write_args(instruction_t *instruction, int index,
     while (instruction) {
         if (instruction->attribut == A_REG) {
             count = my_getnbr(instruction->str);
+            printf("reg: %d\n", count);
             fwrite(&count, 1, sizeof(char), write.file);
         }
-        if (instruction->attribut == A_IND)
+        if (instruction->attribut == A_IND) {
+            printf("ind: %s\n", instruction->str);
             write_indirect(index, instruction, write.file, instructions);
-        if (instruction->attribut == A_DIR)
+        }
+        if (instruction->attribut == A_DIR) {
+            printf("dir: %s\n", instruction->str);
             write_direct(index, instruction, write, instructions);
+        }
         instruction = instruction->next;
     }
 }

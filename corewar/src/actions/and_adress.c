@@ -52,7 +52,7 @@ void and_na(prog_t *prog, vm_t *vm)
     int ad2 = (prog->coord.y * IDX_MOD + prog->coord.x + value - 6);
     ad2 = vm->arene[ad2 / IDX_MOD][ad2 % IDX_MOD];
     move_prog(prog), move_prog(prog);
-    int reg2 = get_param(vm, prog->coord, 1) - 1;
+    int reg2 = m(vm, prog->coord, 1) - 1;
     move_prog(prog);
     prog->reg[reg2] = nb & ad2;
     prog->carry = (prog->reg[reg2] == 0) ? 1 : 0;
